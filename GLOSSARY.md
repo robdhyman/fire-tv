@@ -89,3 +89,7 @@ One of the three contexts the benchmarks doc compares: **connected TV** (Fire TV
 ## Placeholder art
 
 The 14 Unsplash photos used in place of show IP. Each show's hero and tile art come from this set.
+
+## Morph
+
+The shared-element transition from Home's hero to a show page: the hero art opens out to full bleed and the title flies to its place on the show page while the nav fades and the season row rises. Back plays it in reverse. Its timings are the `morph` tokens in `src/motion/tokens.ts`.

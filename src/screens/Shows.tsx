@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react'
+import { motion } from 'motion/react'
 import { Nav } from '../components/Nav'
 import { GRID, GridTile } from '../components/GridTile'
 import { useFocusable, useFocusedId, useScreenFocus } from '../focus/FocusEngine'
 import { useSettings } from '../state/settings'
+import { useMotion } from '../motion/useMotion'
 import { brandShows, editorsChoiceFor, type Show } from '../data/catalogue'
 
 type Tab = 'shows' | 'movies' | 'editors'
@@ -17,7 +19,7 @@ function TabItem({ tab, active, onSelect }: { tab: (typeof TABS)[number]; active
   return (
     <div
       {...props}
-      className={`leading-none transition-all duration-150 ${active ? 'text-[36px] text-white' : 'text-[25px] text-white/70'} ${
+      className={`leading-none transition-all duration-(--motion-quick) ${active ? 'text-[36px] text-white' : 'text-[25px] text-white/70'} ${
         focused ? 'underline decoration-accent decoration-[3px] underline-offset-[8px]' : ''
       }`}
     >
@@ -31,22 +33,26 @@ export function Grid({ shows, idPrefix, top }: { shows: Show[]; idPrefix: string
   const focusedId = useFocusedId()
   const focusedRow = Math.floor(Math.max(0, shows.findIndex((s) => focusedId === `${idPrefix}:${s.id}`)) / GRID.cols)
   const scroll = Math.max(0, focusedRow - 1) * GRID.rowPitch
+  const m = useMotion()
   return (
-    <div
-      className="absolute left-[200px] grid"
-      style={{
-        top,
-        gridTemplateColumns: `repeat(${GRID.cols}, ${GRID.w}px)`,
-        columnGap: GRID.colPitch - GRID.w,
-        rowGap: GRID.rowPitch - GRID.h,
-        transform: `translateY(${-scroll}px)`,
-        transition: 'transform 250ms ease-out',
-      }}
-    >
-      {shows.map((show) => (
-        <GridTile key={show.id} id={`${idPrefix}:${show.id}`} show={show} />
-      ))}
-    </div>
+    <motion.div className="absolute left-[200px]" style={{ top }} initial={false} animate={{ y: -scroll }} transition={m.strip}>
+      <motion.div
+        key={idPrefix}
+        className="grid"
+        style={{
+          gridTemplateColumns: `repeat(${GRID.cols}, ${GRID.w}px)`,
+          columnGap: GRID.colPitch - GRID.w,
+          rowGap: GRID.rowPitch - GRID.h,
+        }}
+        variants={m.stagger()}
+        initial="hidden"
+        animate="shown"
+      >
+        {shows.map((show) => (
+          <GridTile key={show.id} id={`${idPrefix}:${show.id}`} show={show} />
+        ))}
+      </motion.div>
+    </motion.div>
   )
 }
 

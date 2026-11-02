@@ -1,10 +1,13 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router'
+import { AnimatePresence, motion } from 'motion/react'
 import { Nav } from '../components/Nav'
-import { Hero, heroId } from '../components/Hero'
-import { EpisodeLabel, Row, ROW_H_PLAIN, rowTileId, type RowItem } from '../components/Row'
+import { Hero, HERO_ID } from '../components/Hero'
+import { EpisodeLabel, Row, ROW_H_PLAIN, type RowItem } from '../components/Row'
 import { useFocusedId, useScreenFocus } from '../focus/FocusEngine'
 import { useSettings } from '../state/settings'
+import { useMotion } from '../motion/useMotion'
+import { stagger } from '../motion/tokens'
 import {
   artUrl,
   brandShows,
@@ -24,12 +27,13 @@ export function Home() {
   const navigate = useNavigate()
   const { settings } = useSettings()
   const brand = settings.brand
+  const m = useMotion()
   const shows = useMemo(() => brandShows(brand), [brand])
   const [backdrop, setBackdrop] = useState<Show>(shows[0])
   const onCurrent = useCallback((s: Show) => setBackdrop(s), [])
   const focusedId = useFocusedId()
 
-  useScreenFocus(`home:${brand}`, heroId(shows[0]))
+  useScreenFocus(`home:${brand}`, HERO_ID)
 
   const upNext: RowItem[] = useMemo(
     () =>
@@ -64,30 +68,33 @@ export function Home() {
       : 0
 
   return (
-    <main className="absolute inset-0 overflow-hidden bg-rows">
-      <img
-        key={backdrop.id}
-        src={artUrl(backdrop.heroArt)}
-        alt=""
-        className="absolute inset-0 h-full w-full object-cover opacity-40 brightness-[0.3]"
-        style={{ objectPosition: backdrop.artFocus }}
-      />
-      <div
-        className="absolute inset-x-0 top-0"
-        style={{ transform: `translateY(${-scroll}px)`, transition: 'transform 250ms ease-out' }}
-      >
+    <main className="absolute inset-0 overflow-hidden">
+      <motion.div className="absolute inset-0 bg-rows" variants={m.part}>
+        <AnimatePresence initial={false}>
+          <motion.img
+            key={backdrop.id}
+            src={artUrl(backdrop.heroArt)}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover brightness-[0.3]"
+            style={{ objectPosition: backdrop.artFocus }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            exit={{ opacity: 0 }}
+            transition={m.heroFade}
+          />
+        </AnimatePresence>
+      </motion.div>
+      <motion.div className="absolute inset-x-0 top-0" initial={false} animate={{ y: -scroll }} transition={m.strip}>
         <Nav />
         <div className="pt-[130px]">
-          <Hero shows={shows} onCurrent={onCurrent} />
+          <Hero shows={shows} memoryKey={brand} onCurrent={onCurrent} />
         </div>
-        <div className="mt-[58px] pl-[200px]">
-          <Row id="row:upnext" label="up next" items={upNext} />
-          <Row id="row:recent" label="recently added" items={recent} className="mt-[80px]" />
+        <motion.div className="mt-[58px] pl-[200px]" variants={m.part}>
+          <Row id="row:upnext" label="up next" items={upNext} enterDelay={stagger.row} />
+          <Row id="row:recent" label="recently added" items={recent} className="mt-[80px]" enterDelay={stagger.row * 2} />
           <div className="h-[400px]" />
-        </div>
-      </div>
-      {/* keep the first tile id stable for restore */}
-      <span hidden>{rowTileId('row:upnext', upNext[0]?.id ?? '')}</span>
+        </motion.div>
+      </motion.div>
     </main>
   )
 }

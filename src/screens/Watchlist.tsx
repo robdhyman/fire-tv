@@ -1,9 +1,12 @@
 import { useMemo } from 'react'
+import { motion } from 'motion/react'
 import { useNavigate } from 'react-router'
 import { Nav } from '../components/Nav'
 import { EpisodeLabel, Row, ROW_H_PLAIN, type RowItem } from '../components/Row'
 import { useFocusedId, useScreenFocus } from '../focus/FocusEngine'
 import { useSettings } from '../state/settings'
+import { useMotion } from '../motion/useMotion'
+import { stagger } from '../motion/tokens'
 import {
   allEpisodes,
   artUrl,
@@ -24,6 +27,7 @@ export function Watchlist() {
   const { settings } = useSettings()
   const brand = settings.brand
   const focusedId = useFocusedId()
+  const m = useMotion()
 
   const toItem = (ref: EpisodeRef): RowItem => ({
     id: episodeKey(ref),
@@ -50,10 +54,7 @@ export function Watchlist() {
   return (
     <main className="absolute inset-0 overflow-hidden bg-page">
       <Nav active="watchlist" />
-      <div
-        className="absolute left-[200px] top-[163px]"
-        style={{ transform: `translateY(${-scroll}px)`, transition: 'transform 250ms ease-out' }}
-      >
+      <motion.div className="absolute left-[200px] top-[163px]" initial={false} animate={{ y: -scroll }} transition={m.strip}>
         <Row
           id="row:upnext"
           label="up next"
@@ -68,13 +69,14 @@ export function Watchlist() {
             </span>
           }
         />
-        {shows.map((show) => (
+        {shows.map((show, i) => (
           <Row
             key={show.id}
             id={`row:show:${show.id}`}
             label={show.title}
             items={allEpisodes(show).map(toItem)}
             className="mt-[85px]"
+            enterDelay={stagger.row * (i + 1)}
           />
         ))}
         {shows.length === 0 && (
@@ -83,7 +85,7 @@ export function Watchlist() {
           </p>
         )}
         <div className="h-[400px]" />
-      </div>
+      </motion.div>
     </main>
   )
 }

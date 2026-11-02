@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router'
+import { AnimatePresence, motion } from 'motion/react'
+import { useMotion } from '../motion/useMotion'
 import { EpisodeLabel, Row, rowTileId, type RowItem } from '../components/Row'
 import { useFocusable, useFocusContext, useScreenFocus } from '../focus/FocusEngine'
 import { CAPTION_SIZES, CAPTION_STYLES, useSettings } from '../state/settings'
@@ -19,7 +21,8 @@ import {
 
 /* Playback is simulated: the clock runs 20x so the credits are a few minutes away;
  * Left/Right on the timeline scrub five minutes. Credits begin 2:08 from the end,
- * when the next episode card counts down 15 seconds. */
+ * when the next episode card counts down 15 seconds. Play/Pause (space) pauses
+ * the clock; Rewind and Fast-forward scrub like Left/Right on the timeline. */
 const SPEED = 20
 const TICK_MS = 100
 const SCRUB = 300
@@ -57,7 +60,9 @@ function Playback({ current }: { current: EpisodeRef }) {
   const { setFocus } = useFocusContext()
   const total = runtimeSeconds(current)
   const next = nextEpisode(current)
+  const m = useMotion()
   const [elapsed, setElapsed] = useState(Math.floor(total * current.progress))
+  const [paused, setPaused] = useState(false)
   const [countdown, setCountdown] = useState(COUNTDOWN)
   const credits = elapsed >= total - CREDITS_LEAD
   const nextId = next ? rowTileId('credits', String(next.episode.number)) : null
@@ -66,8 +71,21 @@ function Playback({ current }: { current: EpisodeRef }) {
   useScreenFocus(`play:${episodeKey(current)}`, 'player:timeline')
 
   useEffect(() => {
+    if (paused) return
     const t = setInterval(() => setElapsed((e) => Math.min(total, e + (SPEED * TICK_MS) / 1000)), TICK_MS)
     return () => clearInterval(t)
+  }, [total, paused])
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'MediaPlayPause' || e.key === ' ') setPaused((p) => !p)
+      else if (e.key === 'MediaRewind') setElapsed((v) => Math.max(0, v - SCRUB))
+      else if (e.key === 'MediaFastForward') setElapsed((v) => Math.min(total, v + SCRUB))
+      else return
+      e.preventDefault()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
   }, [total])
 
   useEffect(() => {
@@ -142,35 +160,53 @@ function Playback({ current }: { current: EpisodeRef }) {
 
   const pct = total ? elapsed / total : 0
   const style = CAPTION_STYLES[settings.captions.style]
-  const ease = 'transition-all duration-500 ease-out'
+  // The layout shift into the credits rides the morph spring.
+  const shift = (top: number) => ({ initial: false as const, animate: { top }, transition: m.morph })
 
   return (
     <main className="absolute inset-0 overflow-hidden bg-black">
-      <img
+      <motion.img
         src={artUrl(current.show.heroArt)}
         alt=""
-        className={`absolute inset-0 h-full w-full object-cover brightness-[0.55] ${ease} ${credits ? 'opacity-0' : 'opacity-100'}`}
+        className="absolute inset-0 h-full w-full object-cover brightness-[0.55]"
         style={{ objectPosition: current.show.artFocus }}
+        initial={false}
+        animate={{ opacity: credits ? 0 : 1 }}
+        transition={m.fade}
       />
       {credits && <CreditsRoll />}
 
-      <div className={`absolute left-[200px] ${ease}`} style={{ top: credits ? 100 : 210 }}>
+      <AnimatePresence>
+        {paused && (
+          <motion.div
+            className="absolute left-1/2 top-[440px] flex h-[120px] w-[120px] -translate-x-1/2 items-center justify-center rounded-full bg-black/50 text-[56px] text-white"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={m.fade}
+          >
+            ❚❚
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <motion.div className="absolute left-[200px]" {...shift(credits ? 100 : 210)}>
         <div className="text-[30px] font-light uppercase leading-none tracking-[0.04em] text-white">{current.show.title}</div>
         <div className="display mt-[14px] text-title text-white">{current.episode.title}</div>
-      </div>
-      <div className={`absolute left-[200px] text-[27px] font-light leading-none text-white ${ease}`} style={{ top: credits ? 236 : 640 }}>
+      </motion.div>
+      <motion.div className="absolute left-[200px] text-[27px] font-light leading-none text-white" {...shift(credits ? 236 : 640)}>
         S{current.season.number} E{current.episode.number}
-      </div>
+      </motion.div>
 
       {/* Timeline: thin line in five segments, elapsed above the marker, total below at the right. */}
-      <div {...timeline.props} className={`absolute inset-x-0 h-[70px] ${ease}`} style={{ top: credits ? 266 : 724 }}>
+      <motion.div {...timeline.props} className="absolute inset-x-0 h-[70px]" {...shift(credits ? 266 : 724)}>
         <div className="absolute inset-x-0 top-[32px] flex h-[3px] gap-[12px]">
           {[0, 1, 2, 3, 4].map((i) => (
             <div key={i} className="h-full flex-1 bg-timeline" />
           ))}
         </div>
         <div
-          className={`absolute top-[24px] h-[20px] w-[3px] bg-white transition-[left] duration-100 ${timeline.focused ? 'shadow-[0_0_0_2px_#fff]' : ''}`}
+          className={`absolute top-[24px] h-[20px] w-[3px] bg-white transition-[left] duration-(--motion-quick) ${timeline.focused ? 'shadow-[0_0_0_2px_#fff]' : ''}`}
           style={{ left: pct * 1920 - 1 }}
         />
         <div
@@ -180,12 +216,12 @@ function Playback({ current }: { current: EpisodeRef }) {
           {timecode(elapsed)}
         </div>
         <div className="absolute right-[103px] top-[46px] text-[27px] font-light leading-none text-white">{timecode(total)}</div>
-      </div>
+      </motion.div>
 
       {!credits && (
         <div
           {...captionsBtn.props}
-          className={`absolute left-[934px] top-[824px] flex h-[52px] w-[52px] items-center justify-center transition-transform duration-150 ${
+          className={`absolute left-[934px] top-[824px] flex h-[52px] w-[52px] items-center justify-center transition-transform duration-(--motion-quick) ${
             captionsBtn.focused ? 'scale-125' : ''
           }`}
           title="captions"
@@ -215,9 +251,9 @@ function Playback({ current }: { current: EpisodeRef }) {
         </div>
       )}
 
-      <div className={`absolute left-[200px] ${ease}`} style={{ top: credits ? 940 : 905 }}>
+      <motion.div className="absolute left-[200px]" {...shift(credits ? 940 : 905)}>
         <Row id="row:upnext" label="up next" items={upNext} />
-      </div>
+      </motion.div>
     </main>
   )
 }
