@@ -1,8 +1,15 @@
-import { Outlet, useNavigate } from 'react-router'
+import { useCallback, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router'
+import { MotionConfig } from 'motion/react'
 import { Stage } from './Stage'
+import { Screens } from './Screens'
 import { FocusProvider, useBack } from '../focus/FocusEngine'
-import { SettingsProvider } from '../state/settings'
+import { SettingsProvider, useSettings } from '../state/settings'
 import { Hint } from '../components/Hint'
+import { RemoteOverlay } from '../remote/Remote'
+import { useGlobalKeys } from '../remote/keys'
+import { cssVars } from '../motion/tokens'
+import { useReduced } from '../motion/useMotion'
 
 /** Back for every screen: pop history, or go Home when there is none. */
 function BackToHistory() {
@@ -15,15 +22,41 @@ function BackToHistory() {
   return null
 }
 
+/** Reduced motion for the whole app: motion's own switch plus the CSS duration tokens. */
+function MotionRoot({ children }: { children: React.ReactNode }) {
+  const reduced = useReduced()
+  useEffect(() => {
+    for (const [k, v] of Object.entries(cssVars(reduced))) document.documentElement.style.setProperty(k, v)
+  }, [reduced])
+  return <MotionConfig reducedMotion={reduced ? 'always' : 'never'}>{children}</MotionConfig>
+}
+
+function App() {
+  const navigate = useNavigate()
+  const { settings } = useSettings()
+  const [hint, setHint] = useState(!settings.hintSeen)
+  const goHome = useCallback(() => navigate('/'), [navigate])
+  const showHint = useCallback(() => setHint(true), [])
+  useGlobalKeys(goHome, showHint)
+  return (
+    <>
+      <Stage>
+        <BackToHistory />
+        <Screens />
+        <Hint shown={hint} setShown={setHint} />
+      </Stage>
+      <RemoteOverlay />
+    </>
+  )
+}
+
 export function Shell() {
   return (
     <SettingsProvider>
       <FocusProvider>
-        <Stage>
-          <BackToHistory />
-          <Outlet />
-          <Hint />
-        </Stage>
+        <MotionRoot>
+          <App />
+        </MotionRoot>
       </FocusProvider>
     </SettingsProvider>
   )

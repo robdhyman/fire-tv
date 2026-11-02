@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router'
+import { motion } from 'motion/react'
+import { useMotion } from '../motion/useMotion'
 import { useFocusable } from '../focus/FocusEngine'
 import { useSettings } from '../state/settings'
 import { Logo } from './Logo'
@@ -19,7 +21,7 @@ function NavItem({ item, active }: { item: (typeof ITEMS)[number]; active: boole
   return (
     <div
       {...props}
-      className={`font-light leading-none transition-all duration-150 ${big ? 'text-[50px] text-white' : 'text-[38px] text-white/60'} ${
+      className={`font-light leading-none transition-all duration-(--motion-quick) ${big ? 'text-[50px] text-white' : 'text-[38px] text-white/60'} ${
         focused ? 'underline decoration-accent decoration-[3px] underline-offset-[10px]' : ''
       }`}
     >
@@ -32,19 +34,26 @@ function NavItem({ item, active }: { item: (typeof ITEMS)[number]; active: boole
 export function Nav({ active }: { active?: NavKey }) {
   const navigate = useNavigate()
   const { settings } = useSettings()
+  const m = useMotion()
   const logo = useFocusable('nav:logo', { onSelect: () => navigate('/') })
   return (
-    <header className="absolute left-[200px] top-[48px] z-20 flex h-[64px] items-baseline gap-[60px]">
-      <div
+    <motion.header
+      className="absolute left-[200px] top-[48px] z-20 flex h-[64px] items-baseline gap-[60px]"
+      variants={m.part}
+    >
+      <motion.div
         {...logo.props}
-        className={`self-center transition-transform duration-150 ${logo.focused ? 'scale-110' : ''}`}
+        className="self-center"
         style={{ marginRight: 4 }}
+        initial={false}
+        animate={{ scale: logo.focused ? m.focusScale : 1 }}
+        transition={m.focus(logo.focused)}
       >
         <Logo brand={settings.brand} />
-      </div>
+      </motion.div>
       {ITEMS.map((item) => (
         <NavItem key={item.key} item={item} active={active === item.key} />
       ))}
-    </header>
+    </motion.header>
   )
 }

@@ -39,7 +39,7 @@ export function Search() {
       <Nav active="search" />
       <div
         {...props}
-        className={`absolute left-[200px] top-[166px] flex h-[64px] w-[900px] items-center border-b-[3px] bg-white/5 px-[20px] transition-colors ${
+        className={`absolute left-[200px] top-[166px] flex h-[64px] w-[900px] items-center border-b-[3px] bg-white/5 px-[20px] transition-colors duration-(--motion-quick) ${
           focused ? 'border-accent' : 'border-white/30'
         }`}
       >

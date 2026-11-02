@@ -10,7 +10,9 @@ import {
   type ReactNode,
   type RefObject,
 } from 'react'
+import { useIsPresent } from 'motion/react'
 import { pickNeighbour, type Direction } from './geometry'
+import { noteArrow } from '../motion/useMotion'
 
 /*
  * Focus engine.
@@ -92,17 +94,23 @@ export function FocusProvider({ children }: { children: ReactNode }) {
       const inInput = target?.tagName === 'INPUT' || target?.tagName === 'TEXTAREA'
       const current = focusedRef.current ? registry.current.get(focusedRef.current) : undefined
 
+      const dir = DIRECTIONS[e.key]
+      if (dir) {
+        noteArrow()
+        arrowListeners.current.forEach((fn) => fn())
+      }
+
       if (current?.onKey?.(e.key)) {
         e.preventDefault()
         return
       }
 
-      const dir = DIRECTIONS[e.key]
       if (dir) {
         e.preventDefault()
-        arrowListeners.current.forEach((fn) => fn())
         if (!current) return
-        const boxes = [...registry.current.values()].map(({ id, el }) => {
+        // A screen fading out keeps its focusables until it unmounts; skip them.
+        const live = [...registry.current.values()].filter(({ el }) => !el.closest('[data-exiting]'))
+        const boxes = live.map(({ id, el }) => {
           const r = el.getBoundingClientRect()
           return { id, left: r.left, top: r.top, right: r.right, bottom: r.bottom }
         })
@@ -215,6 +223,8 @@ export function useBack(handler: () => void) {
 export function useScreenFocus(key: string, defaultId: string) {
   const { focusedId, setFocus, has, memory } = useFocusContext()
   const ready = useRef(false)
+  // Once the screen starts leaving, the next screen's focus is not ours to remember.
+  const present = useIsPresent()
 
   useLayoutEffect(() => {
     ready.current = false
@@ -229,6 +239,6 @@ export function useScreenFocus(key: string, defaultId: string) {
   }, [key])
 
   useEffect(() => {
-    if (ready.current && focusedId && has(focusedId)) memory.set(key, focusedId)
-  }, [focusedId, key, has, memory])
+    if (present && ready.current && focusedId && has(focusedId)) memory.set(key, focusedId)
+  }, [present, focusedId, key, has, memory])
 }

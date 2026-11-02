@@ -31,7 +31,7 @@ function Choice({ id, selected, onSelect, children, className = '' }: { id: stri
   return (
     <div
       {...props}
-      className={`leading-none transition-colors ${selected ? 'font-semibold text-white' : 'font-normal text-white/60'} ${
+      className={`leading-none transition-colors duration-(--motion-quick) ${selected ? 'font-semibold text-white' : 'font-normal text-white/60'} ${
         focused ? 'text-accent underline decoration-[3px] underline-offset-[8px]' : ''
       } ${className}`}
     >
@@ -54,7 +54,7 @@ function Section({ title, prefix, children }: { title: string; prefix: string; c
   const focusedId = useFocusedId()
   const within = focusedId?.startsWith(prefix) ?? false
   return (
-    <section className={`transition-opacity duration-200 ${within ? 'opacity-100' : 'opacity-50'}`}>
+    <section className={`transition-opacity duration-(--motion-fade) ${within ? 'opacity-100' : 'opacity-50'}`}>
       <h2 className="text-[38px] font-light leading-none text-white">{title}</h2>
       {children}
     </section>
@@ -91,7 +91,7 @@ export function Tools() {
       <div className="absolute left-[200px] top-[284px]">
         <Section title="captions" prefix="cap:">
           <OnOff prefix="cap" on={captions.on} onChange={(on) => update({ captions: { ...captions, on } })} />
-          <div className={`transition-opacity duration-200 ${captions.on ? 'opacity-100' : 'opacity-45'}`}>
+          <div className={`transition-opacity duration-(--motion-fade) ${captions.on ? 'opacity-100' : 'opacity-45'}`}>
             <h3 className="mt-[56px] text-[27px] font-light leading-none text-white/80">Font size</h3>
             <div className="mt-[22px] flex items-baseline gap-[30px]">
               {CAPTION_SIZES.map((px, i) => (
