@@ -1,0 +1,47 @@
+{
+  "shows": [
+    {
+      "id": "hollow-signal",
+      "title": "Hollow Signal",
+      "logline": "A deep-space relay crew intercepts a transmission that predicts their own deaths, one shift at a time.",
+      "hero": "/fire-tv/art/art-05.jpg",
+      "tile": "/fire-tv/art/art-07.jpg",
+      "new": true,
+      "expiring": false,
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            { "number": 1, "name": "Carrier Wave", "still": "/fire-tv/art/art-07.jpg", "runtime": 44 },
+            { "number": 2, "name": "Dead Air", "still": "/fire-tv/art/art-10.jpg", "runtime": 42 },
+            { "number": 3, "name": "Null Island", "still": "/fire-tv/art/art-05.jpg", "runtime": 45 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "salt-and-static",
+      "title": "Salt & Static",
+      "logline": "A coastal radio host starts taking calls from a town that was wiped off the map in 1962.",
+      "hero": "/fire-tv/art/art-10.jpg",
+      "tile": "/fire-tv/art/art-02.jpg",
+      "new": false,
+      "expiring": true,
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            { "number": 1, "name": "Low Tide", "still": "/fire-tv/art/art-02.jpg", "runtime": 48 },
+            { "number": 2, "name": "The Lighthouse Hour", "still": "/fire-tv/art/art-13.jpg", "runtime": 47 }
+          ]
+        },
+        {
+          "number": 2,
+          "episodes": [
+            { "number": 1, "name": "Signal Fire", "still": "/fire-tv/art/art-11.jpg", "runtime": 46 }
+          ]
+        }
+      ]
+    }
+  ]
+}
