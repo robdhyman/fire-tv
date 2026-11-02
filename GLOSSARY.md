@@ -74,6 +74,14 @@ The playback screen: full-bleed picture, title overlay, timeline with elapsed an
 
 The thin progress line on the Player with the elapsed time on the left and the total on the right. Not "scrubber" (that is the handle) and not "progress bar".
 
+## Stage
+
+The fixed 1920x1080 canvas the app is laid out on, scaled to fit the window and letterboxed in black. Every layout number in the screens is a 1080p pixel from the source screenshots.
+
+## Lane
+
+A horizontal band of focusables at about the same height (a nav bar, a row of tiles, a grid row). Up and Down move focus to the nearest lane, then to the item in it nearest in x.
+
 ## Device class
 
 One of the three contexts the benchmarks doc compares: **connected TV** (Fire TV, Roku, Apple TV, smart TV), **desktop** (web in a browser) and **mobile** (phone and tablet apps). Also the three layouts of the rebuilt app: TV, tablet, phone.
