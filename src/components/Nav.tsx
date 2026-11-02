@@ -17,11 +17,13 @@ const ITEMS: { key: NavKey; path: string }[] = [
 function NavItem({ item, active }: { item: (typeof ITEMS)[number]; active: boolean }) {
   const navigate = useNavigate()
   const { focused, props } = useFocusable(`nav:${item.key}`, { onSelect: () => navigate(item.path) })
-  const big = active || focused
+  // Size marks the current screen only; focus is colour and underline, so the bar never reflows.
   return (
     <div
       {...props}
-      className={`font-light leading-none transition-all duration-(--motion-quick) ${big ? 'text-[50px] text-white' : 'text-[38px] text-white/60'} ${
+      className={`font-light leading-none transition-colors duration-(--motion-quick) ${active ? 'text-[50px]' : 'text-[38px]'} ${
+        active || focused ? 'text-white' : 'text-white/60'
+      } ${
         focused ? 'underline decoration-accent decoration-[3px] underline-offset-[10px]' : ''
       }`}
     >

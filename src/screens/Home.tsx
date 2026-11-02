@@ -84,7 +84,7 @@ export function Home() {
           />
         </AnimatePresence>
       </motion.div>
-      <motion.div className="absolute inset-x-0 top-0" initial={false} animate={{ y: -scroll }} transition={m.strip}>
+      <motion.div className="absolute inset-x-0 top-0" initial={false} animate={{ y: -scroll }} transition={m.scroll}>
         <Nav />
         <div className="pt-[130px]">
           <Hero shows={shows} memoryKey={brand} onCurrent={onCurrent} />

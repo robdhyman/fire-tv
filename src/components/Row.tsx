@@ -79,7 +79,7 @@ export function Row({ id, label, items, mode = 'auto', initialIndex = 0, aside, 
         className="mt-[6px] flex items-center"
         initial={false}
         animate={{ height: big ? BIG.focusH : PLAIN.h, x: -anchor * pitch }}
-        transition={m.strip}
+        transition={{ default: m.strip, height: m.scroll }}
       >
         <motion.div
           className="flex items-center"
@@ -108,7 +108,7 @@ function Tile({ rowId, item, big, current }: { rowId: string; item: RowItem; big
         className="relative flex flex-col justify-center"
         initial={false}
         animate={{ width: w, height: big ? BIG.focusH : PLAIN.h }}
-        transition={m.strip}
+        transition={{ default: m.strip, height: m.scroll }}
       >
         <motion.div
           {...props}

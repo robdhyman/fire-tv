@@ -3,7 +3,7 @@ import { Navigate, useNavigate, useParams } from 'react-router'
 import { AnimatePresence, motion } from 'motion/react'
 import { useMotion } from '../motion/useMotion'
 import { EpisodeLabel, Row, rowTileId, type RowItem } from '../components/Row'
-import { useFocusable, useFocusContext, useScreenFocus } from '../focus/FocusEngine'
+import { useFocusable, useFocusContext, useFocusedId, useScreenFocus } from '../focus/FocusEngine'
 import { CAPTION_SIZES, CAPTION_STYLES, useSettings } from '../state/settings'
 import {
   artUrl,
@@ -160,8 +160,19 @@ function Playback({ current }: { current: EpisodeRef }) {
 
   const pct = total ? elapsed / total : 0
   const style = CAPTION_STYLES[settings.captions.style]
-  // The layout shift into the credits rides the morph spring.
-  const shift = (top: number) => ({ initial: false as const, animate: { top }, transition: m.morph })
+  // The up next row peeks at the bottom; focusing it lifts the overlay so the opened row fits on screen.
+  const focusedId = useFocusedId()
+  const browsing = focusedId?.startsWith('row:upnext:') ?? false
+  const top = credits
+    ? browsing
+      ? { title: 100, episode: 236, timeline: 236, credits: 316, upNext: 690, episodeOpacity: 0 }
+      : { title: 100, episode: 236, timeline: 266, credits: 497, upNext: 940, episodeOpacity: 1 }
+    : browsing
+      ? { title: 210, episode: 480, timeline: 560, credits: 497, upNext: 650, episodeOpacity: 1 }
+      : { title: 210, episode: 640, timeline: 724, credits: 497, upNext: 905, episodeOpacity: 1 }
+
+  // Every layout shift on the Player is an up/down move: the `scroll` spring.
+  const shift = (y: number) => ({ initial: false as const, animate: { top: y }, transition: m.scroll })
 
   return (
     <main className="absolute inset-0 overflow-hidden bg-black">
@@ -190,16 +201,21 @@ function Playback({ current }: { current: EpisodeRef }) {
         )}
       </AnimatePresence>
 
-      <motion.div className="absolute left-[200px]" {...shift(credits ? 100 : 210)}>
+      <motion.div className="absolute left-[200px]" {...shift(top.title)}>
         <div className="text-[30px] font-light uppercase leading-none tracking-[0.04em] text-white">{current.show.title}</div>
         <div className="display mt-[14px] text-title text-white">{current.episode.title}</div>
       </motion.div>
-      <motion.div className="absolute left-[200px] text-[27px] font-light leading-none text-white" {...shift(credits ? 236 : 640)}>
+      <motion.div
+        className="absolute left-[200px] text-[27px] font-light leading-none text-white"
+        initial={false}
+        animate={{ top: top.episode, opacity: top.episodeOpacity }}
+        transition={{ default: m.scroll, opacity: m.fade }}
+      >
         S{current.season.number} E{current.episode.number}
       </motion.div>
 
       {/* Timeline: thin line in five segments, elapsed above the marker, total below at the right. */}
-      <motion.div {...timeline.props} className="absolute inset-x-0 h-[70px]" {...shift(credits ? 266 : 724)}>
+      <motion.div {...timeline.props} className="absolute inset-x-0 h-[70px]" {...shift(top.timeline)}>
         <div className="absolute inset-x-0 top-[32px] flex h-[3px] gap-[12px]">
           {[0, 1, 2, 3, 4].map((i) => (
             <div key={i} className="h-full flex-1 bg-timeline" />
@@ -240,7 +256,7 @@ function Playback({ current }: { current: EpisodeRef }) {
       )}
 
       {credits && (
-        <div className="absolute left-[200px] top-[497px]">
+        <motion.div className="absolute left-[200px]" {...shift(top.credits)}>
           <Row
             id="credits"
             label={next ? <EpisodeLabel season={next.season.number} number={next.episode.number} title={next.episode.title} /> : 'end of season'}
@@ -248,10 +264,10 @@ function Playback({ current }: { current: EpisodeRef }) {
             mode="big"
             initialIndex={next ? current.season.episodes.indexOf(next.episode) : 0}
           />
-        </div>
+        </motion.div>
       )}
 
-      <motion.div className="absolute left-[200px]" {...shift(credits ? 940 : 905)}>
+      <motion.div className="absolute left-[200px]" {...shift(top.upNext)}>
         <Row id="row:upnext" label="up next" items={upNext} />
       </motion.div>
     </main>

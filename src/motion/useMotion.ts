@@ -41,6 +41,7 @@ export function useMotion() {
     focusScale: reduced ? 1 : distance.focusScale,
     focusLift: reduced ? 0 : distance.focusLift,
     strip: t(spring.strip),
+    scroll: t(spring.scroll),
     morph: t(spring.morph),
     rise: t(spring.rise),
     fade: fade(reduced ? duration.reduced : duration.screenFade),

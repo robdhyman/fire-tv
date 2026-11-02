@@ -54,7 +54,7 @@ export function Watchlist() {
   return (
     <main className="absolute inset-0 overflow-hidden bg-page">
       <Nav active="watchlist" />
-      <motion.div className="absolute left-[200px] top-[163px]" initial={false} animate={{ y: -scroll }} transition={m.strip}>
+      <motion.div className="absolute left-[200px] top-[163px]" initial={false} animate={{ y: -scroll }} transition={m.scroll}>
         <Row
           id="row:upnext"
           label="up next"

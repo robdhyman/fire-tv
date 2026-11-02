@@ -15,4 +15,5 @@ The style guide needs numbers it can cite, and reduced motion has to be one swit
 ## Consequences
 
 - `scripts/motion-frames.mjs` captures the "after" frame strips and asserts the morph, focus scale, rapid input and remote wiring; `--reduced` and `--size=WxH` cover the other paths.
+- After Rob's review (2 Nov): up/down moves use their own slower `spring.scroll` (90/20/1, about 600 ms) while sideways moves keep `spring.strip`; the morph slowed to 80/18/1 (about 700 ms); the stage ignores the mouse (`pointer-events: none`), so only the keyboard and the remote overlay move focus; nav items no longer resize on focus; the focused hero gets the white focus ring; the Player lifts its peeking up next row fully into view when it takes focus.
 - A row's current tile still expands from 376 to 590 px as in the 2017 screenshots (layout fidelity); the 1.1 focus scale applies where tiles are uniform (Shows grid, buttons, logo).

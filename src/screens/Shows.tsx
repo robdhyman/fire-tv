@@ -35,7 +35,7 @@ export function Grid({ shows, idPrefix, top }: { shows: Show[]; idPrefix: string
   const scroll = Math.max(0, focusedRow - 1) * GRID.rowPitch
   const m = useMotion()
   return (
-    <motion.div className="absolute left-[200px]" style={{ top }} initial={false} animate={{ y: -scroll }} transition={m.strip}>
+    <motion.div className="absolute left-[200px]" style={{ top }} initial={false} animate={{ y: -scroll }} transition={m.scroll}>
       <motion.div
         key={idPrefix}
         className="grid"

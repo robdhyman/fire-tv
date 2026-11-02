@@ -74,6 +74,8 @@ html, body, #root {
   background: var(--color-page);
   user-select: none;
   cursor: default;
+  /* Keyboard only: the D-pad (arrows, Enter, Esc) or the on-screen remote. */
+  pointer-events: none;
 }
 
 .display {
