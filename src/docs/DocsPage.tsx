@@ -1,15 +1,24 @@
 import { useEffect, useState } from 'react'
-import Markdown from 'react-markdown'
+import Markdown, { type Components } from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Link, useParams } from 'react-router'
 
-// Every Markdown file under docs/benchmarks and docs/style-guide is bundled as
-// a lazy raw import. Route /docs/<section>/<slug> maps to docs/<section>/<slug>.md;
-// /docs/<section> and /docs map to that folder's index.md.
-const pages = import.meta.glob('/docs/{benchmarks,style-guide}/**/*.md', {
+// Every Markdown file under docs/benchmarks, docs/research and docs/style-guide
+// is bundled as a lazy raw import. Route /docs/<section>/<slug> maps to
+// docs/<section>/<slug>.md; /docs/<section> and /docs map to that folder's index.md.
+const pages = import.meta.glob('/docs/{benchmarks,research,style-guide}/**/*.md', {
   query: '?raw',
   import: 'default',
 }) as Record<string, () => Promise<string>>
+
+// Links written as /docs/... in the Markdown navigate inside the router so the
+// Pages base path is applied; everything else is a normal link.
+const components: Components = {
+  a({ href, children }) {
+    if (href?.startsWith('/docs')) return <Link to={href}>{children}</Link>
+    return <a href={href} target="_blank" rel="noreferrer">{children}</a>
+  },
+}
 
 function resolve(splat: string | undefined): string | null {
   const parts = (splat ?? '').split('/').filter(Boolean)
@@ -53,7 +62,7 @@ export function DocsPage() {
         <p className="text-white/60">Loading…</p>
       ) : (
         <article className="prose-docs">
-          <Markdown remarkPlugins={[remarkGfm]}>{body}</Markdown>
+          <Markdown remarkPlugins={[remarkGfm]} components={components}>{body}</Markdown>
         </article>
       )}
     </main>
