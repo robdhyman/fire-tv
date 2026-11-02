@@ -1,14 +1,94 @@
 @import "tailwindcss";
 
+/* Self-hosted OFL faces (see docs/research/typefaces.md). */
+@font-face {
+  font-family: "Barlow Condensed";
+  font-weight: 700;
+  font-display: swap;
+  src: url("./fonts/BarlowCondensed-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Barlow Condensed";
+  font-weight: 800;
+  font-display: swap;
+  src: url("./fonts/BarlowCondensed-800.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Montserrat";
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("./fonts/Montserrat-var.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Figtree";
+  font-weight: 300 900;
+  font-display: swap;
+  src: url("./fonts/Figtree-var.woff2") format("woff2");
+}
+
+/*
+ * Brand tokens. SYFY is the default; `<html data-brand="usa">` flips accent,
+ * display face and display sizes. Nothing structural changes with the brand.
+ */
 @theme {
-  --color-brand: #f8c400; /* SYFY yellow */
-  --font-display: "Oswald", "Helvetica Neue Condensed", "Arial Narrow", sans-serif;
+  --color-accent: #f2e600;
+  --color-timeline: #1ea4dc;
+  --color-page: #0d0d0d;
+  --color-rows: #333333;
+  --font-display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --font-ui: "Figtree", "Helvetica Neue", Arial, sans-serif;
+  --text-hero: 96px;
+  --text-hero--line-height: 0.95;
+  --text-title: 76px;
+  --text-title--line-height: 0.95;
+  --tracking-display: 0.01em;
+  --font-weight-display: 800;
+}
+
+:root[data-brand="usa"] {
+  --color-accent: #d8261c;
+  --font-display: "Montserrat", "Avenir Next", "Gill Sans", "Helvetica Neue", Arial, sans-serif;
+  --text-hero: 72px;
+  --text-title: 68px;
+  --tracking-display: 0.02em;
+  --font-weight-display: 700;
 }
 
 html, body, #root {
   height: 100%;
   background: #000;
   color: #fff;
+  font-family: var(--font-ui);
+  font-weight: 400;
+}
+
+/* The app is laid out at 1920x1080 and scaled to fit the window, like a TV. */
+.stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  transform-origin: 0 0;
+  background: var(--color-page);
+  user-select: none;
+  cursor: default;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-display);
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+}
+
+.credits-roll {
+  animation: credits 40s linear infinite;
+}
+@keyframes credits {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
 }
 
 /* Minimal Markdown styling for /docs until the style guide lands. */
