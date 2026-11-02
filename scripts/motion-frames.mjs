@@ -127,11 +127,13 @@ const navAfter = await rect('[data-focus-id="nav:search"]')
 check('nav does not jump as focus moves', JSON.stringify(navBefore) === JSON.stringify(navAfter), `${JSON.stringify(navBefore)} vs ${JSON.stringify(navAfter)}`)
 
 // Player: the peeking up next row lifts fully into view when focused, playing and in the credits.
-for (const keys of [['ArrowDown', 'ArrowDown'], Array(10).fill('ArrowRight').concat(['ArrowDown'])]) {
+for (const keys of [['ArrowDown', 'ArrowDown'], Array(10).fill('ArrowRight').concat(['wait', 'ArrowDown'])]) {
   await page.goto(base + '/play/ringfall/3/2')
   await page.waitForTimeout(700)
   for (const k of keys) {
-    await page.keyboard.press(k)
+    // 'wait': let the credits take focus before moving on.
+    if (k === 'wait') await page.waitForTimeout(1000)
+    else await page.keyboard.press(k)
     await page.waitForTimeout(120)
   }
   await page.waitForTimeout(1200)
@@ -163,13 +165,6 @@ if (visible) {
   check('physical arrow lights the remote', lit)
   await page.waitForTimeout(300)
   check('remote Up brought focus back', (await focused()) === 'hero', await focused())
-  for (const v of ['puck', 'strip']) {
-    await page.goto(base + '/?remote=' + v)
-    await page.waitForTimeout(600)
-    await page.keyboard.press('r')
-    await page.waitForTimeout(500)
-    await page.screenshot({ path: `${out}/7-remote-${v}.jpg`, type: 'jpeg', quality: 70 })
-  }
   await page.keyboard.press('r')
   await page.waitForTimeout(400)
   check('R hides it again', (await page.locator('[aria-label="select (enter)"]').count()) === 0)

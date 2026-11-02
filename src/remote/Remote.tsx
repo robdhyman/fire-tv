@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties, type PointerEvent, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react'
 import { AnimatePresence, motion, useDragControls } from 'motion/react'
 import { useMotion } from '../motion/useMotion'
 import { LABELS, press, useLit, type RemoteButton } from './keys'
@@ -7,25 +7,13 @@ import { LABELS, press, useLit, type RemoteButton } from './keys'
  * Remote overlay (issue #10): a small Fire TV remote reviewers summon with
  * the corner button or R, drag anywhere, and hide again. It sits outside the
  * scaled stage, in window pixels, and is hidden below 768px (phone, tablet).
- *
- * PROTOTYPE: three forms of the same remote, switchable with the pill above
- * it (`?remote=classic|puck|strip`). The losers go to a throwaway branch once
- * Rob picks; the wiring (keys.ts) stays.
+ * Rob picked the upright "classic" form on 2 Nov; the puck and strip
+ * prototypes live on the `prototype/remote-variants` branch.
  */
-
-const VARIANTS = ['classic', 'puck', 'strip'] as const
-type Variant = (typeof VARIANTS)[number]
-const NAMES: Record<Variant, string> = { classic: 'A · classic', puck: 'B · puck', strip: 'C · strip' }
-
-function initialVariant(): Variant {
-  const v = new URLSearchParams(window.location.search).get('remote')
-  return VARIANTS.includes(v as Variant) ? (v as Variant) : 'classic'
-}
 
 export function RemoteOverlay() {
   const m = useMotion()
   const [open, setOpen] = useState(false)
-  const [variant, setVariant] = useState<Variant>(initialVariant)
   const bounds = useRef<HTMLDivElement>(null)
   const drag = useDragControls()
 
@@ -38,14 +26,6 @@ export function RemoteOverlay() {
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [])
-
-  const cycle = (d: number) => {
-    const next = VARIANTS[(VARIANTS.indexOf(variant) + d + VARIANTS.length) % VARIANTS.length]
-    setVariant(next)
-    const url = new URL(window.location.href)
-    url.searchParams.set('remote', next)
-    window.history.replaceState(window.history.state, '', url)
-  }
 
   // Drag from the body, never from a button.
   const startDrag = (e: PointerEvent) => {
@@ -73,7 +53,7 @@ export function RemoteOverlay() {
         {open && (
           <motion.div
             key="remote"
-            className="fixed bottom-[72px] right-[24px] z-[101] flex touch-none flex-col items-end gap-[8px]"
+            className="fixed bottom-[72px] right-[24px] z-[101] flex touch-none flex-col items-end"
             drag
             dragControls={drag}
             dragListener={false}
@@ -84,19 +64,8 @@ export function RemoteOverlay() {
             animate={{ opacity: 1, scale: 1, y: 0, transition: m.reduced ? m.fade : { ...m.focus(true), opacity: m.fade } }}
             exit={{ opacity: 0, scale: m.reduced ? 1 : 0.92, transition: m.fade }}
           >
-            <div className="flex items-center gap-[2px] rounded-full bg-[#ffd400] px-[4px] py-[2px] text-[11px] font-semibold text-black shadow">
-              <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => cycle(-1)} className="px-[6px]" aria-label="previous variant">
-                ‹
-              </button>
-              <span>prototype {NAMES[variant]}</span>
-              <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => cycle(1)} className="px-[6px]" aria-label="next variant">
-                ›
-              </button>
-            </div>
             <div onPointerDown={startDrag} className="cursor-grab active:cursor-grabbing">
-              {variant === 'classic' && <Classic />}
-              {variant === 'puck' && <Puck />}
-              {variant === 'strip' && <Strip />}
+              <Classic />
             </div>
           </motion.div>
         )}
@@ -105,7 +74,7 @@ export function RemoteOverlay() {
   )
 }
 
-/* ---------- Variant A: the Alexa Voice Remote, upright, about 13cm tall at 1:1.3 ---------- */
+/* ---------- The Alexa Voice Remote, upright ---------- */
 
 function Classic() {
   const lit = useLit()
@@ -128,61 +97,9 @@ function Classic() {
   )
 }
 
-/* ---------- Variant B: a puck, the ring is the body and the keys orbit below it ---------- */
-
-function Puck() {
-  const lit = useLit()
-  const orbit: [RemoteButton, ReactNode][] = [
-    ['back', <BackIcon />],
-    ['home', <HomeIcon />],
-    ['menu', <MenuIcon />],
-    ['rewind', <RewIcon />],
-    ['playPause', <PlayIcon />],
-    ['fastForward', <FfIcon />],
-  ]
-  const R = 112
-  return (
-    <div className="relative h-[232px] w-[232px]">
-      <div className="absolute left-1/2 top-[12px] -translate-x-1/2 rounded-full p-[8px] shadow-[0_18px_40px_rgba(0,0,0,0.6)] backdrop-blur bg-black/60 border border-white/15">
-        <Ring size={150} lit={lit} />
-      </div>
-      {orbit.map(([b, icon], i) => {
-        // Spread along the lower arc, left to right: 245° to 115° clockwise from the top.
-        const a = ((245 - (i * 130) / (orbit.length - 1)) * Math.PI) / 180
-        const cx = 116 + Math.sin(a) * R
-        const cy = 95 - Math.cos(a) * R
-        return (
-          <Key key={b} b={b} lit={lit} size={30} style={{ position: 'absolute', left: cx - 15, top: cy - 15 }}>
-            {icon}
-          </Key>
-        )
-      })}
-    </div>
-  )
-}
-
-/* ---------- Variant C: a low strip, keys either side of a small ring ---------- */
-
-function Strip() {
-  const lit = useLit()
-  return (
-    <div className="flex h-[96px] items-center gap-[12px] rounded-full border border-white/15 bg-black/70 px-[18px] shadow-[0_18px_40px_rgba(0,0,0,0.6)] backdrop-blur">
-      <Key b="back" lit={lit} size={34}><BackIcon /></Key>
-      <Key b="home" lit={lit} size={34}><HomeIcon /></Key>
-      <Key b="menu" lit={lit} size={34}><MenuIcon /></Key>
-      <div className="mx-[4px]"><Ring size={80} lit={lit} /></div>
-      <Key b="rewind" lit={lit} size={34}><RewIcon /></Key>
-      <Key b="playPause" lit={lit} size={34}><PlayIcon /></Key>
-      <Key b="fastForward" lit={lit} size={34}><FfIcon /></Key>
-    </div>
-  )
-}
-
-/* ---------- Shared parts ---------- */
-
 const LIT_BG = 'bg-[var(--color-accent)] text-black'
 
-function Key({ b, lit, size, children, style }: { b: RemoteButton; lit: Set<RemoteButton>; size: number; children: ReactNode; style?: CSSProperties }) {
+function Key({ b, lit, size, children }: { b: RemoteButton; lit: Set<RemoteButton>; size: number; children: ReactNode }) {
   const on = lit.has(b)
   return (
     <button
@@ -194,7 +111,7 @@ function Key({ b, lit, size, children, style }: { b: RemoteButton; lit: Set<Remo
       className={`flex shrink-0 items-center justify-center rounded-full border transition-colors duration-(--motion-quick) ${
         on ? `${LIT_BG} border-transparent` : 'border-white/15 bg-white/10 text-white/85 hover:bg-white/20'
       }`}
-      style={{ width: size, height: size, ...style }}
+      style={{ width: size, height: size }}
     >
       {children}
     </button>
