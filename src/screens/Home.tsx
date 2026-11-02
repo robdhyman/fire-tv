@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { Link } from 'react-router'
-import { catalogue } from '../data/catalogue'
+import { artUrl, catalogue } from '../data/catalogue'
 
 export function Home() {
   const [featured, ...rest] = catalogue.shows
@@ -21,7 +21,12 @@ export function Home() {
       </header>
 
       <section className="relative mx-12 aspect-[21/9] overflow-hidden rounded-lg">
-        <img src={featured.hero} alt="" className="absolute inset-0 h-full w-full object-cover" />
+        <img
+          src={artUrl(featured.heroArt)}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ objectPosition: featured.artFocus }}
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
         <motion.div
           className="absolute bottom-12 left-12 max-w-xl"
@@ -47,7 +52,12 @@ export function Home() {
               whileHover={{ scale: 1.06 }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             >
-              <img src={show.tile} alt="" className="aspect-video w-full object-cover" />
+              <img
+                src={artUrl(show.tileArt)}
+                alt=""
+                className="aspect-video w-full object-cover"
+                style={{ objectPosition: show.artFocus }}
+              />
               {show.new && (
                 <span className="absolute left-2 top-2 bg-brand px-1.5 text-[10px] font-bold uppercase text-black">new</span>
               )}
