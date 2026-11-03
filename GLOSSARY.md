@@ -14,6 +14,14 @@ The invented set of shows, seasons and episodes that stands in for NBCU IP, pair
 
 A series in the catalogue: title, logline, hero art, tile art, one or more seasons. Not "title" (ambiguous with the show's name) and not "program".
 
+## Movie
+
+A catalogue entry with key art and a logline and no seasons. Every movie in the catalogue is coming soon: it has a detail page but nothing to play.
+
+## Coming Soon
+
+The Home row of movies, and the badge on their tiles.
+
 ## Episode
 
 One entry in a season, labelled on screen as `E<n> <name>` and in copy as `S<season> E<n>`.
@@ -36,7 +44,23 @@ One item in a row: episode still or show key art with a label and optional badge
 
 ## Badge
 
-The small corner tag on a tile: `new` or `expiring`.
+The small corner tag on a tile: `new`, `expiring` or `coming soon`.
+
+## Dwell
+
+Focus resting on a tile without moving for about a second. A dwell on an episode tile reveals the tile overlay.
+
+## Tile overlay
+
+What a dwell reveals on an episode tile: `info`, `play` and `add` buttons and the episode's synopsis. `info` opens the show page, `play` the Player, `add` toggles the show in the watchlist.
+
+## Watch position
+
+How far into an episode the viewer has got, remembered per episode across visits. Zero for an episode never started.
+
+## Progress stroke
+
+The 2px white line along the bottom edge of an episode tile whose width, as a fraction of the tile, is the watch position as a fraction of the runtime. Absent when the watch position is zero.
 
 ## Focus
 
@@ -54,6 +78,14 @@ The remote's back button; Esc or Backspace in the browser. Reverses the last nav
 
 The summonable on-screen Fire TV remote that reviewers can show and hide on desktop and TV. Hidden on phone and tablet.
 
+## Nav sounds
+
+The short synthesised sounds the app makes as focus moves: a tick on each move, a pop on select, a lower pop on Back, and a bump on an **edge bump** (a move with no neighbour in that direction). On by default.
+
+## Sound toggle
+
+The chip beside the remote overlay's chip that mutes and unmutes the nav sounds. Remembered between visits.
+
 ## Up Next
 
 The row of episodes the viewer is mid-way through or due to watch next, on Home and at the top of the Watchlist. Also the 15-second next-episode countdown card at the end of playback.
@@ -62,9 +94,13 @@ The row of episodes the viewer is mid-way through or due to watch next, on Home 
 
 The screen listing shows the viewer has added (the `+` on a hero or show page), one row per show plus Up Next.
 
+## Nav
+
+The top bar: logo, `shows`, `watchlist` and `search` on the left; a gear and the account avatar flush right. The gear and the avatar both open Tools. On a show page the nav is shown while focus is on the `+` and hidden while focus is below it.
+
 ## Tools
 
-The settings screen: language options, sign out, reload, about, terms, FAQs, contact, captions, audio description. The original's name; not "settings".
+The settings screen: language options, sign out, reload, about, terms, FAQs, contact, captions, audio description, nav sounds. The original's name; not "settings". Reached from the gear and the avatar in the nav.
 
 ## Player
 
@@ -96,7 +132,19 @@ On phone and tablet, a row rendered as a horizontally swipeable strip with scrol
 
 ## Placeholder art
 
-The 14 Unsplash photos used in place of show IP. Each show's hero and tile art come from this set.
+The 14 Unsplash photos used in place of show IP, the art the app shipped with. Being replaced by generated art.
+
+## Generated art
+
+Images made by an image model for the catalogue: one hero per show, one still per episode, one poster per movie, all in one house style so a show's stills read as one series. The prompts live in the repo beside the art.
+
+## Still
+
+The image on an episode tile. One generated still per episode.
+
+## B-roll
+
+A short generated video clip of a show, meant one day to play on the hero after a dwell. The app does not play video yet.
 
 ## Morph
 
