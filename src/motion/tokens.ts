@@ -13,6 +13,10 @@
  * With reduced motion every spring becomes an instant move and every fade
  * becomes `duration.reduced` (see `useMotion`).
  *
+ * Mobile (issue #13) reuses the same springs: `focusIn` for tap feedback and
+ * switches, `rise` for the Player's Up Next card, `fade` for its chrome; the
+ * rails and hero are native scroll-snap, so the finger sets their timing.
+ *
  * Review edits (Rob, 2 Nov): up/down moves got their own slower `scroll`
  * spring, and the morph was slowed from 120/22 to 80/18. Second review: the
  * hero slides again (the crossfade and Ken Burns are gone) on its own
@@ -51,6 +55,8 @@ export const duration = {
   copyAfterFlight: 0.45,
   /** The only animation left with reduced motion: a short opacity fade. */
   reduced: 0.15,
+  /** Mobile Player: the chrome hides this long after the last tap while playing. */
+  chromeHide: 3,
 } as const
 
 export const stagger = {
@@ -72,6 +78,10 @@ export const distance = {
   /** Hero panels either side of the centre one: scale and opacity; they grow and brighten as they slide in. */
   heroNeighbourScale: 0.92,
   heroNeighbourOpacity: 0.4,
+  /** Mobile: a pressed tile or button shrinks to this while the finger is down. */
+  pressScale: 0.97,
+  /** Mobile: the Player's Up Next card rises from this far below, px. */
+  cardRise: 24,
 } as const
 
 /** Arrow presses closer together than this count as rapid input (Apple's input-rate rule). */

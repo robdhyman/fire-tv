@@ -19,30 +19,7 @@ import {
   type EpisodeRef,
 } from '../data/catalogue'
 
-/* Playback is simulated: the clock runs 20x so the credits are a few minutes away;
- * Left/Right on the timeline scrub five minutes. Credits begin 2:08 from the end,
- * when the next episode card counts down 15 seconds. Play/Pause (space) pauses
- * the clock; Rewind and Fast-forward scrub like Left/Right on the timeline. */
-const SPEED = 20
-const TICK_MS = 100
-const SCRUB = 300
-const CREDITS_LEAD = 128
-const COUNTDOWN = 15
-
-const CREW: [string, string][] = [
-  ['Assistant Editor', 'John Klump'],
-  ['Supervising Sound Editor', 'Susan Chernus'],
-  ['Visual Effects Supervisor', 'Albert Ibbotson'],
-  ['Colourist', 'Kevin Bassinson'],
-  ['Assistant to Jeff Freilich', 'Conchi Tellechea'],
-  ['Script Supervisor', 'Marla Ostrow'],
-  ['Location Manager', 'Dev Anand Rao'],
-  ['Key Grip', 'Tomasz Wiech'],
-  ['Gaffer', 'Lena Hoffmeister'],
-  ['Production Coordinator', 'Ayo Adeyemi'],
-  ['Re-recording Mixer', 'Pat Delaney'],
-  ['Music Supervisor', 'Yuki Tanaka'],
-]
+import { COUNTDOWN, CREDITS_LEAD, CREW, SCRUB, SPEED, TICK_MS } from '../data/playback'
 
 export function Player() {
   const { showId = '', season = '', episode = '' } = useParams()
