@@ -45,7 +45,7 @@
   --font-weight-display: 800;
 }
 
-:root[data-brand="usa"] {
+[data-brand="usa"] {
   --color-accent: #d8261c;
   --font-display: "Montserrat", "Avenir Next", "Gill Sans", "Helvetica Neue", Arial, sans-serif;
   --text-hero: 72px;
@@ -93,7 +93,7 @@ html, body, #root {
   to { transform: translateY(-50%); }
 }
 
-/* Minimal Markdown styling for /docs until the style guide lands. */
+/* Markdown styling for /docs. The .sg-* classes are the style guide's swatches and specimens; they read the brand variables above. */
 .prose-docs h1 { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
 .prose-docs h2 { font-size: 1.5rem; font-weight: 700; margin: 2rem 0 0.75rem; }
 .prose-docs h3 { font-size: 1.2rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
@@ -104,3 +104,21 @@ html, body, #root {
 .prose-docs table { border-collapse: collapse; margin: 1rem 0; display: block; overflow-x: auto; }
 .prose-docs th, .prose-docs td { border: 1px solid rgb(255 255 255 / 0.2); padding: 0.4rem 0.75rem; text-align: left; }
 .prose-docs code { background: rgb(255 255 255 / 0.1); padding: 0.1rem 0.3rem; border-radius: 0.2rem; }
+
+.prose-docs h4 { font-size: 1rem; font-weight: 600; margin: 1.25rem 0 0.4rem; }
+.prose-docs hr { border-color: rgb(255 255 255 / 0.15); margin: 2rem 0; }
+.prose-docs blockquote { border-left: 3px solid var(--color-accent); padding-left: 1rem; margin: 1rem 0; color: rgb(255 255 255 / 0.8); }
+.prose-docs img { max-width: 100%; }
+.prose-docs .sg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin: 1rem 0; }
+.prose-docs .sg-card { border: 1px solid rgb(255 255 255 / 0.2); border-radius: 6px; overflow: hidden; font-size: 0.85rem; line-height: 1.4; background: #000; }
+.prose-docs .sg-chip { height: 64px; border-bottom: 1px solid rgb(255 255 255 / 0.12); }
+.prose-docs .sg-meta { padding: 0.5rem 0.65rem; color: rgb(255 255 255 / 0.85); }
+.prose-docs .sg-meta b { display: block; color: #fff; }
+.prose-docs .sg-meta code { font-size: 0.78rem; }
+.prose-docs .sg-spec { background: var(--color-page); border: 1px solid rgb(255 255 255 / 0.2); border-radius: 6px; padding: 1rem 1.25rem; margin: 0.75rem 0; overflow: hidden; color: #fff; }
+.prose-docs .sg-spec-rows { background: var(--color-rows); }
+.prose-docs .sg-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 640px) { .prose-docs .sg-pair { grid-template-columns: 1fr; } }
+.prose-docs .sg-label { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgb(255 255 255 / 0.5); margin-bottom: 0.4rem; }
+.prose-docs .sg-tile { background: #1b1b1b center/cover; display: inline-block; vertical-align: top; }
+.prose-docs .sg-svg { width: 100%; height: auto; display: block; margin: 1rem 0; border: 1px solid rgb(255 255 255 / 0.2); border-radius: 6px; }
