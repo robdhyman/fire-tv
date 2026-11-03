@@ -40,6 +40,8 @@ export function useMotion() {
       t(focused ? (rapid ? spring.focusInFast : spring.focusIn) : spring.focusOut),
     focusScale: reduced ? 1 : distance.focusScale,
     focusLift: reduced ? 0 : distance.focusLift,
+    /** Mobile tap feedback: spread as `whileTap`; nothing with reduced motion. */
+    press: reduced ? undefined : { scale: distance.pressScale },
     strip: t(spring.strip),
     heroSlide: t(spring.heroSlide),
     scroll: t(spring.scroll),

@@ -43,6 +43,18 @@
   --text-title--line-height: 0.95;
   --tracking-display: 0.01em;
   --font-weight-display: 800;
+
+  /* Mobile (phone and tablet, issue #13): sizes in CSS px, not stage px. */
+  --spacing-tab-bar: 56px;
+  --spacing-gutter: 16px;
+  --text-m-hero: 40px;
+  --text-m-hero--line-height: 0.95;
+  --text-m-hero-md: 60px;
+  --text-m-hero-md--line-height: 0.95;
+  --text-m-title: 30px;
+  --text-m-title--line-height: 0.95;
+  --text-m-tile: 20px;
+  --text-m-tile--line-height: 0.95;
 }
 
 [data-brand="usa"] {
@@ -52,6 +64,10 @@
   --text-title: 68px;
   --tracking-display: 0.02em;
   --font-weight-display: 700;
+  --text-m-hero: 32px;
+  --text-m-hero-md: 48px;
+  --text-m-title: 26px;
+  --text-m-tile: 17px;
 }
 
 html, body, #root {
@@ -76,6 +92,20 @@ html, body, #root {
   cursor: default;
   /* Keyboard only: the D-pad (arrows, Enter, Esc) or the on-screen remote. */
   pointer-events: none;
+}
+
+/* Mobile layout: a normal scrolling document driven by touch. */
+.mobile {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.rail {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.rail::-webkit-scrollbar {
+  display: none;
 }
 
 .display {

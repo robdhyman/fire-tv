@@ -10,6 +10,8 @@ import { RemoteOverlay } from '../remote/Remote'
 import { useGlobalKeys } from '../remote/keys'
 import { cssVars } from '../motion/tokens'
 import { useReduced } from '../motion/useMotion'
+import { DeviceProvider, useDevice } from './device'
+import { MobileApp } from '../mobile/MobileShell'
 
 /** Back for every screen: pop history, or go Home when there is none. */
 function BackToHistory() {
@@ -50,14 +52,27 @@ function App() {
   )
 }
 
+/** The TV stage with its focus engine, or the touch layout (issue #13), by device class. */
+function Layout() {
+  const device = useDevice()
+  if (device === 'tv') {
+    return (
+      <FocusProvider>
+        <App />
+      </FocusProvider>
+    )
+  }
+  return <MobileApp />
+}
+
 export function Shell() {
   return (
     <SettingsProvider>
-      <FocusProvider>
+      <DeviceProvider>
         <MotionRoot>
-          <App />
+          <Layout />
         </MotionRoot>
-      </FocusProvider>
+      </DeviceProvider>
     </SettingsProvider>
   )
 }

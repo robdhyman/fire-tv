@@ -8,6 +8,14 @@ import { Player } from './screens/Player'
 import { Watchlist } from './screens/Watchlist'
 import { Tools } from './screens/Tools'
 import { Search } from './screens/Search'
+import { Adaptive } from './app/device'
+import { MobileHome } from './mobile/Home'
+import { MobileShows } from './mobile/Shows'
+import { MobileShowDetail } from './mobile/ShowDetail'
+import { MobilePlayer } from './mobile/Player'
+import { MobileWatchlist } from './mobile/Watchlist'
+import { MobileTools } from './mobile/Tools'
+import { MobileSearch } from './mobile/Search'
 
 // Docs pull in the Markdown renderer, so they load as their own chunk.
 const DocsPage = lazy(() => import('./docs/DocsPage').then((m) => ({ default: m.DocsPage })))
@@ -19,13 +27,14 @@ export const router = createBrowserRouter(
     {
       element: <Shell />,
       children: [
-        { path: '/', element: <Home /> },
-        { path: '/shows', element: <Shows /> },
-        { path: '/show/:id', element: <ShowDetail /> },
-        { path: '/play/:showId/:season/:episode', element: <Player /> },
-        { path: '/watchlist', element: <Watchlist /> },
-        { path: '/tools', element: <Tools /> },
-        { path: '/search', element: <Search /> },
+        // Each route has a TV screen and a mobile one; the device class picks (src/app/device.tsx).
+        { path: '/', element: <Adaptive tv={<Home />} mobile={<MobileHome />} /> },
+        { path: '/shows', element: <Adaptive tv={<Shows />} mobile={<MobileShows />} /> },
+        { path: '/show/:id', element: <Adaptive tv={<ShowDetail />} mobile={<MobileShowDetail />} /> },
+        { path: '/play/:showId/:season/:episode', element: <Adaptive tv={<Player />} mobile={<MobilePlayer />} /> },
+        { path: '/watchlist', element: <Adaptive tv={<Watchlist />} mobile={<MobileWatchlist />} /> },
+        { path: '/tools', element: <Adaptive tv={<Tools />} mobile={<MobileTools />} /> },
+        { path: '/search', element: <Adaptive tv={<Search />} mobile={<MobileSearch />} /> },
       ],
     },
     {

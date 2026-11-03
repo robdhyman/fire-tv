@@ -84,7 +84,15 @@ A horizontal band of focusables at about the same height (a nav bar, a row of ti
 
 ## Device class
 
-One of the three contexts the benchmarks doc compares: **connected TV** (Fire TV, Roku, Apple TV, smart TV), **desktop** (web in a browser) and **mobile** (phone and tablet apps). Also the three layouts of the rebuilt app: TV, tablet, phone.
+One of the three contexts the benchmarks doc compares: **connected TV** (Fire TV, Roku, Apple TV, smart TV), **desktop** (web in a browser) and **mobile** (phone and tablet apps). Also the three layouts of the rebuilt app, picked by window width: **phone** below 768px, **tablet** from 768px to 1279px, **TV** (the stage) from 1280px up (ADR 003). Phone and tablet share one touch layout; tablet widens the tiles and adds columns.
+
+## Tab bar
+
+The bottom bar of five destinations (home, shows, watchlist, search, tools) on phone and tablet, in place of the TV's top nav. Hidden on the Player.
+
+## Rail
+
+On phone and tablet, a row rendered as a horizontally swipeable strip with scroll-snap. The same row data as on TV; only the interaction differs. Elsewhere, keep saying "row".
 
 ## Placeholder art
 
