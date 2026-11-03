@@ -5,7 +5,7 @@ import { EpisodeLabel, Row, type RowItem } from '../components/Row'
 import { RoundButton } from '../components/RoundButton'
 import { useFocusable, useScreenFocus } from '../focus/FocusEngine'
 import { useSettings } from '../state/settings'
-import { FULL_CLIP, HERO_CLIP, morph, useFlight, useMotion } from '../motion/useMotion'
+import { FULL_CLIP, fromHeroPanel, morph, useFlight, useMotion } from '../motion/useMotion'
 import { distance, duration } from '../motion/tokens'
 import { artUrl, episodeBadge, showById, stillFocus, type Season, type Show } from '../data/catalogue'
 
@@ -43,8 +43,8 @@ function ShowPage({ show }: { show: Show }) {
     return via
   })
   const [morphIn, setMorphIn] = useState(viaHero)
-  const startScale = viaHero && !m.reduced ? 1 + distance.kenBurnsScale * (morph.hero?.kenBurns ?? 0) : 1
-  const startX = viaHero && !m.reduced ? distance.kenBurnsDrift * (morph.hero?.kenBurns ?? 0) : 0
+  // The art starts where the hero panel was, even if Enter landed mid-slide.
+  const [from] = useState(() => fromHeroPanel(viaHero ? (morph.hero?.panel ?? null) : null))
   const later = { delay: m.reduced ? 0 : duration.riseDelay }
   const afterFlight = { delay: m.reduced || !viaHero ? later.delay : duration.copyAfterFlight }
   // The title flies in from the hero's title; its resting box is kept for the flight back.
@@ -91,7 +91,7 @@ function ShowPage({ show }: { show: Show }) {
       >
         <motion.div
           className="absolute inset-0 overflow-hidden"
-          initial={{ clipPath: viaHero ? HERO_CLIP : FULL_CLIP }}
+          initial={{ clipPath: viaHero ? from.clip : FULL_CLIP }}
           animate={{ clipPath: FULL_CLIP }}
           transition={m.morph}
           onAnimationComplete={() => setMorphIn(false)}
@@ -100,9 +100,9 @@ function ShowPage({ show }: { show: Show }) {
             src={artUrl(show.heroArt)}
             alt=""
             className="absolute inset-0 h-full w-full object-cover"
-            style={{ objectPosition: show.artFocus }}
-            initial={{ scale: startScale, x: startX }}
-            animate={{ scale: 1, x: 0 }}
+            style={{ objectPosition: show.artFocus, originX: 0, originY: 0 }}
+            initial={viaHero && !m.reduced ? { scale: from.scale, x: from.x, y: from.y } : false}
+            animate={{ scale: 1, x: 0, y: 0 }}
             transition={m.morph}
           />
         </motion.div>

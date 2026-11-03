@@ -41,11 +41,12 @@ export function useMotion() {
     focusScale: reduced ? 1 : distance.focusScale,
     focusLift: reduced ? 0 : distance.focusLift,
     strip: t(spring.strip),
+    heroSlide: t(spring.heroSlide),
     scroll: t(spring.scroll),
     morph: t(spring.morph),
     rise: t(spring.rise),
     fade: fade(reduced ? duration.reduced : duration.screenFade),
-    heroFade: fade(reduced ? duration.reduced : duration.heroCrossfade),
+    backdropFade: fade(reduced ? duration.reduced : duration.backdropFade),
     /** Opacity-only part of a screen: fades with the screen's enter/exit. */
     part: {
       hidden: { opacity: 0, transition: fade(reduced ? duration.reduced : duration.screenFade) },
@@ -71,11 +72,11 @@ export function useMotion() {
  * the show page; the show page and the returning Home read it on mount.
  * `prevPath` is the screen we came from, updated by the route switcher.
  */
-export type StageRect = { x: number; y: number; h: number }
+export type StageRect = { x: number; y: number; w: number; h: number }
 
 export const morph = {
-  /** Show whose hero was selected, with its Ken Burns progress and title box at that moment. */
-  hero: null as null | { showId: string; kenBurns: number; title: StageRect | null },
+  /** Show whose hero was selected, with its panel and title boxes at that moment (mid-slide, the panel is off the hero rectangle). */
+  hero: null as null | { showId: string; panel: StageRect | null; title: StageRect | null },
   /** Where the show page's title rests, for the reverse morph. */
   showTitle: null as StageRect | null,
   prevPath: null as string | null,
@@ -88,7 +89,7 @@ export function stageRect(el: Element | null): StageRect | null {
   const s = stage.getBoundingClientRect()
   const k = s.width / 1920
   const r = el.getBoundingClientRect()
-  return { x: (r.left - s.left) / k, y: (r.top - s.top) / k, h: r.height / k }
+  return { x: (r.left - s.left) / k, y: (r.top - s.top) / k, w: r.width / k, h: r.height / k }
 }
 
 /**
@@ -128,6 +129,24 @@ export function useFlight<T extends HTMLElement>(
   return { ref, style: { x, y, scale, originX: 0, originY: 0 } }
 }
 
-/** The hero's rectangle on the 1920x1080 stage, as a clip-path inset. */
-export const HERO_CLIP = 'inset(130px 117px 278px 117px)'
+/** The hero's rectangle on the 1920x1080 stage. */
+export const HERO_RECT = { x: 117, y: 130, w: 1686, h: 672 }
+
+/** A stage box as a clip-path inset on a full-stage element. */
+export const clipTo = (r: { x: number; y: number; w: number; h: number }) =>
+  `inset(${r.y}px ${1920 - r.x - r.w}px ${1080 - r.y - r.h}px ${r.x}px)`
+
+export const HERO_CLIP = clipTo(HERO_RECT)
 export const FULL_CLIP = 'inset(0px 0px 0px 0px)'
+
+/**
+ * Where the show page's full-bleed art starts so it lines up with the hero
+ * panel it came from: the clip on its frame, and a top-left-origin transform
+ * on the image. At rest the panel is the hero rectangle and this is
+ * HERO_CLIP with no transform; mid-slide it follows the moving panel.
+ */
+export function fromHeroPanel(panel: StageRect | null) {
+  const r = panel ?? HERO_RECT
+  const scale = r.w / HERO_RECT.w
+  return { clip: clipTo(r), x: r.x - HERO_RECT.x * scale, y: r.y - HERO_RECT.y * scale, scale }
+}

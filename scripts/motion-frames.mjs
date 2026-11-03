@@ -43,9 +43,42 @@ const focused = () => page.evaluate(() => document.querySelector('[data-focused]
 // Fresh Home: where the hero title sits at rest.
 await page.goto(base + '/')
 await page.waitForTimeout(1200)
-const heroTitleAtRest = await rect('h1')
+const heroTitle = '[data-hero-current] h1'
+const heroTitleAtRest = await rect(heroTitle)
+const k = w / 1920
+const PITCH = 1711
 
-await strip('1-hero-crossfade', 'ArrowRight', [0, 150, 300, 600, 900])
+// Hero strip: Right slides every panel one pitch; the centre panel is larger and carries the ring.
+const panels = () =>
+  page.evaluate(() =>
+    [...document.querySelectorAll('[data-hero-panel]')].map((el) => {
+      const r = el.getBoundingClientRect()
+      const ring = getComputedStyle(el.lastElementChild).boxShadow
+      return { id: el.dataset.heroPanel, current: el.hasAttribute('data-hero-current'), x: r.left, right: r.right, h: r.height, ring }
+    }),
+  )
+const was = await panels()
+const centre0 = was.findIndex((p) => p.current)
+check('neighbour is smaller than the centre', was[centre0 + 1].h < was[centre0].h - 1, `${Math.round(was[centre0 + 1].h / k)} vs ${Math.round(was[centre0].h / k)} stage px`)
+check('focused hero has a white ring', /rgb\(255, 255, 255\) 0px 0px 0px 3px/.test(was[centre0].ring), was[centre0].ring)
+await page.keyboard.press('ArrowRight')
+await page.waitForTimeout(150)
+const mid = await panels()
+const incoming = mid[centre0 + 1]
+const slid = incoming.x < was[centre0 + 1].x - 2 && incoming.x > was[centre0].x + 2
+check(reduced ? 'reduced: hero moves without a slide' : 'hero slides (mid-slide frame between panels)', reduced ? !slid : slid, `x ${Math.round(incoming.x / k)} at 150 ms`)
+await page.waitForTimeout(900)
+const now = await panels()
+check(
+  'strip moved by one panel pitch',
+  Math.abs(now[centre0].right - (was[centre0].right - PITCH * k)) <= 1.5 && Math.abs(now[centre0 + 1].x - was[centre0].x) <= 1.5 && now[centre0 + 1].current,
+  `old centre right ${Math.round(was[centre0].right / k)} → ${Math.round(now[centre0].right / k)}; new centre x ${Math.round(now[centre0 + 1].x / k)}`,
+)
+check('ring moved to the new centre panel', /rgb\(255, 255, 255\) 0px 0px 0px 3px/.test(now[centre0 + 1].ring) && !/rgb\(255, 255, 255\) 0px/.test(now[centre0].ring), now[centre0 + 1].ring)
+await page.keyboard.press('ArrowLeft')
+await page.waitForTimeout(900)
+
+await strip('1-hero-slide', 'ArrowRight', [0, 100, 200, 350, 600])
 await page.waitForTimeout(400)
 await strip('2-hero-to-show', 'Enter', [0, 100, 200, 350, 600, 900])
 check('hero → show page', page.url().includes('/show/'), page.url())
@@ -57,7 +90,7 @@ check('Back lands on Home with the hero focused', (await focused()) === 'hero', 
 // After the reverse morph the title is back exactly where it rests (scaled stage included).
 await page.keyboard.press('ArrowLeft')
 await page.waitForTimeout(1200)
-const heroTitleAfter = await rect('h1')
+const heroTitleAfter = await rect(heroTitle)
 check(
   'title returns to its resting place',
   heroTitleAfter && Math.abs(heroTitleAfter.x - heroTitleAtRest.x) <= 1 && Math.abs(heroTitleAfter.y - heroTitleAtRest.y) <= 1,
@@ -67,20 +100,37 @@ check(
 // Mid-morph sample: the show page title must start at the hero title's box.
 await page.keyboard.press('ArrowRight')
 await page.waitForTimeout(900)
-const fromBox = await rect('h1')
+const fromBox = await rect(heroTitle)
 await page.keyboard.press('Enter')
-// First frame with the show page's title mounted (Home's is still fading out, unless reduced).
-await page.waitForFunction((n) => document.querySelectorAll('h1').length >= n && location.pathname.includes('/show/'), reduced ? 1 : 2)
-const startBox = await page.evaluate(() => {
-  const hs = [...document.querySelectorAll('h1')]
-  const r = hs[hs.length - 1].getBoundingClientRect()
-  return { x: Math.round(r.left), y: Math.round(r.top) }
-})
+// First frame with the show page's title mounted (Home's are still fading out, unless reduced).
+const showTitle = 'h1:not([data-hero-title])'
+await page.waitForFunction((sel) => document.querySelector(sel) && location.pathname.includes('/show/'), showTitle)
+const startBox = await rect(showTitle)
 const near = Math.abs(startBox.x - fromBox.x) <= 2 && Math.abs(startBox.y - fromBox.y) <= 2
 check('morph starts from the hero title', reduced ? !near : near, `${JSON.stringify(fromBox)} → ${JSON.stringify(startBox)}`)
 await page.waitForTimeout(1000)
 await page.keyboard.press('Escape')
 await page.waitForTimeout(1000)
+
+// Enter mid-slide: the show page's art opens from the moving panel, not from the hero rectangle.
+if (!reduced) {
+  await page.keyboard.press('ArrowLeft')
+  await page.waitForTimeout(120)
+  await page.keyboard.press('Enter')
+  // First frame of the show page: its art frame is the only clipped element outside the hero panels.
+  const clip = await (
+    await page.waitForFunction(() =>
+      [...document.querySelectorAll('div')].find((d) => d.style.clipPath && !d.closest('[data-hero-panel]'))?.style.clipPath,
+    )
+  ).jsonValue()
+  const left = Number(clip?.match(/inset\([\d.]+px [\d.]+px [\d.]+px ([-\d.]+)px/)?.[1])
+  check('Enter mid-slide morphs from the moving panel', left < 117 - 20, `${clip}`)
+  await page.waitForTimeout(1000)
+  await page.keyboard.press('Escape')
+  await page.waitForTimeout(1000)
+  await page.keyboard.press('ArrowRight')
+  await page.waitForTimeout(900)
+}
 
 // Rows: focus spring and the expanded tile.
 await strip('4-row-focus', 'ArrowDown', [0, 120, 250, 500])
