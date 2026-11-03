@@ -6,7 +6,7 @@
  * The 2017 prototype slid the hero strip and zoomed into the show page with
  * fixed ease-out tweens. These replace it (issue #9):
  *   tile focus     spring scale 1.1 + 8px lift, brighter border; unfocus trails
- *   hero change    crossfade with a slow Ken Burns drift, no slide
+ *   hero change    the strip of hero panels slides; neighbours peek smaller and dimmed
  *   hero → show    shared-element morph; nav fades, season row rises
  *   Back           the same morph reversed
  *   screen entry   rows and grids settle with a light stagger
@@ -14,7 +14,9 @@
  * becomes `duration.reduced` (see `useMotion`).
  *
  * Review edits (Rob, 2 Nov): up/down moves got their own slower `scroll`
- * spring, and the morph was slowed from 120/22 to 80/18.
+ * spring, and the morph was slowed from 120/22 to 80/18. Second review: the
+ * hero slides again (the crossfade and Ken Burns are gone) on its own
+ * `heroSlide` spring, with the centre panel larger than its neighbours.
  */
 
 export const spring = {
@@ -26,6 +28,8 @@ export const spring = {
   focusOut: { type: 'spring', stiffness: 200, damping: 26, mass: 1 },
   /** Sideways moves: row strips, season tabs, expanded-tile width. About 250 ms, no overshoot. */
   strip: { type: 'spring', stiffness: 260, damping: 32, mass: 1 },
+  /** Home's hero strip sliding one panel (1711 px): about 450 ms, critically damped, like the 2017 slide. */
+  heroSlide: { type: 'spring', stiffness: 170, damping: 26, mass: 1 },
   /** Up/down moves: page scroll, a row opening up, the Player's overlay shifting. About 600 ms. */
   scroll: { type: 'spring', stiffness: 90, damping: 20, mass: 1 },
   /** Hero ↔ show page shared-element morph: about 700 ms, critically damped. */
@@ -35,14 +39,8 @@ export const spring = {
 } as const
 
 export const duration = {
-  /** Hero art and copy crossfade on Home. */
-  heroCrossfade: 0.6,
-  /** Outgoing hero copy clears in this long, so two titles never overlap. */
-  heroCopyOut: 0.15,
-  /** Incoming hero copy starts this long after the art, once the old copy has gone. */
-  heroCopyDelay: 0.15,
-  /** One leg of the Ken Burns drift (it then reverses). */
-  kenBurns: 20,
+  /** Home's blurred backdrop crossfading to the current hero show. */
+  backdropFade: 0.6,
   /** Screen-to-screen crossfade and the nav fading out of the morph. */
   screenFade: 0.25,
   /** Colour and underline changes on text focus (CSS transitions). */
@@ -71,11 +69,9 @@ export const distance = {
   tileEnter: 16,
   /** The season row rises from this far below, px. */
   rowRise: 200,
-  /** Ken Burns: total zoom and horizontal drift over one leg. */
-  kenBurnsScale: 0.06,
-  kenBurnsDrift: -24,
-  /** Hero copy rises this far as it crossfades in, px. */
-  heroCopyRise: 12,
+  /** Hero panels either side of the centre one: scale and opacity; they grow and brighten as they slide in. */
+  heroNeighbourScale: 0.92,
+  heroNeighbourOpacity: 0.4,
 } as const
 
 /** Arrow presses closer together than this count as rapid input (Apple's input-rate rule). */

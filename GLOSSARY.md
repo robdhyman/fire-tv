@@ -24,7 +24,7 @@ The one-to-two-line premise shown under a show's title on the hero and the show 
 
 ## Hero
 
-The full-width featured panel at the top of Home and the full-bleed header of a show page: art, title, logline. "Billboard" is Netflix's word; avoid it here except in the benchmarks doc.
+The full-width featured panel at the top of Home and the full-bleed header of a show page: art, title, logline. On Home the heroes form a strip that slides sideways; the centre panel is full size and its neighbours peek in, smaller and dimmed. "Billboard" is Netflix's word; avoid it here except in the benchmarks doc.
 
 ## Row
 

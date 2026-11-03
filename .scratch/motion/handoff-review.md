@@ -2,7 +2,7 @@
 
 Tickets [#9 motion](https://github.com/robdhyman/fire-tv/issues/9) and [#10 remote](https://github.com/robdhyman/fire-tv/issues/10). PR [#20](https://github.com/robdhyman/fire-tv/pull/20).
 
-- **Live:** https://robdhyman.github.io/fire-tv/ (PR #20 is live; your review edits are PR #21). Add `?motion=reduced` to see the reduced-motion path; press **R** for the remote.
+- **Live:** https://robdhyman.github.io/fire-tv/ (PRs #20 and #21 are live; the hero carousel is PR #22 and goes live when merged). Add `?motion=reduced` to see the reduced-motion path; press **R** for the remote.
 - **Before:** the 18s recording, `iCloud Drive/Claude/Cowork/nbcu-firetv/nbcu-firetv-assets/Screen Recording 2026-11-02 at 1.39.57 PM.mov`. Key frames in `docs/motion/before/` (t04.50 mid-slide, t12.00–t13.50 the zoom).
 - **After:** key frames in `docs/motion/after/`; regenerate any time with `node scripts/motion-frames.mjs <url>`.
 
@@ -10,22 +10,22 @@ Tickets [#9 motion](https://github.com/robdhyman/fire-tv/issues/9) and [#10 remo
 
 | Moment | 2017 (recording) | Now |
 |---|---|---|
-| Hero change | Whole strip slides ~500 ms; neighbours peek and slide with it | Art and copy **crossfade** 0.6 s; old copy clears in 0.15 s, new copy follows at 0.15 s; art drifts in a **Ken Burns** (6% zoom, 24 px drift, 20 s each way). Neighbour edges still peek, dimmed, and crossfade |
+| Hero change | Whole strip slides ~500 ms; neighbours peek and slide with it | Whole **strip slides** one panel (1711 px) on `heroSlide`, about 450 ms, critically damped; a press mid-slide retargets. Centre panel full size with the white ring; neighbours peek at both edges at **0.92** scale and 40% opacity, growing and brightening as they slide in; their copy fades out. No Ken Burns (second review) |
 | Up/down moves | Page slid ~250 ms | Own slower **scroll** spring, about 600 ms (review edit) |
 | Hero → show page | Hero zooms to fill the screen, nav fades, season row rises | **Morph** (about 700 ms after your review): the same photo's clip opens from the hero rectangle to full bleed (no crop jump), the title flies to its show-page spot, nav fades, season row rises 200 px, logline and + wait for the title to land |
 | Back | Cut | The morph in reverse: art shrinks into the hero, title flies back, Home fades in around it |
 | Tile focus | Instant border; tile grew | Shows grid, buttons, logo: **spring to 1.1 + 8 px lift**, white ring and shadow; neighbours unmoved. Rows keep the 2017 expanding tile (376 → 590 px) but on a spring. Unfocus is softer, so the old tile trails |
 | Rapid D-pad | — | Presses under 160 ms apart switch to a stiffer focus spring; a press mid-spring retargets, never queues |
 | Screen entry | Cut | Rows and grids **stagger** in (35 ms per tile, 80 ms per row, 16 px rise); screens crossfade 0.25 s |
-| Reduced motion | — | Every move is instant; only 150 ms opacity fades remain; no Ken Burns, no scale |
+| Reduced motion | — | Every move is instant (the hero strip jumps a panel); only 150 ms opacity fades remain; no focus scale |
 
 **Tokens** (`src/motion/tokens.ts`, stiffness / damping / mass):
 
 - `spring.focusIn` 400 / 30 / 0.8 (~200 ms) · `focusInFast` 700 / 40 / 0.8 (~150 ms) · `focusOut` 200 / 26 / 1 (~300 ms)
-- `spring.strip` 260 / 32 / 1 (~250 ms, sideways) · `scroll` 90 / 20 / 1 (~600 ms, up/down) · `morph` 80 / 18 / 1 (~700 ms) · `rise` 110 / 20 / 1
-- `duration`: heroCrossfade 0.6 · heroCopyOut 0.15 · heroCopyDelay 0.15 · kenBurns 20 · screenFade 0.25 · quick 0.15 · riseDelay 0.12 · copyAfterFlight 0.45 · reduced 0.15 (s)
+- `spring.strip` 260 / 32 / 1 (~250 ms, sideways) · `heroSlide` 170 / 26 / 1 (~450 ms, hero strip) · `scroll` 90 / 20 / 1 (~600 ms, up/down) · `morph` 80 / 18 / 1 (~700 ms) · `rise` 110 / 20 / 1
+- `duration`: backdropFade 0.6 · screenFade 0.25 · quick 0.15 · riseDelay 0.12 · copyAfterFlight 0.45 · reduced 0.15 (s)
 - `stagger`: tile 0.035 · row 0.08 (s)
-- `distance`: focusScale 1.1 · focusLift −8 · tileEnter 16 · rowRise 200 · kenBurnsScale 0.06 · kenBurnsDrift −24 · heroCopyRise 12 (px); `RAPID_INPUT_MS` 160
+- `distance`: focusScale 1.1 · focusLift −8 · tileEnter 16 · rowRise 200 (px) · heroNeighbourScale 0.92 · heroNeighbourOpacity 0.4; `RAPID_INPUT_MS` 160
 
 Decided here: the morph is drawn in stage pixels instead of `layoutId`, because `layoutId` started the title in the wrong place in any window smaller than 1080p (ADR 002).
 
@@ -48,3 +48,13 @@ Decided here: the morph is drawn in stage pixels instead of `layoutId`, because 
 | "Watch Next" row cut off at the bottom | The Player's up next row peeks at the bottom; when it takes focus the overlay lifts so the opened row is fully on screen (playing and during the credits) |
 
 Checked by `node scripts/motion-frames.mjs`: 17/17 at 1920x1080, 1280x720 and reduced motion, including hover-does-nothing, nav-doesn't-reflow and the Player row.
+
+## Your second review (PR #22, hero carousel)
+
+| You said | Change |
+|---|---|
+| The central hero tile should be slightly larger than all others | The centre panel is the hero rectangle (1686x672); neighbours are 0.92 (618 px tall vs 672), dimmed to 40%, and shrink toward the centre so the peeks stay put |
+| The tiles should actually move when I navigate left/right | Every hero show is a panel in one strip that slides a full pitch on Left/Right, for every show; presses mid-slide retarget. The crossfade and Ken Burns are gone |
+| There should be a white border around the focused hero | The 3 px white ring sits on the centre panel and passes to the incoming panel as it slides in; it waits for the reverse morph to land before showing |
+
+Also: Enter mid-slide opens the show page from where the panel actually is (measured live), so there is no jump. Checked by `node scripts/motion-frames.mjs`: 23/23 at 1920x1080 and 1280x720, 22/22 with reduced motion (the mid-slide check needs motion), including neighbour-smaller, strip-moved-one-pitch, mid-slide frame and ring-on-centre.
