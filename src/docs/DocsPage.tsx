@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Markdown, { type Components } from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
 import remarkGfm from 'remark-gfm'
 import { Link, useParams } from 'react-router'
 
@@ -34,6 +35,17 @@ export function DocsPage() {
   const key = resolve(splat)
   const [body, setBody] = useState<string | null>(null)
 
+  // The guide's swatches read the app's brand variables, so docs always render
+  // in the SYFY default (USA blocks scope themselves with data-brand="usa").
+  useEffect(() => {
+    const root = document.documentElement
+    const previous = root.dataset.brand
+    delete root.dataset.brand
+    return () => {
+      if (previous) root.dataset.brand = previous
+    }
+  }, [])
+
   useEffect(() => {
     let live = true
     setBody(null)
@@ -62,7 +74,7 @@ export function DocsPage() {
         <p className="text-white/60">Loading…</p>
       ) : (
         <article className="prose-docs">
-          <Markdown remarkPlugins={[remarkGfm]} components={components}>{body}</Markdown>
+          <Markdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={components}>{body}</Markdown>
         </article>
       )}
     </main>

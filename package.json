@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build && cp dist/index.html dist/404.html",
     "preview": "vite preview",
-    "art": "node scripts/convert-art.mjs"
+    "art": "node scripts/convert-art.mjs",
+    "check:style-guide": "node scripts/check-style-guide.mjs"
   },
   "dependencies": {
     "motion": "^12.0.0",
@@ -15,6 +16,7 @@
     "react-dom": "^19.0.0",
     "react-markdown": "^10.1.0",
     "react-router": "^7.0.0",
+    "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
