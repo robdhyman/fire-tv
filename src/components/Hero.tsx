@@ -73,7 +73,7 @@ export function Hero({ shows, memoryKey, onCurrent }: { shows: Show[]; memoryKey
     return true
   }
 
-  const { props } = useFocusable(HERO_ID, {
+  const { focused, props } = useFocusable(HERO_ID, {
     onSelect: () => {
       // By id, not by ref: a fading-out title's unmount clears the shared ref.
       const h1 = document.querySelector(`[data-hero-title="${show.id}"]`)
@@ -89,8 +89,8 @@ export function Hero({ shows, memoryKey, onCurrent }: { shows: Show[]; memoryKey
   return (
     <div className="relative h-[672px]">
       <motion.div variants={m.part}>
-        <Peek show={prev} side="left" onClick={() => step(-1)} />
-        <Peek show={next} side="right" onClick={() => step(1)} />
+        <Peek show={prev} side="left" />
+        <Peek show={next} side="right" />
       </motion.div>
 
       {/* Full-bleed art clipped to the hero; it covers the stage exactly when Home is unscrolled. */}
@@ -127,6 +127,12 @@ export function Hero({ shows, memoryKey, onCurrent }: { shows: Show[]; memoryKey
       <motion.div {...props} className="absolute top-0 z-[31]" style={{ left: HERO.left, width: HERO.w, height: HERO.h }}
         variants={morphIn ? { hidden: { opacity: 1 }, shown: { opacity: 1 } } : m.part}
       >
+        <motion.div
+          className="absolute inset-0"
+          initial={false}
+          animate={{ boxShadow: focused ? HERO_RING : NO_HERO_RING }}
+          transition={m.focus(focused)}
+        />
         <AnimatePresence initial={false}>
           <motion.div
             key={show.id}
@@ -156,14 +162,17 @@ export function Hero({ shows, memoryKey, onCurrent }: { shows: Show[]; memoryKey
   )
 }
 
+/** Focus ring on the hero: the same white 3px border as a focused tile, no lift (it is the size of the screen). */
+const HERO_RING = '0 0 0 3px rgba(255,255,255,1)'
+const NO_HERO_RING = '0 0 0 3px rgba(255,255,255,0)'
+
 /** The edge of the previous or next show, dimmed, in the 92px gutter beside the hero. */
-function Peek({ show, side, onClick }: { show?: Show; side: 'left' | 'right'; onClick: () => void }) {
+function Peek({ show, side }: { show?: Show; side: 'left' | 'right' }) {
   const m = useMotion()
   return (
     <div
       className="absolute top-0 h-[672px] w-[92px] overflow-hidden"
       style={{ [side]: 0 }}
-      onClick={onClick}
     >
       <AnimatePresence initial={false}>
         {show && (

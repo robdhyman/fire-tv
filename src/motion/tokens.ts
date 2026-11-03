@@ -11,7 +11,10 @@
  *   Back           the same morph reversed
  *   screen entry   rows and grids settle with a light stagger
  * With reduced motion every spring becomes an instant move and every fade
- * becomes `fade.reduced` (see `useMotion`).
+ * becomes `duration.reduced` (see `useMotion`).
+ *
+ * Review edits (Rob, 2 Nov): up/down moves got their own slower `scroll`
+ * spring, and the morph was slowed from 120/22 to 80/18.
  */
 
 export const spring = {
@@ -21,12 +24,14 @@ export const spring = {
   focusInFast: { type: 'spring', stiffness: 700, damping: 40, mass: 0.8 },
   /** Focus leaving: softer than focusIn, so the old tile trails the new one. */
   focusOut: { type: 'spring', stiffness: 200, damping: 26, mass: 1 },
-  /** Row strips, grid and page scroll, expanded-tile width: about 250 ms, no overshoot. */
+  /** Sideways moves: row strips, season tabs, expanded-tile width. About 250 ms, no overshoot. */
   strip: { type: 'spring', stiffness: 260, damping: 32, mass: 1 },
-  /** Hero ↔ show page shared-element morph: about 500 ms, critically damped. */
-  morph: { type: 'spring', stiffness: 120, damping: 22, mass: 1 },
+  /** Up/down moves: page scroll, a row opening up, the Player's overlay shifting. About 600 ms. */
+  scroll: { type: 'spring', stiffness: 90, damping: 20, mass: 1 },
+  /** Hero ↔ show page shared-element morph: about 700 ms, critically damped. */
+  morph: { type: 'spring', stiffness: 80, damping: 18, mass: 1 },
   /** Season row rising into the show page, and tiles settling on entry. */
-  rise: { type: 'spring', stiffness: 170, damping: 24, mass: 1 },
+  rise: { type: 'spring', stiffness: 110, damping: 20, mass: 1 },
 } as const
 
 export const duration = {
@@ -45,7 +50,7 @@ export const duration = {
   /** The season row waits this long into the morph before rising. */
   riseDelay: 0.12,
   /** Copy beside a flying title (logline, + button) waits for it to land. */
-  copyAfterFlight: 0.32,
+  copyAfterFlight: 0.45,
   /** The only animation left with reduced motion: a short opacity fade. */
   reduced: 0.15,
 } as const

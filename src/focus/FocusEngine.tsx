@@ -6,7 +6,6 @@ import {
   useLayoutEffect,
   useRef,
   useState,
-  type MouseEvent,
   type ReactNode,
   type RefObject,
 } from 'react'
@@ -20,7 +19,8 @@ import { noteArrow } from '../motion/useMotion'
  * Focus is app state: one focused element id, not the browser's tab order.
  * Focusables register their DOM node; arrow keys pick the nearest neighbour
  * from live bounding boxes; Enter selects; Esc/Backspace runs the top Back
- * handler; mouse hover moves focus and click selects. Each screen remembers
+ * handler. The stage ignores the mouse (Rob, 2 Nov review): only the keyboard
+ * and the on-screen remote drive focus. Each screen remembers
  * its last focused id so returning to it restores the same focus path.
  */
 
@@ -165,13 +165,11 @@ export type FocusableProps<T extends HTMLElement = HTMLDivElement> = {
   ref: RefObject<T | null>
   'data-focus-id': string
   'data-focused'?: true
-  onMouseMove: () => void
-  onClick: (e: MouseEvent) => void
 }
 
 /** Register one focusable element. Spread `props` onto its DOM node. */
 export function useFocusable<T extends HTMLElement = HTMLDivElement>(id: string, options: FocusableOptions = {}) {
-  const { focusedId, setFocus, register } = useFocusContext()
+  const { focusedId, register } = useFocusContext()
   const ref = useRef<T>(null)
   const optionsRef = useRef(options)
   optionsRef.current = options
@@ -196,14 +194,6 @@ export function useFocusable<T extends HTMLElement = HTMLDivElement>(id: string,
     ref,
     'data-focus-id': id,
     'data-focused': focused || undefined,
-    onMouseMove: () => {
-      if (!focused) setFocus(id)
-    },
-    onClick: (e) => {
-      e.stopPropagation()
-      setFocus(id)
-      optionsRef.current.onSelect?.()
-    },
   }
   return { focused, props }
 }

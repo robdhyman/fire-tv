@@ -109,6 +109,40 @@ const neighbourAfter = await rect('[data-focus-id^="grid:shows:"]')
 check('grid tile scales on focus', reduced ? scaled === 'none' : scaled.startsWith('matrix(1.1'), scaled)
 check('grid neighbours stay put', JSON.stringify(neighbourBefore) !== undefined && neighbourAfter.x >= 0, `${JSON.stringify(neighbourAfter)}`)
 
+// Keyboard only: hovering the stage never moves focus.
+await page.goto(base + '/')
+await page.waitForTimeout(900)
+await page.mouse.move(w * 0.3, h * 0.9)
+await page.mouse.move(w * 0.35, h * 0.92)
+await page.waitForTimeout(200)
+check('hover does not move focus', (await focused()) === 'hero', await focused())
+
+// Nav: moving along it never reflows it.
+await page.keyboard.press('ArrowUp')
+await page.waitForTimeout(300)
+const navBefore = await rect('[data-focus-id="nav:search"]')
+await page.keyboard.press('ArrowRight')
+await page.waitForTimeout(400)
+const navAfter = await rect('[data-focus-id="nav:search"]')
+check('nav does not jump as focus moves', JSON.stringify(navBefore) === JSON.stringify(navAfter), `${JSON.stringify(navBefore)} vs ${JSON.stringify(navAfter)}`)
+
+// Player: the peeking up next row lifts fully into view when focused, playing and in the credits.
+for (const keys of [['ArrowDown', 'ArrowDown'], Array(10).fill('ArrowRight').concat(['wait', 'ArrowDown'])]) {
+  await page.goto(base + '/play/ringfall/3/2')
+  await page.waitForTimeout(700)
+  for (const k of keys) {
+    // 'wait': let the credits take focus before moving on.
+    if (k === 'wait') await page.waitForTimeout(1000)
+    else await page.keyboard.press(k)
+    await page.waitForTimeout(120)
+  }
+  await page.waitForTimeout(1200)
+  const id = await focused()
+  const box = await rect('[data-focused]')
+  const bottom = box && (box.y + box.h) / (h / 1080)
+  check(`player up next fully visible (${keys.length > 2 ? 'credits' : 'playing'})`, id?.startsWith('row:upnext:') && bottom <= 1080, `${id} bottom ${Math.round(bottom)}`)
+}
+
 // Remote overlay: R summons it, its buttons drive focus, physical keys light it.
 await page.goto(base + '/')
 await page.waitForTimeout(900)
@@ -131,13 +165,6 @@ if (visible) {
   check('physical arrow lights the remote', lit)
   await page.waitForTimeout(300)
   check('remote Up brought focus back', (await focused()) === 'hero', await focused())
-  for (const v of ['puck', 'strip']) {
-    await page.goto(base + '/?remote=' + v)
-    await page.waitForTimeout(600)
-    await page.keyboard.press('r')
-    await page.waitForTimeout(500)
-    await page.screenshot({ path: `${out}/7-remote-${v}.jpg`, type: 'jpeg', quality: 70 })
-  }
   await page.keyboard.press('r')
   await page.waitForTimeout(400)
   check('R hides it again', (await page.locator('[aria-label="select (enter)"]').count()) === 0)

@@ -40,7 +40,7 @@ The small corner tag on a tile: `new` or `expiring`.
 
 ## Focus
 
-The single item that the D-pad currently points at. Focus is spatial: arrow keys move it between neighbours; Enter selects it; Back leaves the screen. Mouse hover moves focus too. Distinct from browser focus-visible styling, which is how focus is drawn.
+The single item that the D-pad currently points at. Focus is spatial: arrow keys move it between neighbours; Enter selects it; Back leaves the screen. The mouse does not move focus; only the keyboard and the remote overlay do. Distinct from browser focus-visible styling, which is how focus is drawn.
 
 ## D-pad
 
