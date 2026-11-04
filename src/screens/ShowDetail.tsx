@@ -74,12 +74,13 @@ function ShowPage({ show }: { show: Show }) {
     [show, season, navigate],
   )
 
+  // Tabs sit in a fixed line from x=200 and never slide: selecting a season changes weight only.
   const tabs = (
-    <motion.div className="flex items-end" initial={false} animate={{ x: -seasonIndex * TAB_PITCH }} transition={m.strip}>
+    <div className="flex items-end">
       {show.seasons.map((s, i) => (
         <SeasonTab key={s.number} show={show} season={s} active={i === seasonIndex} onSelect={() => setSeasonIndex(i)} />
       ))}
-    </motion.div>
+    </div>
   )
 
   return (

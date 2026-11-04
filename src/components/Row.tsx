@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from 'react'
 import { motion } from 'motion/react'
 import { useFocusable, useFocusedId } from '../focus/FocusEngine'
 import { useMotion } from '../motion/useMotion'
+import { distance } from '../motion/tokens'
 import { Badge } from './Badge'
 
 /*
@@ -9,6 +10,8 @@ import { Badge } from './Badge'
  *  plain  318x179 tiles, 2px gap, no labels
  *  big    376x211 tiles with labels below, 19px gap; the current tile 590x332
  *         with its label inside; a white border when it is actually focused.
+ *         The label sits LIFT_ROOM further above the tiles than in plain mode,
+ *         so the focused tile's lift and ring never cross it (issue #27).
  * The row is a carousel anchored at x=200: the current tile sits at the safe
  * inset and the previous one peeks in from the left edge. Strip, widths and
  * height move on the `strip` spring; the focused tile lifts on `focus`;
@@ -18,9 +21,13 @@ import { Badge } from './Badge'
 export const PLAIN = { w: 318, h: 179, gap: 2 }
 export const BIG = { w: 376, h: 211, gap: 19, focusW: 590, focusH: 332 }
 export const ROW_LABEL_H = 33
+/** Focus ring width, px: the white border in FOCUS_RING. */
+const RING_W = 3
+/** Room a big row keeps between label and tiles for the lift and the ring: the lifted ring lands where the resting tile sat. */
+export const LIFT_ROOM = -distance.focusLift + RING_W
 /** Row block heights (label + gap + tiles) in each mode. */
 export const ROW_H_PLAIN = ROW_LABEL_H + PLAIN.h
-export const ROW_H_BIG = ROW_LABEL_H + 6 + BIG.focusH
+export const ROW_H_BIG = ROW_LABEL_H + 6 + LIFT_ROOM + BIG.focusH
 
 export type RowItem = {
   id: string
@@ -76,10 +83,10 @@ export function Row({ id, label, items, mode = 'auto', initialIndex = 0, aside, 
         {aside}
       </div>
       <motion.div
-        className="mt-[6px] flex items-center"
+        className="flex items-center"
         initial={false}
-        animate={{ height: big ? BIG.focusH : PLAIN.h, x: -anchor * pitch }}
-        transition={{ default: m.strip, height: m.scroll }}
+        animate={{ marginTop: big ? 6 + LIFT_ROOM : 6, height: big ? BIG.focusH : PLAIN.h, x: -anchor * pitch }}
+        transition={{ default: m.strip, marginTop: m.scroll, height: m.scroll }}
       >
         <motion.div
           className="flex items-center"
@@ -140,9 +147,9 @@ function Tile({ rowId, item, big, current }: { rowId: string; item: RowItem; big
   )
 }
 
-/** Focus ring: a white 3px border and a drop shadow under the lifted tile. Both ends share one shape so it tweens. */
-export const FOCUS_RING = '0 0 0 3px rgba(255,255,255,1), 0 18px 36px rgba(0,0,0,0.55)'
-export const NO_RING = '0 0 0 3px rgba(255,255,255,0), 0 0px 0px rgba(0,0,0,0)'
+/** Focus ring: a white RING_W border and a drop shadow under the lifted tile. Both ends share one shape so it tweens. */
+export const FOCUS_RING = `0 0 0 ${RING_W}px rgba(255,255,255,1), 0 18px 36px rgba(0,0,0,0.55)`
+export const NO_RING = `0 0 0 ${RING_W}px rgba(255,255,255,0), 0 0px 0px rgba(0,0,0,0)`
 
 /** `E2 Heros and Morons` with the number in the label weight. */
 export function EpisodeLabel({ season, number, title }: { season?: number; number: number; title: string }) {
