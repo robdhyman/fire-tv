@@ -23,7 +23,9 @@ export function pickNeighbour(current: Box, boxes: Box[], dir: Direction): Box |
         const p = centre(b)
         return { b, dy: (p.y - c.y) * sign, dx: Math.abs(p.x - c.x) }
       })
-      .filter((e) => e.dy > 8)
+      // A centre inside the current item's span is beside it, not past it: the
+      // focused tile lifts 8px, which the stage scales past the 8px slack above.
+      .filter((e) => e.dy > 8 && (sign > 0 ? centre(e.b).y > current.bottom : centre(e.b).y < current.top))
     if (list.length === 0) return null
     const minDy = Math.min(...list.map((e) => e.dy))
     const lane = list.filter((e) => e.dy <= minDy + 40)
