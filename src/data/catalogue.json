@@ -41,37 +41,43 @@
               "number": 1,
               "title": "Salvage Rights",
               "synopsis": "Ines Varga tows a derelict hauler off Callisto and finds a passenger who has been dead for two centuries.",
-              "duration": 58
+              "duration": 58,
+              "still": "ringfall/still-1x1.jpg"
             },
             {
               "number": 2,
               "title": "The Quiet Ring",
               "synopsis": "The hauler's log points to a structure in orbit around Uranus that no chart has ever shown.",
-              "duration": 52
+              "duration": 52,
+              "still": "ringfall/still-1x2.jpg"
             },
             {
               "number": 3,
               "title": "Tariff",
               "synopsis": "A Belt union inspector boards the salvage ship and discovers the cargo is worth more than the ship.",
-              "duration": 49
+              "duration": 49,
+              "still": "ringfall/still-1x3.jpg"
             },
             {
               "number": 4,
               "title": "Burn",
               "synopsis": "A Martian frigate matches course. Ines has nine hours of fuel and one lie left.",
-              "duration": 51
+              "duration": 51,
+              "still": "ringfall/still-1x4.jpg"
             },
             {
               "number": 5,
               "title": "Protocol Seven",
               "synopsis": "Earth's intelligence service wakes a sleeper on Ceres whose only job is to make the ring go away.",
-              "duration": 50
+              "duration": 50,
+              "still": "ringfall/still-1x5.jpg"
             },
             {
               "number": 6,
               "title": "Perihelion",
               "synopsis": "The ring opens for the first time in two hundred years, with three navies watching.",
-              "duration": 61
+              "duration": 61,
+              "still": "ringfall/still-1x6.jpg"
             }
           ]
         },
@@ -82,37 +88,43 @@
               "number": 1,
               "title": "Other Side",
               "synopsis": "The crew wakes on the far side of the ring under a star that has no name.",
-              "duration": 55
+              "duration": 55,
+              "still": "ringfall/still-2x1.jpg"
             },
             {
               "number": 2,
               "title": "Dead Reckoning",
               "synopsis": "With no charts and failing water, the ship follows a signal that answers in their own voices.",
-              "duration": 48
+              "duration": 48,
+              "still": "ringfall/still-2x2.jpg"
             },
             {
               "number": 3,
               "title": "The Colony",
               "synopsis": "A settlement of the lost first fleet is still here, and it has been expecting them.",
-              "duration": 53
+              "duration": 53,
+              "still": "ringfall/still-2x3.jpg"
             },
             {
               "number": 4,
               "title": "Founders' Day",
               "synopsis": "The colony's governor offers Ines a seat at the table. The price is her ship.",
-              "duration": 50
+              "duration": 50,
+              "still": "ringfall/still-2x4.jpg"
             },
             {
               "number": 5,
               "title": "Escape Velocity",
               "synopsis": "Mars sends a second expedition through, and the colony closes its gates.",
-              "duration": 52
+              "duration": 52,
+              "still": "ringfall/still-2x5.jpg"
             },
             {
               "number": 6,
               "title": "Homeward",
               "synopsis": "Ines carries the colony's only message back to a solar system that has already declared war.",
-              "duration": 60
+              "duration": 60,
+              "still": "ringfall/still-2x6.jpg"
             }
           ]
         },
@@ -123,37 +135,43 @@
               "number": 1,
               "title": "Blockade",
               "synopsis": "Earth and Mars seal the ring. The Belt decides it is tired of asking permission.",
-              "duration": 54
+              "duration": 54,
+              "still": "ringfall/still-3x1.jpg"
             },
             {
               "number": 2,
               "title": "The Lantern",
               "synopsis": "A second ring lights up near Neptune and the balance of power tips in a day.",
-              "duration": 50
+              "duration": 50,
+              "still": "ringfall/still-3x2.jpg"
             },
             {
               "number": 3,
               "title": "Chain of Command",
               "synopsis": "A mutiny aboard the Martian flagship puts Ines in a room with the admiral who hunted her.",
-              "duration": 49
+              "duration": 49,
+              "still": "ringfall/still-3x3.jpg"
             },
             {
               "number": 4,
               "title": "Tidal",
               "synopsis": "The rings begin to move, and the orbits of three moons move with them.",
-              "duration": 51
+              "duration": 51,
+              "still": "ringfall/still-3x4.jpg"
             },
             {
               "number": 5,
               "title": "What the Ring Wants",
               "synopsis": "The colony governor returns with an offer that would end the war and the human species' independence with it.",
-              "duration": 53
+              "duration": 53,
+              "still": "ringfall/still-3x5.jpg"
             },
             {
               "number": 6,
               "title": "Ringfall",
               "synopsis": "Ines makes the one choice every navy agreed she would never be allowed to make.",
-              "duration": 64
+              "duration": 64,
+              "still": "ringfall/still-3x6.jpg"
             }
           ]
         }
@@ -178,37 +196,43 @@
               "number": 1,
               "title": "First Light",
               "synopsis": "Sheriff Dale Okafor finds a hunter's truck idling at the tree line with the heater on and nobody inside.",
-              "duration": 46
+              "duration": 46,
+              "still": "ember-hollow/still-1x1.jpg"
             },
             {
               "number": 2,
               "title": "The Stag",
               "synopsis": "Nell Okafor photographs a deer standing in front of a light that casts no shadow.",
-              "duration": 44
+              "duration": 44,
+              "still": "ember-hollow/still-1x2.jpg"
             },
             {
               "number": 3,
               "title": "Burn Line",
               "synopsis": "The forestry service maps the glow and finds it moving a hundred yards closer to town every night.",
-              "duration": 45
+              "duration": 45,
+              "still": "ember-hollow/still-1x3.jpg"
             },
             {
               "number": 4,
               "title": "Mrs. Teller's Boy",
               "synopsis": "A man who vanished in the 1991 autumn walks out of the trees, exactly as old as the day he left.",
-              "duration": 47
+              "duration": 47,
+              "still": "ember-hollow/still-1x4.jpg"
             },
             {
               "number": 5,
               "title": "Cold Ash",
               "synopsis": "The town council votes to close the forest road. The forest opens a new one.",
-              "duration": 44
+              "duration": 44,
+              "still": "ember-hollow/still-1x5.jpg"
             },
             {
               "number": 6,
               "title": "Hollow",
               "synopsis": "Nell walks in, and for the first time the lights go out behind her.",
-              "duration": 52
+              "duration": 52,
+              "still": "ember-hollow/still-1x6.jpg"
             }
           ]
         },
@@ -219,37 +243,43 @@
               "number": 1,
               "title": "Spring",
               "synopsis": "Six months on, the forest is dark and Nell is back, but she will not say where she has been.",
-              "duration": 46
+              "duration": 46,
+              "still": "ember-hollow/still-2x1.jpg"
             },
             {
               "number": 2,
               "title": "The Survey",
               "synopsis": "A mining company's geologists arrive with a permit and a map of something buried under the hollow.",
-              "duration": 44
+              "duration": 44,
+              "still": "ember-hollow/still-2x2.jpg"
             },
             {
               "number": 3,
               "title": "Kindling",
               "synopsis": "Fires start in three homes on the same night, each one in a child's bedroom, none of them with a child inside.",
-              "duration": 45
+              "duration": 45,
+              "still": "ember-hollow/still-2x3.jpg"
             },
             {
               "number": 4,
               "title": "The Returned",
               "synopsis": "Everyone the forest ever took walks back into town on one afternoon, and none of them are hungry.",
-              "duration": 48
+              "duration": 48,
+              "still": "ember-hollow/still-2x4.jpg"
             },
             {
               "number": 5,
               "title": "Firebreak",
               "synopsis": "Dale tries to burn the hollow out before the mining company can dig it up.",
-              "duration": 46
+              "duration": 46,
+              "still": "ember-hollow/still-2x5.jpg"
             },
             {
               "number": 6,
               "title": "What Walks Back",
               "synopsis": "The lights return early, and this time they come as far as Main Street.",
-              "duration": 54
+              "duration": 54,
+              "still": "ember-hollow/still-2x6.jpg"
             }
           ]
         }
@@ -382,37 +412,43 @@
               "number": 1,
               "title": "Scan",
               "synopsis": "A library archivist digitising old family photos finds a face in the scanner bed that is not in the print.",
-              "duration": 44
+              "duration": 44,
+              "still": "feedback/still-1x1.jpg"
             },
             {
               "number": 2,
               "title": "300 DPI",
               "synopsis": "Every copy of the scan is different, and every copy is closer.",
-              "duration": 43
+              "duration": 43,
+              "still": "feedback/still-1x2.jpg"
             },
             {
               "number": 3,
               "title": "The Negative",
               "synopsis": "The archivist traces the photo to a 1970s portrait studio whose clients all died within a year of sitting.",
-              "duration": 45
+              "duration": 45,
+              "still": "feedback/still-1x3.jpg"
             },
             {
               "number": 4,
               "title": "Flatbed",
               "synopsis": "The scanner starts running on its own, and the output tray is never empty in the morning.",
-              "duration": 42
+              "duration": 42,
+              "still": "feedback/still-1x4.jpg"
             },
             {
               "number": 5,
               "title": "Exposure",
               "synopsis": "A security guard who watched the footage of the archive wakes with a stranger's mouth.",
-              "duration": 44
+              "duration": 44,
+              "still": "feedback/still-1x5.jpg"
             },
             {
               "number": 6,
               "title": "Last Copy",
               "synopsis": "The archivist destroys every scan but one, and keeps it where no one would look: her own face.",
-              "duration": 51
+              "duration": 51,
+              "still": "feedback/still-1x6.jpg"
             }
           ]
         },
@@ -423,37 +459,43 @@
               "number": 1,
               "title": "Dial Tone",
               "synopsis": "A late-night radio host takes a call from a listener who died on air in 1983.",
-              "duration": 44
+              "duration": 44,
+              "still": "feedback/still-2x1.jpg"
             },
             {
               "number": 2,
               "title": "Dead Air",
               "synopsis": "The station's transmitter starts broadcasting a show that is not on the schedule.",
-              "duration": 43
+              "duration": 43,
+              "still": "feedback/still-2x2.jpg"
             },
             {
               "number": 3,
               "title": "Call-In",
               "synopsis": "Listeners across the county report the same voice telling them to leave their doors open.",
-              "duration": 45
+              "duration": 45,
+              "still": "feedback/still-2x3.jpg"
             },
             {
               "number": 4,
               "title": "Frequency",
               "synopsis": "An engineer isolates the signal and finds it is coming from the host's own apartment.",
-              "duration": 44
+              "duration": 44,
+              "still": "feedback/still-2x4.jpg"
             },
             {
               "number": 5,
               "title": "Request Hour",
               "synopsis": "The caller asks for one song, and every radio in the county plays it at once.",
-              "duration": 42
+              "duration": 42,
+              "still": "feedback/still-2x5.jpg"
             },
             {
               "number": 6,
               "title": "Sign-Off",
               "synopsis": "The host reads the final sign-off from a script she did not write, in a voice that is not hers.",
-              "duration": 50
+              "duration": 50,
+              "still": "feedback/still-2x6.jpg"
             }
           ]
         }
@@ -478,37 +520,43 @@
               "number": 1,
               "title": "Frosted Glass",
               "synopsis": "Dr. Maren Holt notices a handprint on the inside of her shower door and no one has used the bathroom in days.",
-              "duration": 46
+              "duration": 46,
+              "still": "veil/still-1x1.jpg"
             },
             {
               "number": 2,
               "title": "Intake",
               "synopsis": "A new client describes Maren's house room by room. He has never been there. He died in 2009.",
-              "duration": 44
+              "duration": 44,
+              "still": "veil/still-1x2.jpg"
             },
             {
               "number": 3,
               "title": "The Wall",
               "synopsis": "Maren finds the previous owners' records: six families, six years, six missing persons.",
-              "duration": 45
+              "duration": 45,
+              "still": "veil/still-1x3.jpg"
             },
             {
               "number": 4,
               "title": "Session Notes",
               "synopsis": "The voices on her session recordings are not her clients'.",
-              "duration": 44
+              "duration": 44,
+              "still": "veil/still-1x4.jpg"
             },
             {
               "number": 5,
               "title": "Thin",
               "synopsis": "The veil wears through in the kitchen, and something on the other side reaches all the way in.",
-              "duration": 47
+              "duration": 47,
+              "still": "veil/still-1x5.jpg"
             },
             {
               "number": 6,
               "title": "Through",
               "synopsis": "Maren crosses over to bring one of the missing back, and learns why the house chose a counsellor.",
-              "duration": 53
+              "duration": 53,
+              "still": "veil/still-1x6.jpg"
             }
           ]
         }
@@ -533,43 +581,50 @@
               "number": 1,
               "title": "Cherry",
               "synopsis": "Dolores bakes for the new neighbours, who are the fourth family to move in since 1957 and the first to ask about the smell.",
-              "duration": 31
+              "duration": 31,
+              "still": "homemaker/still-1x1.jpg"
             },
             {
               "number": 2,
               "title": "Spring Cleaning",
               "synopsis": "A realtor arrives to list the house. Dolores explains, politely, that the house is not for sale and neither is she.",
-              "duration": 30
+              "duration": 30,
+              "still": "homemaker/still-1x2.jpg"
             },
             {
               "number": 3,
               "title": "The Tupperware Party",
               "synopsis": "Dolores hosts the street, and every guest leaves with leftovers and a small, permanent gap in their memory.",
-              "duration": 32
+              "duration": 32,
+              "still": "homemaker/still-1x3.jpg"
             },
             {
               "number": 4,
               "title": "Husband Number Six",
               "synopsis": "A door-to-door salesman proposes by accident. Dolores accepts on purpose.",
-              "duration": 30
+              "duration": 30,
+              "still": "homemaker/still-1x4.jpg"
             },
             {
               "number": 5,
               "title": "Rhubarb",
               "synopsis": "A detective investigating the previous five husbands is invited to stay for dinner, and then for good.",
-              "duration": 31
+              "duration": 31,
+              "still": "homemaker/still-1x5.jpg"
             },
             {
               "number": 6,
               "title": "Thanksgiving",
               "synopsis": "Dolores sets a place for everyone she has ever lost, and they all come.",
-              "duration": 33
+              "duration": 33,
+              "still": "homemaker/still-1x6.jpg"
             },
             {
               "number": 7,
               "title": "Pie Crust",
               "synopsis": "The house finally offers Dolores a way out. She has to decide whether she wants one.",
-              "duration": 36
+              "duration": 36,
+              "still": "homemaker/still-1x7.jpg"
             }
           ]
         }
@@ -594,49 +649,57 @@
               "number": 1,
               "title": "Stagecoach",
               "synopsis": "Twelve players arrive with one dollar each and the saloon is already charging five for a room.",
-              "duration": 42
+              "duration": 42,
+              "still": "last-town-standing/still-1x1.jpg"
             },
             {
               "number": 2,
               "title": "The Bank Job",
               "synopsis": "The first alliance forms over a plan to rob the town bank, which the producers built with a real safe.",
-              "duration": 42
+              "duration": 42,
+              "still": "last-town-standing/still-1x2.jpg"
             },
             {
               "number": 3,
               "title": "High Noon",
               "synopsis": "A duel challenge (paintball, ten paces) decides who keeps the sheriff's badge and the key to the jail.",
-              "duration": 42
+              "duration": 42,
+              "still": "last-town-standing/still-1x3.jpg"
             },
             {
               "number": 4,
               "title": "Gold Rush",
               "synopsis": "A rumour about the prize location sends half the town digging up the schoolhouse floor.",
-              "duration": 42
+              "duration": 42,
+              "still": "last-town-standing/still-1x4.jpg"
             },
             {
               "number": 5,
               "title": "Wanted",
               "synopsis": "The town votes to exile its first player, and she leaves with the only map.",
-              "duration": 42
+              "duration": 42,
+              "still": "last-town-standing/still-1x5.jpg"
             },
             {
               "number": 6,
               "title": "Dry County",
               "synopsis": "The saloon runs out of water. The general store owner becomes the most powerful person in town.",
-              "duration": 42
+              "duration": 42,
+              "still": "last-town-standing/still-1x6.jpg"
             },
             {
               "number": 7,
               "title": "Land Grab",
               "synopsis": "A land auction forces every remaining player to show how much cash they have actually been hiding.",
-              "duration": 42
+              "duration": 42,
+              "still": "last-town-standing/still-1x7.jpg"
             },
             {
               "number": 8,
               "title": "The Deed",
               "synopsis": "Three players, one deed, and a buried prize that turns out to be under the only building no one dared dig up.",
-              "duration": 58
+              "duration": 58,
+              "still": "last-town-standing/still-1x8.jpg"
             }
           ]
         }
@@ -661,37 +724,43 @@
               "number": 1,
               "title": "Drop Zone",
               "synopsis": "Eight riders are helicoptered to a ridge at 3,400 metres with a board, a shovel and a bivvy each.",
-              "duration": 42
+              "duration": 42,
+              "still": "whiteout/still-1x1.jpg"
             },
             {
               "number": 2,
               "title": "Cornice",
               "synopsis": "The first descent crosses a cornice that the mountain guide refuses to certify.",
-              "duration": 42
+              "duration": 42,
+              "still": "whiteout/still-1x2.jpg"
             },
             {
               "number": 3,
               "title": "Front",
               "synopsis": "The storm arrives twelve hours early and the riders dig in on the wrong side of the ridge.",
-              "duration": 42
+              "duration": 42,
+              "still": "whiteout/still-1x3.jpg"
             },
             {
               "number": 4,
               "title": "Pit",
               "synopsis": "A snow pit test splits the group: half ride the face, half wait it out.",
-              "duration": 42
+              "duration": 42,
+              "still": "whiteout/still-1x4.jpg"
             },
             {
               "number": 5,
               "title": "Flat Light",
               "synopsis": "A whiteout wipes the horizon and one rider's beacon goes silent.",
-              "duration": 42
+              "duration": 42,
+              "still": "whiteout/still-1x5.jpg"
             },
             {
               "number": 6,
               "title": "The Line",
               "synopsis": "The storm clears for one hour, and the last three riders race a single untouched line to the valley.",
-              "duration": 56
+              "duration": 56,
+              "still": "whiteout/still-1x6.jpg"
             }
           ]
         }
@@ -716,37 +785,43 @@
               "number": 1,
               "title": "Dust",
               "synopsis": "Silas Reed rides into Carver with a satchel of bank notes and a sermon nobody asked for.",
-              "duration": 57
+              "duration": 57,
+              "still": "the-long-dry/still-1x1.jpg"
             },
             {
               "number": 2,
               "title": "The Grange",
               "synopsis": "The farmers' cooperative votes to withhold the harvest, and the bank's men arrive the same night.",
-              "duration": 54
+              "duration": 54,
+              "still": "the-long-dry/still-1x2.jpg"
             },
             {
               "number": 3,
               "title": "Tithe",
               "synopsis": "Silas preaches a sermon on debt that empties the church and fills the grange hall.",
-              "duration": 52
+              "duration": 52,
+              "still": "the-long-dry/still-1x3.jpg"
             },
             {
               "number": 4,
               "title": "Foreclosure",
               "synopsis": "The sheriff serves the first eviction of the season, and a widow's barn burns before he reaches it.",
-              "duration": 55
+              "duration": 55,
+              "still": "the-long-dry/still-1x4.jpg"
             },
             {
               "number": 5,
               "title": "Strike",
               "synopsis": "The county's wheat stays in the silos. The bank hires a man from Chicago to change that.",
-              "duration": 53
+              "duration": 53,
+              "still": "the-long-dry/still-1x5.jpg"
             },
             {
               "number": 6,
               "title": "Rain",
               "synopsis": "The first storm in three years breaks over a town already on fire.",
-              "duration": 61
+              "duration": 61,
+              "still": "the-long-dry/still-1x6.jpg"
             }
           ]
         },
@@ -757,37 +832,43 @@
               "number": 1,
               "title": "Ledger",
               "synopsis": "Silas's real name reaches Carver in a newspaper two weeks old.",
-              "duration": 55
+              "duration": 55,
+              "still": "the-long-dry/still-2x1.jpg"
             },
             {
               "number": 2,
               "title": "The Chicago Man",
               "synopsis": "The strikebreaker builds his own congregation out of the men the grange turned away.",
-              "duration": 53
+              "duration": 53,
+              "still": "the-long-dry/still-2x2.jpg"
             },
             {
               "number": 3,
               "title": "County Line",
               "synopsis": "A neighbouring county's sheriff rides in with a warrant and leaves without his badge.",
-              "duration": 52
+              "duration": 52,
+              "still": "the-long-dry/still-2x3.jpg"
             },
             {
               "number": 4,
               "title": "Harvest",
               "synopsis": "The wheat finally moves, under armed guard, to a buyer no one in town has met.",
-              "duration": 54
+              "duration": 54,
+              "still": "the-long-dry/still-2x4.jpg"
             },
             {
               "number": 5,
               "title": "Confession",
               "synopsis": "Silas tells the truth from the pulpit, and the town has to decide whether the truth changes anything.",
-              "duration": 55
+              "duration": 55,
+              "still": "the-long-dry/still-2x5.jpg"
             },
             {
               "number": 6,
               "title": "West",
               "synopsis": "The bank wins the county. Silas rides out at dawn with less money and more followers than he arrived with.",
-              "duration": 63
+              "duration": 63,
+              "still": "the-long-dry/still-2x6.jpg"
             }
           ]
         }
@@ -812,37 +893,43 @@
               "number": 1,
               "title": "Shell",
               "synopsis": "Theo Marsh is offered a desk in a basement with no name on the door and a 1998 embezzlement nobody closed.",
-              "duration": 44
+              "duration": 44,
+              "still": "pale-street/still-1x1.jpg"
             },
             {
               "number": 2,
               "title": "Wire",
               "synopsis": "A charity's missing endowment traces to a hat shop that has not sold a hat in twenty years.",
-              "duration": 43
+              "duration": 43,
+              "still": "pale-street/still-1x2.jpg"
             },
             {
               "number": 3,
               "title": "Float",
               "synopsis": "A dead bookmaker's ledger names half the precinct, and Theo has to choose which half to report.",
-              "duration": 44
+              "duration": 44,
+              "still": "pale-street/still-1x3.jpg"
             },
             {
               "number": 4,
               "title": "Escrow",
               "synopsis": "A property deal that closed the day before a fire leads to a city councillor's brother-in-law.",
-              "duration": 43
+              "duration": 43,
+              "still": "pale-street/still-1x4.jpg"
             },
             {
               "number": 5,
               "title": "Round Trip",
               "synopsis": "The money from Theo's own conviction resurfaces in an account that was opened last week.",
-              "duration": 44
+              "duration": 44,
+              "still": "pale-street/still-1x5.jpg"
             },
             {
               "number": 6,
               "title": "Balance",
               "synopsis": "The unit's commander is the one name Theo has not run, and the only one still on the street.",
-              "duration": 50
+              "duration": 50,
+              "still": "pale-street/still-1x6.jpg"
             }
           ]
         },
@@ -853,37 +940,43 @@
               "number": 1,
               "title": "Audit",
               "synopsis": "Internal Affairs finds the basement. Theo has one day to make the unit look like it never existed.",
-              "duration": 44
+              "duration": 44,
+              "still": "pale-street/still-2x1.jpg"
             },
             {
               "number": 2,
               "title": "Numbered",
               "synopsis": "An offshore account with a nine-digit balance belongs to a man who has been dead for a year.",
-              "duration": 43
+              "duration": 43,
+              "still": "pale-street/still-2x2.jpg"
             },
             {
               "number": 3,
               "title": "Dividend",
               "synopsis": "A pension fund's quiet collapse turns out to have been planned by its own retirees.",
-              "duration": 44
+              "duration": 44,
+              "still": "pale-street/still-2x3.jpg"
             },
             {
               "number": 4,
               "title": "Kiting",
               "synopsis": "A chain of cheques across six banks points to a courier who only works Sundays.",
-              "duration": 43
+              "duration": 43,
+              "still": "pale-street/still-2x4.jpg"
             },
             {
               "number": 5,
               "title": "Cash Basis",
               "synopsis": "Theo's old firm offers him his licence back in exchange for one file.",
-              "duration": 44
+              "duration": 44,
+              "still": "pale-street/still-2x5.jpg"
             },
             {
               "number": 6,
               "title": "Write-Off",
               "synopsis": "The unit's commander trades Theo for his own clean exit, and Theo lets him think it worked.",
-              "duration": 50
+              "duration": 50,
+              "still": "pale-street/still-2x6.jpg"
             }
           ]
         },
@@ -894,37 +987,43 @@
               "number": 1,
               "title": "Reserve",
               "synopsis": "A new commander arrives with a budget, a name on the door and a list of cases she wants closed quietly.",
-              "duration": 44
+              "duration": 44,
+              "still": "pale-street/still-3x1.jpg"
             },
             {
               "number": 2,
               "title": "Laundry",
               "synopsis": "A laundromat that takes in forty thousand dollars a week in quarters is the cleanest business in the city.",
-              "duration": 43
+              "duration": 43,
+              "still": "pale-street/still-3x2.jpg"
             },
             {
               "number": 3,
               "title": "Co-Sign",
               "synopsis": "A student loan fraud ring is run out of a university's own bursar's office.",
-              "duration": 44
+              "duration": 44,
+              "still": "pale-street/still-3x3.jpg"
             },
             {
               "number": 4,
               "title": "Arrears",
               "synopsis": "The hat shop from the first case reopens, and sells one hat, for a million dollars.",
-              "duration": 43
+              "duration": 43,
+              "still": "pale-street/still-3x4.jpg"
             },
             {
               "number": 5,
               "title": "Settlement",
               "synopsis": "Theo is subpoenaed to testify against the one person who ever gave him a second chance.",
-              "duration": 44
+              "duration": 44,
+              "still": "pale-street/still-3x5.jpg"
             },
             {
               "number": 6,
               "title": "Pale Street",
               "synopsis": "The street the unit is named for finally gives up what was buried under it.",
-              "duration": 52
+              "duration": 52,
+              "still": "pale-street/still-3x6.jpg"
             }
           ]
         }
@@ -949,37 +1048,43 @@
               "number": 1,
               "title": "Commit",
               "synopsis": "Adrian Kell finds a commit under his name, dated a night he was in hospital.",
-              "duration": 51
+              "duration": 51,
+              "still": "sandbox/still-1x1.jpg"
             },
             {
               "number": 2,
               "title": "Staging",
               "synopsis": "The backdoor has been live in production for nine months and has moved nothing. Yet.",
-              "duration": 48
+              "duration": 48,
+              "still": "sandbox/still-1x2.jpg"
             },
             {
               "number": 3,
               "title": "Keynote",
               "synopsis": "Adrian's CEO announces the company's new identity platform on stage, built on the compromised code.",
-              "duration": 49
+              "duration": 49,
+              "still": "sandbox/still-1x3.jpg"
             },
             {
               "number": 4,
               "title": "Two-Factor",
               "synopsis": "Someone logs in as Adrian from his own apartment while he watches from across the street.",
-              "duration": 50
+              "duration": 50,
+              "still": "sandbox/still-1x4.jpg"
             },
             {
               "number": 5,
               "title": "Rollback",
               "synopsis": "Adrian tries to revert the code and discovers every backup has the same change.",
-              "duration": 48
+              "duration": 48,
+              "still": "sandbox/still-1x5.jpg"
             },
             {
               "number": 6,
               "title": "Root",
               "synopsis": "The other Adrian makes contact, and the message is a list of everything the real one has ever done.",
-              "duration": 56
+              "duration": 56,
+              "still": "sandbox/still-1x6.jpg"
             }
           ]
         },
@@ -990,37 +1095,43 @@
               "number": 1,
               "title": "Fork",
               "synopsis": "The company goes public with Adrian's double as its chief security officer.",
-              "duration": 50
+              "duration": 50,
+              "still": "sandbox/still-2x1.jpg"
             },
             {
               "number": 2,
               "title": "Cold Storage",
               "synopsis": "A forgotten data centre in Nevada holds the first copy of Adrian's identity, and it is still running.",
-              "duration": 48
+              "duration": 48,
+              "still": "sandbox/still-2x2.jpg"
             },
             {
               "number": 3,
               "title": "Breach",
               "synopsis": "The backdoor finally fires: one cent from every account on Earth, in one second.",
-              "duration": 49
+              "duration": 49,
+              "still": "sandbox/still-2x3.jpg"
             },
             {
               "number": 4,
               "title": "Disclosure",
               "synopsis": "Adrian takes the story to a journalist whose byline has been his double's since March.",
-              "duration": 50
+              "duration": 50,
+              "still": "sandbox/still-2x4.jpg"
             },
             {
               "number": 5,
               "title": "Privilege",
               "synopsis": "A board vote decides which Adrian keeps the company. The other keeps the access.",
-              "duration": 48
+              "duration": 48,
+              "still": "sandbox/still-2x5.jpg"
             },
             {
               "number": 6,
               "title": "Sandbox",
               "synopsis": "Adrian builds a copy of the whole system to trap his double, and finds himself already inside it.",
-              "duration": 58
+              "duration": 58,
+              "still": "sandbox/still-2x6.jpg"
             }
           ]
         }
@@ -1045,37 +1156,43 @@
               "number": 1,
               "title": "Notice to Vacate",
               "synopsis": "Lena Castellanos takes a routine condemnation inspection and recognises the stairwell from a night she has spent twenty years not remembering.",
-              "duration": 56
+              "duration": 56,
+              "still": "slow-burn/still-1x1.jpg"
             },
             {
               "number": 2,
               "title": "Fourth Floor",
               "synopsis": "A tenant who has not left her apartment since 2004 keeps a box of the fire's original evidence.",
-              "duration": 52
+              "duration": 52,
+              "still": "slow-burn/still-1x2.jpg"
             },
             {
               "number": 3,
               "title": "Accelerant",
               "synopsis": "The original report named faulty wiring. The wiring was replaced the week before.",
-              "duration": 53
+              "duration": 53,
+              "still": "slow-burn/still-1x3.jpg"
             },
             {
               "number": 4,
               "title": "The Super",
               "synopsis": "The building's superintendent is the same man, and he knows exactly which apartment Lena lived in.",
-              "duration": 54
+              "duration": 54,
+              "still": "slow-burn/still-1x4.jpg"
             },
             {
               "number": 5,
               "title": "Smoke",
               "synopsis": "The city moves the demolition forward, and Lena finds out who signed the order.",
-              "duration": 52
+              "duration": 52,
+              "still": "slow-burn/still-1x5.jpg"
             },
             {
               "number": 6,
               "title": "Point of Origin",
               "synopsis": "Lena stands in the apartment where it started and finally remembers who lit the match.",
-              "duration": 60
+              "duration": 60,
+              "still": "slow-burn/still-1x6.jpg"
             }
           ]
         }
@@ -1100,37 +1217,43 @@
               "number": 1,
               "title": "Memorial Day",
               "synopsis": "The lake's biggest resort closes for good, and Juno Bell and Cal Whitaker are the only two people under thirty left in town.",
-              "duration": 44
+              "duration": 44,
+              "still": "the-summer-people/still-1x1.jpg"
             },
             {
               "number": 2,
               "title": "The Dock",
               "synopsis": "A dock built an inch over the property line restarts a feud that has outlived two grandfathers.",
-              "duration": 43
+              "duration": 43,
+              "still": "the-summer-people/still-1x2.jpg"
             },
             {
               "number": 3,
               "title": "Regatta",
               "synopsis": "The town's annual boat race goes ahead with four boats, two of them owned by people who are not speaking.",
-              "duration": 44
+              "duration": 44,
+              "still": "the-summer-people/still-1x3.jpg"
             },
             {
               "number": 4,
               "title": "Off Season",
               "synopsis": "A developer offers both families the same number, and only one of them says no.",
-              "duration": 43
+              "duration": 43,
+              "still": "the-summer-people/still-1x4.jpg"
             },
             {
               "number": 5,
               "title": "Fireworks",
               "synopsis": "Juno and Cal are found out on the Fourth of July, in front of the whole town, in the only boat that still floats.",
-              "duration": 44
+              "duration": 44,
+              "still": "the-summer-people/still-1x5.jpg"
             },
             {
               "number": 6,
               "title": "Labor Day",
               "synopsis": "The lake drops a foot, the old property line reappears, and nobody is where they expected to be.",
-              "duration": 52
+              "duration": 52,
+              "still": "the-summer-people/still-1x6.jpg"
             }
           ]
         }
@@ -1209,6 +1332,78 @@
       "genre": "crime thriller",
       "logline": "A night-shift editor at a dying city newspaper takes a call reporting a murder that hasn't happened yet, and has six hours to stop the story coming true.",
       "posterArt": "coming-soon/the-night-desk.jpg",
+      "artFocus": "50% 70%"
+    },
+    {
+      "id": "saltmarsh",
+      "brand": "syfy",
+      "title": "Saltmarsh",
+      "genre": "folk horror",
+      "logline": "A sound recordist spends one winter alone on a tidal island recording the birds. Her tapes keep catching a second set of footsteps that only walk at low tide.",
+      "posterArt": "coming-soon/saltmarsh.jpg",
+      "artFocus": "50% 70%"
+    },
+    {
+      "id": "second-sun",
+      "brand": "syfy",
+      "title": "Second Sun",
+      "genre": "sci-fi",
+      "logline": "A mining colony on a tidally locked world has lived in permanent dusk for a hundred years. Then the dark side of the planet starts to get light.",
+      "posterArt": "coming-soon/second-sun.jpg",
+      "artFocus": "50% 70%"
+    },
+    {
+      "id": "the-glasswright",
+      "brand": "syfy",
+      "title": "The Glasswright",
+      "genre": "fantasy",
+      "logline": "In a city where every window shows the past, a glassmaker's apprentice cuts a pane that shows tomorrow. The guild wants it broken before sunset.",
+      "posterArt": "coming-soon/the-glasswright.jpg",
+      "artFocus": "50% 70%"
+    },
+    {
+      "id": "deadlight",
+      "brand": "syfy",
+      "title": "Deadlight",
+      "genre": "horror",
+      "logline": "A keeper relights a decommissioned lighthouse for one night to guide her brother's boat home. Something else out on the water has been waiting a long time for the light.",
+      "posterArt": "coming-soon/deadlight.jpg",
+      "artFocus": "50% 70%"
+    },
+    {
+      "id": "fourth-quarter",
+      "brand": "usa",
+      "title": "Fourth Quarter",
+      "genre": "sports drama",
+      "logline": "A disgraced high-school football coach takes the only job left, at the prison team across the county line, and has one season to win back his name.",
+      "posterArt": "coming-soon/fourth-quarter.jpg",
+      "artFocus": "50% 70%"
+    },
+    {
+      "id": "clean-room",
+      "brand": "usa",
+      "title": "Clean Room",
+      "genre": "thriller",
+      "logline": "A chip-plant night supervisor finds a body in the one room on Earth with no dust, and no way in.",
+      "posterArt": "coming-soon/clean-room.jpg",
+      "artFocus": "50% 70%"
+    },
+    {
+      "id": "the-appraiser",
+      "brand": "usa",
+      "title": "The Appraiser",
+      "genre": "crime drama",
+      "logline": "An insurance appraiser values a dead collector's estate and finds that every painting in the house was stolen once before, from the same house.",
+      "posterArt": "coming-soon/the-appraiser.jpg",
+      "artFocus": "50% 70%"
+    },
+    {
+      "id": "hard-shoulder",
+      "brand": "usa",
+      "title": "Hard Shoulder",
+      "genre": "crime thriller",
+      "logline": "A night-shift tow driver pulls a car out of a ditch with the engine still warm and no driver. The next call is for the same car.",
+      "posterArt": "coming-soon/hard-shoulder.jpg",
       "artFocus": "50% 70%"
     }
   ]
