@@ -27,3 +27,7 @@ Review screens: [TV show page](review-tv-show.jpg), [TV episodes](review-tv-show
 - **Found: TV show-page overlap.** The hero centres its subject (the portrait-safe rule), so on TV the logline sits over the left sister. Options: generate TV heroes with the subject in the right two-thirds, or accept the scrim. This affects every show in #34.
 
 Done when Rob approves the style and this PR merges. #34 (batch) and #35 (Coming Soon) are unblocked by it.
+
+## Rob's answers (3 Nov 2026)
+
+He approved HS-1 with still template v2, title-clear posters, separate hero and key art, and the four-plus-one palette rule. TV heroes move the subject into the right two-thirds. Next: re-generate The Drowned Court hero to that rule (about 10 credits), swap it in, and merge #41.
