@@ -8,7 +8,7 @@ import { useFocusable, useFocusedId, useScreenFocus } from '../focus/FocusEngine
 import { useSettings } from '../state/settings'
 import { FULL_CLIP, fromHeroPanel, morph, useFlight, useMotion } from '../motion/useMotion'
 import { distance, duration } from '../motion/tokens'
-import { artUrl, episodeBadge, showById, stillFocus, type Season, type Show } from '../data/catalogue'
+import { artUrl, episodeBadge, showById, stillArt, stillFocus, type Season, type Show } from '../data/catalogue'
 
 const TAB_PITCH = 132
 
@@ -77,7 +77,7 @@ function ShowPage({ show }: { show: Show }) {
         const ref = { show, season, episode, progress: 0 }
         return {
           id: String(episode.number),
-          art: artUrl(show.tileArt),
+          art: artUrl(stillArt(ref)),
           artFocus: stillFocus(ref),
           badge: episodeBadge(ref),
           label: <EpisodeLabel number={episode.number} title={episode.title} />,
