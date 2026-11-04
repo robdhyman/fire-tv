@@ -2,13 +2,15 @@ import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from '
 import { AnimatePresence, motion, useDragControls } from 'motion/react'
 import { useMotion } from '../motion/useMotion'
 import { LABELS, press, useLit, type RemoteButton } from './keys'
+import { SoundChip } from '../sound/NavSounds'
 
 /*
  * Remote overlay (issue #10): a small Fire TV remote reviewers summon with
  * the corner button or R, drag anywhere, and hide again. It sits outside the
  * scaled stage, in window pixels, and is hidden below 768px (phone, tablet).
  * Rob picked the upright "classic" form on 2 Nov; the puck and strip
- * prototypes live on the `prototype/remote-variants` branch.
+ * prototypes live on the `prototype/remote-variants` branch. The sound
+ * toggle's chip (issue #29) sits to the left of the remote's.
  */
 
 export function RemoteOverlay() {
@@ -35,19 +37,22 @@ export function RemoteOverlay() {
   return (
     <div className="hidden md:block">
       <div ref={bounds} className="pointer-events-none fixed inset-[8px] z-[100]" />
-      <button
-        type="button"
-        onMouseDown={(e) => e.preventDefault()}
-        onClick={() => setOpen((o) => !o)}
-        className={`fixed bottom-[16px] right-[16px] z-[101] flex h-[44px] items-center gap-[8px] rounded-full border px-[14px] text-[13px] shadow-lg backdrop-blur transition-colors duration-(--motion-quick) ${
-          open ? 'border-white/60 bg-white text-black' : 'border-white/25 bg-black/70 text-white/85 hover:bg-black/90'
-        }`}
-        aria-pressed={open}
-        title="Show or hide the on-screen remote (R)"
-      >
-        <RemoteGlyph />
-        remote <kbd className="rounded border border-current/40 px-[5px] text-[11px] opacity-70">R</kbd>
-      </button>
+      <div className="fixed bottom-[16px] right-[16px] z-[101] flex gap-[8px]">
+        <SoundChip />
+        <button
+          type="button"
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={() => setOpen((o) => !o)}
+          className={`flex h-[44px] items-center gap-[8px] rounded-full border px-[14px] text-[13px] shadow-lg backdrop-blur transition-colors duration-(--motion-quick) ${
+            open ? 'border-white/60 bg-white text-black' : 'border-white/25 bg-black/70 text-white/85 hover:bg-black/90'
+          }`}
+          aria-pressed={open}
+          title="Show or hide the on-screen remote (R)"
+        >
+          <RemoteGlyph />
+          remote <kbd className="rounded border border-current/40 px-[5px] text-[11px] opacity-70">R</kbd>
+        </button>
+      </div>
 
       <AnimatePresence>
         {open && (

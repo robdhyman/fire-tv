@@ -22,7 +22,16 @@ import { noteArrow } from '../motion/useMotion'
  * handler. The stage ignores the mouse (Rob, 2 Nov review): only the keyboard
  * and the on-screen remote drive focus. Each screen remembers
  * its last focused id so returning to it restores the same focus path.
+ * Every handled key reports what it did as a nav event (`onNav`), which the
+ * nav sounds play (issue #29).
  */
+
+/**
+ * What a key did: focus moved (or a handler moved along, like the hero strip
+ * or the Player's scrub), an item was selected, Back ran, or an arrow found
+ * no neighbour in its lane (an edge bump).
+ */
+export type NavEvent = 'move' | 'select' | 'back' | 'bump'
 
 type Entry = {
   id: string
@@ -40,6 +49,7 @@ type Ctx = {
   pushBack: (fn: () => void) => () => void
   memory: Map<string, string>
   onFirstArrow: (fn: () => void) => () => void
+  onNav: (fn: (e: NavEvent) => void) => () => void
 }
 
 const FocusContext = createContext<Ctx | null>(null)
@@ -58,6 +68,7 @@ export function FocusProvider({ children }: { children: ReactNode }) {
   const backStack = useRef<Array<() => void>>([])
   const memory = useRef(new Map<string, string>())
   const arrowListeners = useRef(new Set<() => void>())
+  const navListeners = useRef(new Set<(e: NavEvent) => void>())
 
   const setFocus = useCallback((id: string) => {
     focusedRef.current = id
@@ -88,7 +99,15 @@ export function FocusProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
+  const onNav = useCallback((fn: (e: NavEvent) => void) => {
+    navListeners.current.add(fn)
+    return () => {
+      navListeners.current.delete(fn)
+    }
+  }, [])
+
   useEffect(() => {
+    const emit = (ev: NavEvent) => navListeners.current.forEach((fn) => fn(ev))
     const onKey = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement | null
       const inInput = target?.tagName === 'INPUT' || target?.tagName === 'TEXTAREA'
@@ -102,6 +121,8 @@ export function FocusProvider({ children }: { children: ReactNode }) {
 
       if (current?.onKey?.(e.key)) {
         e.preventDefault()
+        if (dir) emit('move')
+        else if (e.key === 'Enter') emit('select')
         return
       }
 
@@ -118,18 +139,24 @@ export function FocusProvider({ children }: { children: ReactNode }) {
         if (!cur) return
         const next = pickNeighbour(cur, boxes, dir)
         if (next) setFocus(next.id)
+        emit(next ? 'move' : 'bump')
         return
       }
 
       if (e.key === 'Enter') {
         e.preventDefault()
-        current?.onSelect?.()
+        if (!current?.onSelect) return
+        current.onSelect()
+        emit('select')
         return
       }
 
       if (e.key === 'Escape' || (e.key === 'Backspace' && !(inInput && (target as HTMLInputElement).value))) {
         e.preventDefault()
-        backStack.current[backStack.current.length - 1]?.()
+        const back = backStack.current[backStack.current.length - 1]
+        if (!back) return
+        back()
+        emit('back')
       }
     }
     window.addEventListener('keydown', onKey)
@@ -138,7 +165,7 @@ export function FocusProvider({ children }: { children: ReactNode }) {
 
   return (
     <FocusContext.Provider
-      value={{ focusedId, setFocus, register, has, pushBack, memory: memory.current, onFirstArrow }}
+      value={{ focusedId, setFocus, register, has, pushBack, memory: memory.current, onFirstArrow, onNav }}
     >
       {children}
     </FocusContext.Provider>

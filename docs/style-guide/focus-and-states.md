@@ -68,6 +68,19 @@ The 60 px circle (`+`, `i`, play): a 3 px white border at 90%, white glyph. Focu
 
 Tiles and nav items are never dimmed to show that something else has focus.
 
+## Nav sounds
+
+Every key the focus engine handles makes one short synthesised sound (WebAudio, no files), on by default; S, the `sound` chip beside the `remote` chip, and Tools turn them off. Rob picked the voices by ear.
+
+| Event | When | Voice |
+|---|---|---|
+| Move | focus moves, the hero slides, the Player scrubs | glass tick: sine 2400 Hz, 1 ms attack, 35 ms decay |
+| Select | Enter on an item | rising chime: sine C6 (1047 Hz) then G6 (1568 Hz) 55 ms later |
+| Back | Esc or Backspace | falling chime: sine G5 (784 Hz) then C5 (523 Hz) 55 ms later |
+| Edge bump | an arrow with no neighbour in its lane | thud: sine 240 to 140 Hz over 80 ms, 120 ms decay, with a triangle harmonic |
+
+Sideways moves stay in the lane: at a row's end, the nav's ends or the hero strip's ends, focus stays put and bumps. Phone and tablet are silent. Decision record: [ADR 004](https://github.com/robdhyman/fire-tv/blob/main/docs/adr/004-nav-sounds-follow-the-focus-engine.md).
+
 ## Focus path and restore
 
 Each screen remembers its last focused id, so Back lands on the same item. Rows and the hero remember their own current index. A lost focus reads as a frozen app, so focus is always somewhere. Decision records: [ADR 001](https://github.com/robdhyman/fire-tv/blob/main/docs/adr/001-spatial-focus-and-stage.md) (focus engine and stage) and [ADR 002](https://github.com/robdhyman/fire-tv/blob/main/docs/adr/002-motion-tokens-and-stage-morph.md) (morph).

@@ -12,6 +12,7 @@ import { cssVars } from '../motion/tokens'
 import { useReduced } from '../motion/useMotion'
 import { DeviceProvider, useDevice } from './device'
 import { MobileApp } from '../mobile/MobileShell'
+import { NavSounds } from '../sound/NavSounds'
 
 /** Back for every screen: pop history, or go Home when there is none. */
 function BackToHistory() {
@@ -48,6 +49,7 @@ function App() {
         <Hint shown={hint} setShown={setHint} />
       </Stage>
       <RemoteOverlay />
+      <NavSounds />
     </>
   )
 }

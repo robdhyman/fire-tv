@@ -80,11 +80,11 @@ The summonable on-screen Fire TV remote that reviewers can show and hide on desk
 
 ## Nav sounds
 
-The short synthesised sounds the app makes as focus moves: a tick on each move, a pop on select, a lower pop on Back, and a bump on an **edge bump** (a move with no neighbour in that direction). On by default.
+The short synthesised sounds the app makes as focus moves: a tick on each move, a chime on select, the same chime falling on Back, and a thud on an **edge bump** (an arrow with no neighbour in that direction: the end of a lane, such as the nav's logo and avatar or a row's last tile, or the top or bottom of a screen). On by default. TV stage only; phone and tablet are silent.
 
 ## Sound toggle
 
-The chip beside the remote overlay's chip that mutes and unmutes the nav sounds. Remembered between visits.
+The chip beside the remote overlay's chip that mutes and unmutes the nav sounds; key S, and a row in Tools. Remembered between visits.
 
 ## Up Next
 
