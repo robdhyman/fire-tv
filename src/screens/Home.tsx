@@ -11,6 +11,7 @@ import { stagger } from '../motion/tokens'
 import {
   artUrl,
   brandShows,
+  comingSoonFor,
   episodeBadge,
   episodeKey,
   recentlyAddedFor,
@@ -23,6 +24,8 @@ import {
 const ROW_GAP = 80
 /** Scroll so a focused row's label lands under the hero's tail, as in the screenshots. */
 const SCROLL_TO_ROWS = 552
+/** From one resting row's label to the next. */
+const ROW_PITCH = ROW_H_PLAIN + 6 + ROW_GAP
 
 export function Home() {
   const navigate = useNavigate()
@@ -63,11 +66,20 @@ export function Home() {
     [brand, navigate],
   )
 
-  const scroll = focusedId?.startsWith('row:upnext:')
-    ? SCROLL_TO_ROWS
-    : focusedId?.startsWith('row:recent:')
-      ? SCROLL_TO_ROWS + ROW_H_PLAIN + 6 + ROW_GAP
-      : 0
+  // Movie posters carry their title in the image, so the tiles have no label.
+  const comingSoon: RowItem[] = useMemo(
+    () =>
+      comingSoonFor(brand).map((movie) => ({
+        id: movie.id,
+        art: artUrl(movie.posterArt),
+        badge: 'coming soon',
+        onSelect: () => navigate(`/movie/${movie.id}`),
+      })),
+    [brand, navigate],
+  )
+
+  const rowIndex = ['row:upnext:', 'row:recent:', 'row:coming:'].findIndex((p) => focusedId?.startsWith(p))
+  const scroll = rowIndex < 0 ? 0 : SCROLL_TO_ROWS + rowIndex * ROW_PITCH
 
   return (
     <main className="absolute inset-0 overflow-hidden">
@@ -94,6 +106,9 @@ export function Home() {
         <motion.div className="mt-[58px] pl-[200px]" variants={m.part}>
           <Row id="row:upnext" label="up next" items={upNext} enterDelay={stagger.row} />
           <Row id="row:recent" label="recently added" items={recent} className="mt-[80px]" enterDelay={stagger.row * 2} />
+          {comingSoon.length > 0 && (
+            <Row id="row:coming" label="coming soon" items={comingSoon} poster className="mt-[80px]" enterDelay={stagger.row * 3} />
+          )}
           <div className="h-[400px]" />
         </motion.div>
       </motion.div>

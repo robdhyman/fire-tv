@@ -5,6 +5,8 @@ import { useMotion } from '../motion/useMotion'
 import { useSettings } from '../state/settings'
 import { Logo } from '../components/Logo'
 import type { RowItem } from '../components/Row'
+import type { BadgeKind } from '../components/Badge'
+import { artUrl, isMovie, type Movie, type Show } from '../data/catalogue'
 
 /* Touch primitives shared by the mobile screens. Sizes are CSS px. */
 
@@ -81,25 +83,26 @@ export function BackButton({ className = '' }: { className?: string }) {
 }
 
 /** Corner tag on a tile, at phone size. */
-export function MiniBadge({ kind }: { kind: 'new' | 'expiring' }) {
+export function MiniBadge({ kind }: { kind: BadgeKind }) {
   return <span className="absolute right-0 top-0 bg-black/60 px-[7px] py-[4px] text-[10px] font-light leading-none text-white">{kind}</span>
 }
 
 /**
  * A row of tiles as a swipeable rail: horizontal scroll with snap, one tile
  * at the gutter, the next peeking in. Tiles are 16:9 and a fraction of the
- * viewport (two-thirds on a phone, under a third on a tablet).
+ * viewport (two-thirds on a phone, under a third on a tablet); a `poster`
+ * rail (Coming Soon) holds 2:3 movie posters at about a third and a seventh.
  */
-export function MobileRow({ label, items, className = '' }: { label: ReactNode; items: RowItem[]; className?: string }) {
+export function MobileRow({ label, items, poster = false, className = '' }: { label: ReactNode; items: RowItem[]; poster?: boolean; className?: string }) {
   if (items.length === 0) return null
   return (
     <section className={className}>
       <h2 className="px-gutter text-[18px] font-light leading-none text-white/90">{label}</h2>
       <ul className="rail mt-[10px] flex snap-x snap-mandatory gap-[8px] overflow-x-auto px-gutter scroll-px-gutter">
         {items.map((item) => (
-          <li key={item.id} className="w-[64vw] shrink-0 snap-start md:w-[29vw]">
+          <li key={item.id} className={`shrink-0 snap-start ${poster ? 'w-[36vw] md:w-[15vw]' : 'w-[64vw] md:w-[29vw]'}`}>
             <Pressable onClick={item.onSelect} className="w-full">
-              <div className="relative aspect-video overflow-hidden rounded-[4px] bg-black/40">
+              <div className={`relative overflow-hidden rounded-[4px] bg-black/40 ${poster ? 'aspect-[2/3]' : 'aspect-video'}`}>
                 <img src={item.art} alt="" draggable={false} className="h-full w-full object-cover" style={{ objectPosition: item.artFocus }} />
                 {item.badge && <MiniBadge kind={item.badge} />}
                 {item.overlay}
@@ -113,18 +116,30 @@ export function MobileRow({ label, items, className = '' }: { label: ReactNode; 
   )
 }
 
-/** Key-art grid: two columns on a phone, three on a tablet, four from 1024px. */
-export function ShowGrid({ shows, className = '' }: { shows: { id: string; title: string; tileArt: string; artFocus: string }[]; className?: string }) {
+/**
+ * Key-art grid: two columns on a phone, three on a tablet, four from 1024px.
+ * A movie keeps the 16:9 cell, as on TV: its poster whole on the left and
+ * the title set beside it, with the `coming soon` badge.
+ */
+export function ShowGrid({ shows, className = '' }: { shows: (Show | Movie)[]; className?: string }) {
   const navigate = useNavigate()
   return (
     <ul className={`grid grid-cols-2 gap-[8px] px-gutter md:grid-cols-3 lg:grid-cols-4 ${className}`}>
-      {shows.map((show) => (
-        <li key={show.id}>
-          <Pressable onClick={() => navigate(`/show/${show.id}`)} className="relative aspect-video w-full overflow-hidden rounded-[4px]">
-            <img src={`${import.meta.env.BASE_URL}art/${show.tileArt}`} alt="" draggable={false} className="h-full w-full object-cover" style={{ objectPosition: show.artFocus }} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-            <div className="display absolute bottom-[8px] left-[10px] right-[10px] text-m-tile text-white drop-shadow-md">{show.title}</div>
-          </Pressable>
+      {shows.map((entry) => (
+        <li key={entry.id}>
+          {isMovie(entry) ? (
+            <Pressable onClick={() => navigate(`/movie/${entry.id}`)} className="relative flex aspect-video w-full overflow-hidden rounded-[4px] bg-rows">
+              <img src={artUrl(entry.posterArt)} alt="" draggable={false} className="aspect-[2/3] h-full shrink-0 object-cover" />
+              <MiniBadge kind="coming soon" />
+              <div className="display flex min-w-0 flex-1 items-end px-[10px] pb-[8px] text-m-tile text-white">{entry.title}</div>
+            </Pressable>
+          ) : (
+            <Pressable onClick={() => navigate(`/show/${entry.id}`)} className="relative aspect-video w-full overflow-hidden rounded-[4px]">
+              <img src={artUrl(entry.tileArt)} alt="" draggable={false} className="h-full w-full object-cover" style={{ objectPosition: entry.artFocus }} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+              <div className="display absolute bottom-[8px] left-[10px] right-[10px] text-m-tile text-white drop-shadow-md">{entry.title}</div>
+            </Pressable>
+          )}
         </li>
       ))}
     </ul>

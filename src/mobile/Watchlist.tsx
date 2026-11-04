@@ -3,9 +3,22 @@ import { useNavigate } from 'react-router'
 import { useSettings, useWatch } from '../state/settings'
 import { EpisodeLabel, type RowItem } from '../components/Row'
 import { MobileRow, ScreenHeader } from './ui'
-import { allEpisodes, artUrl, episodeBadge, episodeKey, showById, stillArt, stillFocus, upNextFor, type EpisodeRef, type Show } from '../data/catalogue'
+import {
+  allEpisodes,
+  artUrl,
+  episodeBadge,
+  episodeKey,
+  movieById,
+  showById,
+  stillArt,
+  stillFocus,
+  upNextFor,
+  type EpisodeRef,
+  type Movie,
+  type Show,
+} from '../data/catalogue'
 
-/** Watchlist on a phone: Up Next, then one rail per saved show. */
+/** Watchlist on a phone: Up Next, then one rail per saved show, then the saved movies in a `coming soon` rail. */
 export function MobileWatchlist() {
   const navigate = useNavigate()
   const { settings } = useSettings()
@@ -26,6 +39,19 @@ export function MobileWatchlist() {
     () => settings.watchlist.map(showById).filter((s): s is Show => !!s && s.brand === brand),
     [settings.watchlist, brand],
   )
+  const movies: RowItem[] = useMemo(
+    () =>
+      settings.watchlist
+        .map(movieById)
+        .filter((m): m is Movie => !!m && m.brand === brand)
+        .map((movie) => ({
+          id: movie.id,
+          art: artUrl(movie.posterArt),
+          badge: 'coming soon',
+          onSelect: () => navigate(`/movie/${movie.id}`),
+        })),
+    [settings.watchlist, brand, navigate],
+  )
 
   return (
     <main>
@@ -35,7 +61,8 @@ export function MobileWatchlist() {
         {shows.map((show) => (
           <MobileRow key={show.id} label={show.title} items={allEpisodes(show, watch).map(toItem)} />
         ))}
-        {shows.length === 0 && (
+        <MobileRow label="coming soon" items={movies} poster />
+        {shows.length === 0 && movies.length === 0 && (
           <p className="px-gutter text-[15px] font-light text-white/60">your watchlist is empty. tap + on a show to add it.</p>
         )}
       </div>

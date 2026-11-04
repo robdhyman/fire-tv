@@ -7,6 +7,7 @@ import { MobileRow, Pill, Pressable } from './ui'
 import {
   artUrl,
   brandShows,
+  comingSoonFor,
   episodeBadge,
   episodeKey,
   recentlyAddedFor,
@@ -51,12 +52,24 @@ export function MobileHome() {
     [brand, navigate],
   )
 
+  const comingSoon: RowItem[] = useMemo(
+    () =>
+      comingSoonFor(brand).map((movie) => ({
+        id: movie.id,
+        art: artUrl(movie.posterArt),
+        badge: 'coming soon',
+        onSelect: () => navigate(`/movie/${movie.id}`),
+      })),
+    [brand, navigate],
+  )
+
   return (
     <main>
       <MobileHero shows={shows} />
       <div className="mt-[24px] flex flex-col gap-[28px]">
         <MobileRow label="up next" items={upNext} />
         <MobileRow label="recently added" items={recent} />
+        <MobileRow label="coming soon" items={comingSoon} poster />
       </div>
     </main>
   )

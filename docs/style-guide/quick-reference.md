@@ -54,6 +54,7 @@ Faces: Barlow Condensed (SYFY titles), Montserrat (USA titles), Figtree (all UI)
 | Hero | 1686 x 672 at (117, 130); gap 25; neighbours 0.92 and 40% |
 | Plain tile | 318 x 179 (16:9), 2 px gap |
 | Open row | 376 x 211, 19 px gap; current 590 x 332 |
+| Poster tile | 160 x 240 (2:3); current 221 x 332 |
 | Shows grid | 4 x 320 x 180, pitch 400 x 249 |
 | Row gap | 80 (Home), 85 (Watchlist) |
 

@@ -25,6 +25,21 @@ export type Show = {
   expiring: boolean
   seasons: Season[]
 }
+/**
+ * A movie: a catalogue entry with a poster and no seasons. Every movie is
+ * coming soon, so it has a detail page (/movie/:id) and nothing to play.
+ */
+export type Movie = {
+  id: string
+  brand: Brand
+  title: string
+  genre: string
+  logline: string
+  /** 2:3 poster in public/art/coming-soon/ with the title set in the image; the app never sets a title over it. Resolve with artUrl(). */
+  posterArt: string
+  /** CSS object-position for the movie page's full-bleed backdrop, cut from the poster. */
+  artFocus: string
+}
 /** The catalogue's Up Next: the first-run seed for the persisted watch positions. */
 export type UpNextEntry = { show: string; season: number; episode: number; progress: number }
 export type Rows = { upNext: UpNextEntry[]; recentlyAdded: string[]; editorsChoice: string[] }
@@ -32,6 +47,7 @@ export type Catalogue = {
   brands: Record<Brand, { name: string; genres: string[] }>
   shows: Show[]
   rows: Rows
+  movies: Movie[]
 }
 
 export const catalogue = data as Catalogue
@@ -42,6 +58,14 @@ export const artUrl = (file: string) => `${import.meta.env.BASE_URL}art/${file}`
 export const showById = (id: string) => catalogue.shows.find((s) => s.id === id)
 
 export const brandShows = (brand: Brand) => catalogue.shows.filter((s) => s.brand === brand)
+
+export const movieById = (id: string) => catalogue.movies.find((m) => m.id === id)
+
+/** Shows and movies share the grid, Search and the watchlist; a movie is the one without seasons. */
+export const isMovie = (entry: Show | Movie): entry is Movie => !('seasons' in entry)
+
+/** Coming Soon for a brand: its movies in catalogue order (every movie is coming soon). */
+export const comingSoonFor = (brand: Brand) => catalogue.movies.filter((m) => m.brand === brand)
 
 /** One episode in context: the row item everything else is built from. `progress` is its watch position as a fraction of the runtime. */
 export type EpisodeRef = { show: Show; season: Season; episode: Episode; progress: number }

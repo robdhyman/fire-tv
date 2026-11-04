@@ -3,7 +3,7 @@ import { motion } from 'motion/react'
 import { useFocusable, useFocusedId } from '../focus/FocusEngine'
 import { useMotion } from '../motion/useMotion'
 import { distance } from '../motion/tokens'
-import { Badge } from './Badge'
+import { Badge, type BadgeKind } from './Badge'
 
 /*
  * A row of tiles with a label. Two modes, both from the screenshots:
@@ -16,10 +16,15 @@ import { Badge } from './Badge'
  * inset and the previous one peeks in from the left edge. Strip, widths and
  * height move on the `strip` spring; the focused tile lifts on `focus`;
  * tiles settle in with a stagger when the screen enters.
+ * A poster row (Coming Soon) holds 2:3 movie posters instead: 160x240 at
+ * rest in either mode and 221x332 when current, shown as is with no label
+ * over the art, since a poster carries its title in the image.
  */
 
 export const PLAIN = { w: 318, h: 179, gap: 2 }
 export const BIG = { w: 376, h: 211, gap: 19, focusW: 590, focusH: 332 }
+/** 2:3 movie posters: one size at rest, the open row's tile height when current. */
+export const POSTER = { w: 160, h: 240, focusW: 221, focusH: BIG.focusH }
 export const ROW_LABEL_H = 33
 /** Focus ring width, px: the white border in FOCUS_RING. */
 const RING_W = 3
@@ -34,7 +39,7 @@ export type RowItem = {
   art: string
   artFocus?: string
   label?: ReactNode
-  badge?: 'new' | 'expiring'
+  badge?: BadgeKind
   onSelect: () => void
   /** Extra content drawn over the tile (the Player's countdown ring). */
   overlay?: ReactNode
@@ -52,11 +57,20 @@ type Props = {
   className?: string
   /** Seconds to wait before the tiles stagger in (later rows wait longer). */
   enterDelay?: number
+  /** 2:3 movie posters (Coming Soon) instead of 16:9 stills and key art. */
+  poster?: boolean
 }
 
 export const rowTileId = (rowId: string, itemId: string) => `${rowId}:${itemId}`
 
-export function Row({ id, label, items, mode = 'auto', initialIndex = 0, aside, className = '', enterDelay = 0 }: Props) {
+/** A tile's size: plain, big, or the big row's current tile. */
+function tileSize(poster: boolean, big: boolean, current: boolean) {
+  if (poster) return current ? { w: POSTER.focusW, h: POSTER.focusH } : { w: POSTER.w, h: POSTER.h }
+  if (current) return { w: BIG.focusW, h: BIG.focusH }
+  return big ? { w: BIG.w, h: BIG.h } : { w: PLAIN.w, h: PLAIN.h }
+}
+
+export function Row({ id, label, items, mode = 'auto', initialIndex = 0, aside, className = '', enterDelay = 0, poster = false }: Props) {
   const m = useMotion()
   const focusedId = useFocusedId()
   const focusedIndex = items.findIndex((it) => focusedId === rowTileId(id, it.id))
@@ -67,7 +81,8 @@ export function Row({ id, label, items, mode = 'auto', initialIndex = 0, aside, 
 
   const within = focusedIndex >= 0
   const big = mode === 'big' || (mode === 'auto' && within)
-  const pitch = big ? BIG.w + BIG.gap : PLAIN.w + PLAIN.gap
+  const pitch = tileSize(poster, big, false).w + (big ? BIG.gap : PLAIN.gap)
+  const stripH = big ? BIG.focusH : poster ? POSTER.h : PLAIN.h
   const anchor = Math.min(current, items.length - 1)
 
   return (
@@ -85,7 +100,7 @@ export function Row({ id, label, items, mode = 'auto', initialIndex = 0, aside, 
       <motion.div
         className="flex items-center"
         initial={false}
-        animate={{ marginTop: big ? 6 + LIFT_ROOM : 6, height: big ? BIG.focusH : PLAIN.h, x: -anchor * pitch }}
+        animate={{ marginTop: big ? 6 + LIFT_ROOM : 6, height: stripH, x: -anchor * pitch }}
         transition={{ default: m.strip, marginTop: m.scroll, height: m.scroll }}
       >
         <motion.div
@@ -96,7 +111,7 @@ export function Row({ id, label, items, mode = 'auto', initialIndex = 0, aside, 
           animate="shown"
         >
           {items.map((item, i) => (
-            <Tile key={item.id} rowId={id} item={item} big={big} current={big && i === anchor} />
+            <Tile key={item.id} rowId={id} item={item} big={big} current={big && i === anchor} poster={poster} stripH={stripH} />
           ))}
         </motion.div>
       </motion.div>
@@ -104,17 +119,18 @@ export function Row({ id, label, items, mode = 'auto', initialIndex = 0, aside, 
   )
 }
 
-function Tile({ rowId, item, big, current }: { rowId: string; item: RowItem; big: boolean; current: boolean }) {
+type TileProps = { rowId: string; item: RowItem; big: boolean; current: boolean; poster: boolean; stripH: number }
+
+function Tile({ rowId, item, big, current, poster, stripH }: TileProps) {
   const m = useMotion()
   const { focused, props } = useFocusable(rowTileId(rowId, item.id), { onSelect: item.onSelect })
-  const w = current ? BIG.focusW : big ? BIG.w : PLAIN.w
-  const h = current ? BIG.focusH : big ? BIG.h : PLAIN.h
+  const { w, h } = tileSize(poster, big, current)
   return (
     <motion.div variants={m.tile} className="shrink-0">
       <motion.div
         className="relative flex flex-col justify-center"
         initial={false}
-        animate={{ width: w, height: big ? BIG.focusH : PLAIN.h }}
+        animate={{ width: w, height: stripH }}
         transition={{ default: m.strip, height: m.scroll }}
       >
         <motion.div
