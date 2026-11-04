@@ -14,6 +14,7 @@ import {
   episodeKey,
   showById,
   stillFocus,
+  stillArt,
   upNextFor,
   type EpisodeRef,
   type Show,
@@ -32,7 +33,7 @@ export function Watchlist() {
 
   const toItem = (ref: EpisodeRef): RowItem => ({
     id: episodeKey(ref),
-    art: artUrl(ref.show.tileArt),
+    art: artUrl(stillArt(ref)),
     artFocus: stillFocus(ref),
     badge: episodeBadge(ref),
     label: <EpisodeLabel number={ref.episode.number} title={ref.episode.title} />,

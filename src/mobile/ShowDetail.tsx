@@ -3,7 +3,7 @@ import { Navigate, useNavigate, useParams } from 'react-router'
 import { useSettings, useWatch } from '../state/settings'
 import { BackButton, MiniBadge, Pill, Pressable, TextTabs } from './ui'
 import { PlayGlyph, playTarget } from './Home'
-import { artUrl, episodeBadge, showById, stillFocus, toEpisodeRef, type Show } from '../data/catalogue'
+import { artUrl, episodeBadge, showById, stillArt, stillFocus, toEpisodeRef, type Show } from '../data/catalogue'
 
 export function MobileShowDetail() {
   const { id = '' } = useParams()
@@ -66,7 +66,7 @@ function ShowPage({ show }: { show: Show }) {
             <li key={episode.number}>
               <Pressable onClick={() => play(season.number, episode.number)} className="flex w-full gap-[12px] px-gutter py-[12px]">
                 <div className="relative aspect-video w-[42%] shrink-0 overflow-hidden rounded-[4px] bg-black/40 md:w-[200px]">
-                  <img src={artUrl(show.tileArt)} alt="" draggable={false} className="h-full w-full object-cover" style={{ objectPosition: stillFocus(ref) }} />
+                  <img src={artUrl(stillArt(ref))} alt="" draggable={false} className="h-full w-full object-cover" style={{ objectPosition: stillFocus(ref) }} />
                   {badge && <MiniBadge kind={badge} />}
                   <span className="absolute left-1/2 top-1/2 flex h-[30px] w-[30px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white">
                     <PlayGlyph />

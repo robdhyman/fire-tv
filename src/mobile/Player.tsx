@@ -6,7 +6,7 @@ import { distance, duration } from '../motion/tokens'
 import { CAPTION_SIZES, CAPTION_STYLES, useSettings, useWatch } from '../state/settings'
 import { COUNTDOWN, CREDITS_LEAD, CREW, SKIP, SPEED, TICK_MS, WATCH_SAVE } from '../data/playback'
 import { BackButton, Pill, Pressable } from './ui'
-import { artUrl, episodeKey, episodeRef, nextEpisode, runtimeSeconds, stillFocus, timecode, type EpisodeRef } from '../data/catalogue'
+import { artUrl, episodeKey, episodeRef, nextEpisode, runtimeSeconds, stillArt, stillFocus, timecode, type EpisodeRef } from '../data/catalogue'
 
 /*
  * The Player on a phone: native-style touch controls. A tap on the picture
@@ -235,7 +235,7 @@ function Playback({ current }: { current: EpisodeRef }) {
               <>
                 <div className="flex gap-[12px]">
                   <div className="relative aspect-video w-[40%] shrink-0 overflow-hidden rounded-[4px] bg-black/40">
-                    <img src={artUrl(next.show.tileArt)} alt="" draggable={false} className="h-full w-full object-cover" style={{ objectPosition: stillFocus(next) }} />
+                    <img src={artUrl(stillArt(next))} alt="" draggable={false} className="h-full w-full object-cover" style={{ objectPosition: stillFocus(next) }} />
                     <span className="absolute inset-0 flex items-center justify-center">
                       <span className="flex h-[40px] w-[40px] items-center justify-center rounded-full border-2 border-white/90 bg-black/40 text-[18px] font-light">{Math.max(0, countdown)}</span>
                     </span>

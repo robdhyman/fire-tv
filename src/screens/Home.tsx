@@ -15,6 +15,7 @@ import {
   episodeKey,
   recentlyAddedFor,
   stillFocus,
+  stillArt,
   upNextFor,
   type Show,
 } from '../data/catalogue'
@@ -40,7 +41,7 @@ export function Home() {
     () =>
       upNextFor(brand, watch).map((ref) => ({
         id: episodeKey(ref),
-        art: artUrl(ref.show.tileArt),
+        art: artUrl(stillArt(ref)),
         artFocus: stillFocus(ref),
         badge: episodeBadge(ref),
         label: <EpisodeLabel number={ref.episode.number} title={ref.episode.title} />,

@@ -13,6 +13,7 @@ import {
   nextEpisode,
   runtimeSeconds,
   stillFocus,
+  stillArt,
   timecode,
   toEpisodeRef,
   upNextFor,
@@ -113,7 +114,7 @@ function Playback({ current }: { current: EpisodeRef }) {
         const isNext = next?.episode === episode && next.season === current.season
         return {
           id: String(episode.number),
-          art: artUrl(current.show.tileArt),
+          art: artUrl(stillArt(ref)),
           artFocus: stillFocus(ref),
           badge: episodeBadge(ref),
           label: <EpisodeLabel season={current.season.number} number={episode.number} title={episode.title} />,
@@ -132,7 +133,7 @@ function Playback({ current }: { current: EpisodeRef }) {
         .filter((r) => episodeKey(r) !== episodeKey(current))
         .map((r) => ({
           id: episodeKey(r),
-          art: artUrl(r.show.tileArt),
+          art: artUrl(stillArt(r)),
           artFocus: stillFocus(r),
           badge: episodeBadge(r),
           label: <EpisodeLabel season={r.season.number} number={r.episode.number} title={r.episode.title} />,
