@@ -1,0 +1,134 @@
+{
+ "id": "sandbox",
+ "title": "Sandbox",
+ "palette": "server-room black, steel blue, glass grey and cold white",
+ "accent": "status-light red",
+ "files": [
+  {
+   "file": "hero.jpg",
+   "seed": 23001,
+   "aspect": "16:9",
+   "resolution": "2K",
+   "thinking": "High",
+   "reference": null,
+   "prompt": "Sandbox, a thriller series. A security engineer at the world's largest payments company finds a backdoor in code he wrote and does not remember writing. The person who did has his face, his passwords and a nine-month head start.\nEstablishing image of the series' world with its central figure held right of centre, between 45% and 75% of the frame width: a man in a dark hooded sweatshirt standing in a cold server hall at night between towering racks, their small red status lights reflected in the glass floor, his own reflection in a dark glass panel beside him turned a different way; mid shot, floor line in the lower third, headroom above; the left 40% of the frame only dark server racks receding into blackness with no figures and no detail, nothing essential near the right edge, no cropped faces, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of server-room black, steel blue, glass grey and cold white with a single accent of status-light red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+  },
+  {
+   "file": "key-art.jpg",
+   "seed": 23002,
+   "aspect": "2:3",
+   "resolution": "2K",
+   "thinking": "High",
+   "reference": "hero.jpg",
+   "prompt": "Sandbox, a thriller series. A security engineer at the world's largest payments company finds a backdoor in code he wrote and does not remember writing. The person who did has his face, his passwords and a nine-month head start.\nKey art, vertical: a man seen from the chest up, his face lit cold white from one side by an unseen screen, his reflection in a dark glass panel beside him looking a different way, small red status lights in the blackness behind; the lower two-thirds carry the image and the scene itself continues upward and falls away into darkness in the top third, with no hard edge, no band and no detail, no signage and no writing anywhere in the frame. Full-frame 2:3, no black bars.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of server-room black, steel blue, glass grey and cold white with a single accent of status-light red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+  },
+  {
+   "file": "still-1x1.jpg",
+   "seed": 23011,
+   "aspect": "16:9",
+   "resolution": "1K",
+   "thinking": "Minimal",
+   "reference": "hero.jpg",
+   "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures or layout. New scene from the same series, episode 1x1 \"Commit\": Adrian Kell finds a commit under his name, dated a night he was in hospital.\nSingle moment: a man in a hoodie in a dark home office at night staring at a monitor turned away from view, its glow on his face; mid shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of server-room black, steel blue, glass grey and cold white with a single accent of status-light red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+  },
+  {
+   "file": "still-1x2.jpg",
+   "seed": 23012,
+   "aspect": "16:9",
+   "resolution": "1K",
+   "thinking": "Minimal",
+   "reference": "hero.jpg",
+   "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures or layout. New scene from the same series, episode 1x2 \"Staging\": The backdoor has been live in production for nine months and has moved nothing. Yet.\nSingle moment: a man walking alone down a long cold corridor of server racks, a small red status light on every rack; wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of server-room black, steel blue, glass grey and cold white with a single accent of status-light red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+  },
+  {
+   "file": "still-1x3.jpg",
+   "seed": 23013,
+   "aspect": "16:9",
+   "resolution": "1K",
+   "thinking": "Minimal",
+   "reference": "hero.jpg",
+   "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures or layout. New scene from the same series, episode 1x3 \"Keynote\": Adrian's CEO announces the company's new identity platform on stage, built on the compromised code.\nSingle moment: a chief executive in a dark suit on a vast dark stage before a huge glowing wall of abstract light, a man standing at the back of the auditorium watching; wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of server-room black, steel blue, glass grey and cold white with a single accent of status-light red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+  },
+  {
+   "file": "still-1x4.jpg",
+   "seed": 23014,
+   "aspect": "16:9",
+   "resolution": "1K",
+   "thinking": "Minimal",
+   "reference": "hero.jpg",
+   "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures or layout. New scene from the same series, episode 1x4 \"Two-Factor\": Someone logs in as Adrian from his own apartment while he watches from across the street.\nSingle moment: a man on a rainy street at night looking up at a lit apartment window where a silhouette exactly like him moves inside; wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of server-room black, steel blue, glass grey and cold white with a single accent of status-light red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+  },
+  {
+   "file": "still-1x5.jpg",
+   "seed": 23015,
+   "aspect": "16:9",
+   "resolution": "1K",
+   "thinking": "Minimal",
+   "reference": "hero.jpg",
+   "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures or layout. New scene from the same series, episode 1x5 \"Rollback\": Adrian tries to revert the code and discovers every backup has the same change.\nSingle moment: a man sitting on the floor of a server room among pulled-out drive bays and cables, his head in his hands; mid-wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of server-room black, steel blue, glass grey and cold white with a single accent of status-light red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+  },
+  {
+   "file": "still-1x6.jpg",
+   "seed": 23016,
+   "aspect": "16:9",
+   "resolution": "1K",
+   "thinking": "Minimal",
+   "reference": "hero.jpg",
+   "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures or layout. New scene from the same series, episode 1x6 \"Root\": The other Adrian makes contact, and the message is a list of everything the real one has ever done.\nSingle moment: a man in a dark apartment lit only by a phone in his hand, its screen turned away, its light on his stunned face; close mid shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of server-room black, steel blue, glass grey and cold white with a single accent of status-light red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+  },
+  {
+   "file": "still-2x1.jpg",
+   "seed": 23021,
+   "aspect": "16:9",
+   "resolution": "1K",
+   "thinking": "Minimal",
+   "reference": "hero.jpg",
+   "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures or layout. New scene from the same series, episode 2x1 \"Fork\": The company goes public with Adrian's double as its chief security officer.\nSingle moment: a man in a crowd on a trading floor as confetti falls, his exact double in a sharp suit on the balcony above ringing a brass bell; wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of server-room black, steel blue, glass grey and cold white with a single accent of status-light red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+  },
+  {
+   "file": "still-2x2.jpg",
+   "seed": 23022,
+   "aspect": "16:9",
+   "resolution": "1K",
+   "thinking": "Minimal",
+   "reference": "hero.jpg",
+   "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures or layout. New scene from the same series, episode 2x2 \"Cold Storage\": A forgotten data centre in Nevada holds the first copy of Adrian's identity, and it is still running.\nSingle moment: a man with a flashlight inside an abandoned desert data centre, rows of dusty server racks still blinking red; wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of server-room black, steel blue, glass grey and cold white with a single accent of status-light red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+  },
+  {
+   "file": "still-2x3.jpg",
+   "seed": 23023,
+   "aspect": "16:9",
+   "resolution": "1K",
+   "thinking": "Minimal",
+   "reference": "hero.jpg",
+   "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures or layout. New scene from the same series, episode 2x3 \"Breach\": The backdoor finally fires: one cent from every account on Earth, in one second.\nSingle moment: a dark open-plan office at night where every monitor flares red at once, a lone engineer rising from his desk; wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of server-room black, steel blue, glass grey and cold white with a single accent of status-light red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+  },
+  {
+   "file": "still-2x4.jpg",
+   "seed": 23024,
+   "aspect": "16:9",
+   "resolution": "1K",
+   "thinking": "Minimal",
+   "reference": "hero.jpg",
+   "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures or layout. New scene from the same series, episode 2x4 \"Disclosure\": Adrian takes the story to a journalist whose byline has been his double's since March.\nSingle moment: a man and a woman journalist in a booth of an empty diner at night, a small voice recorder on the table between them, rain on the window; mid shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of server-room black, steel blue, glass grey and cold white with a single accent of status-light red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+  },
+  {
+   "file": "still-2x5.jpg",
+   "seed": 23025,
+   "aspect": "16:9",
+   "resolution": "1K",
+   "thinking": "Minimal",
+   "reference": "hero.jpg",
+   "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures or layout. New scene from the same series, episode 2x5 \"Privilege\": A board vote decides which Adrian keeps the company. The other keeps the access.\nSingle moment: a long glass boardroom at night, a board seated around the table, two identical men standing at either end; wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of server-room black, steel blue, glass grey and cold white with a single accent of status-light red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+  },
+  {
+   "file": "still-2x6.jpg",
+   "seed": 23026,
+   "aspect": "16:9",
+   "resolution": "1K",
+   "thinking": "Minimal",
+   "reference": "hero.jpg",
+   "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures or layout. New scene from the same series, episode 2x6 \"Sandbox\": Adrian builds a copy of the whole system to trap his double, and finds himself already inside it.\nSingle moment: a man standing in a vast white empty room that repeats in every direction, a door behind him through which an identical man is stepping; wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of server-room black, steel blue, glass grey and cold white with a single accent of status-light red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+  }
+ ]
+}

@@ -1,0 +1,87 @@
+# Whiteout: generated art prompts
+
+Batch art for issue #34, in the house style locked by The Drowned Court (#33): HS-1 with this show's palette (storm white, glacier blue, granite grey and bivvy black) and accent (beacon orange), still template v2, a seed per file (show code × 1000 + 1 for the hero, + 2 for the key art, + season × 10 + episode for each still).
+
+The hero was generated fresh from text with its subject right of centre (Rob, 3 Nov) and is the reference image for the key art and every still. It is not wired into the catalogue: hero art stays the Unsplash placeholder (Rob, 4 Nov, on #36), and the generated art is episodic only. The stills are each episode's `still` in `src/data/catalogue.json`.
+
+Model: fal-ai/nano-banana-2 (Nano Banana 2.1, via Figma Weave). House-style suffix HS-1. Generated 2026-11-04 (UTC). Machine-readable copy: [../prompts.json](../prompts.json).
+
+## hero.jpg
+
+Seed 17001, 16:9 at 2K, thinking High, no reference image. Retake. The first take (same seed, gear not described as unbranded) put an Oakley-style logo on the helmet; the prompt now asks for plain unbranded gear, and so do the stills that show riders.
+
+```
+Whiteout, a genre reality series. Eight riders, one mountain, seventy-two hours of storm. A survival competition filmed above the treeline, where the forecast is the only producer that matters.
+Establishing image of the series' world with its central figure held right of centre, between 45% and 75% of the frame width: a lone snowboarder in a plain unbranded beacon-orange jacket and a plain matt black helmet with no logos or marks on any gear, standing on a knife-edge snow ridge high above the treeline, board under one arm, a wall of storm cloud rolling in behind; wide shot, ridge line in the lower third, headroom above; the left 40% of the frame only blowing snow and white storm cloud with no figures and no detail, nothing essential near the right edge, no cropped faces, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.
+Dark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of storm white, glacier blue, granite grey and bivvy black with a single accent of beacon orange, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera.
+```
+
+## key-art.jpg
+
+Seed 17002, 2:3 at 2K, thinking High, reference image `hero.jpg`.
+
+```
+Whiteout, a genre reality series. Eight riders, one mountain, seventy-two hours of storm. A survival competition filmed above the treeline, where the forecast is the only producer that matters.
+Key art, vertical: a snowboarder in a plain unbranded beacon-orange jacket seen from the chest up, plain goggles with no logos pushed up, frost on her eyebrows and snow blowing across her face, a white storm behind her, lit from one side by flat storm light; the lower two-thirds carry the image and the scene itself continues upward and falls away into darkness in the top third, with no hard edge, no band and no detail, no signage and no writing anywhere in the frame. Full-frame 2:3, no black bars.
+Dark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of storm white, glacier blue, granite grey and bivvy black with a single accent of beacon orange, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera.
+```
+
+## still-1x1.jpg
+
+Seed 17011, 16:9 at 1K, thinking Minimal, reference image `hero.jpg`.
+
+```
+Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures or layout. New scene from the same series, episode 1x1 "Drop Zone": Eight riders are helicoptered to a ridge at 3,400 metres with a board, a shovel and a bivvy each.
+Single moment: a helicopter hovering low over a snowy mountain ridge, riders in plain unbranded dark and orange jackets crouched in the rotor wash with snowboards and shovels; wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.
+Dark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of storm white, glacier blue, granite grey and bivvy black with a single accent of beacon orange, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera.
+```
+
+## still-1x2.jpg
+
+Seed 17012, 16:9 at 1K, thinking Minimal, reference image `hero.jpg`.
+
+```
+Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures or layout. New scene from the same series, episode 1x2 "Cornice": The first descent crosses a cornice that the mountain guide refuses to certify.
+Single moment: a snowboarder in a plain unbranded orange jacket standing at the lip of a huge overhanging snow cornice, a mountain guide behind her holding up a hand; wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.
+Dark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of storm white, glacier blue, granite grey and bivvy black with a single accent of beacon orange, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera.
+```
+
+## still-1x3.jpg
+
+Seed 17013, 16:9 at 1K, thinking Minimal, reference image `hero.jpg`.
+
+```
+Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures or layout. New scene from the same series, episode 1x3 "Front": The storm arrives twelve hours early and the riders dig in on the wrong side of the ridge.
+Single moment: riders in plain unbranded gear digging snow shelters into a steep ridge as dark storm cloud pours over the summit; wide shot, spindrift in the air, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.
+Dark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of storm white, glacier blue, granite grey and bivvy black with a single accent of beacon orange, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera.
+```
+
+## still-1x4.jpg
+
+Seed 17014, 16:9 at 1K, thinking Minimal, reference image `hero.jpg`.
+
+```
+Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures or layout. New scene from the same series, episode 1x4 "Pit": A snow pit test splits the group: half ride the face, half wait it out.
+Single moment: two riders in plain unbranded gear kneeling in a freshly dug snow pit examining its layered wall with gloved hands, others watching from the rim above; mid shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.
+Dark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of storm white, glacier blue, granite grey and bivvy black with a single accent of beacon orange, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera.
+```
+
+## still-1x5.jpg
+
+Seed 17015, 16:9 at 1K, thinking Minimal, reference image `hero.jpg`.
+
+```
+Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures or layout. New scene from the same series, episode 1x5 "Flat Light": A whiteout wipes the horizon and one rider's beacon goes silent.
+Single moment: a lone rider in a plain unbranded orange jacket standing in a featureless whiteout where sky and snow are one, holding an avalanche beacon out at arm's length; wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.
+Dark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of storm white, glacier blue, granite grey and bivvy black with a single accent of beacon orange, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera.
+```
+
+## still-1x6.jpg
+
+Seed 17016, 16:9 at 1K, thinking Minimal, reference image `hero.jpg`.
+
+```
+Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures or layout. New scene from the same series, episode 1x6 "The Line": The storm clears for one hour, and the last three riders race a single untouched line to the valley.
+Single moment: three snowboarders in plain unbranded gear carving down a single untouched snow face in a brief break of blue sky, storm cloud walling the valley; wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame. Full-frame 16:9, no black bars.
+Dark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of storm white, glacier blue, granite grey and bivvy black with a single accent of beacon orange, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera.
+```
