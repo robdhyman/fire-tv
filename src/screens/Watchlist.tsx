@@ -9,11 +9,11 @@ import { useMotion } from '../motion/useMotion'
 import { stagger } from '../motion/tokens'
 import {
   allEpisodes,
-  artUrl,
   episodeBadge,
   episodeKey,
   showById,
   stillFocus,
+  stillUrl,
   upNextFor,
   type EpisodeRef,
   type Show,
@@ -31,7 +31,7 @@ export function Watchlist() {
 
   const toItem = (ref: EpisodeRef): RowItem => ({
     id: episodeKey(ref),
-    art: artUrl(ref.show.tileArt),
+    art: stillUrl(ref),
     artFocus: stillFocus(ref),
     badge: episodeBadge(ref),
     label: <EpisodeLabel number={ref.episode.number} title={ref.episode.title} />,

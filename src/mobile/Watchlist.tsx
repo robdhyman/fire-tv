@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router'
 import { useSettings } from '../state/settings'
 import { EpisodeLabel, type RowItem } from '../components/Row'
 import { MobileRow, ScreenHeader } from './ui'
-import { allEpisodes, artUrl, episodeBadge, episodeKey, showById, stillFocus, upNextFor, type EpisodeRef, type Show } from '../data/catalogue'
+import { allEpisodes, episodeBadge, episodeKey, showById, stillFocus, stillUrl, upNextFor, type EpisodeRef, type Show } from '../data/catalogue'
 
 /** Watchlist on a phone: Up Next, then one rail per saved show. */
 export function MobileWatchlist() {
@@ -13,7 +13,7 @@ export function MobileWatchlist() {
 
   const toItem = (ref: EpisodeRef): RowItem => ({
     id: episodeKey(ref),
-    art: artUrl(ref.show.tileArt),
+    art: stillUrl(ref),
     artFocus: stillFocus(ref),
     badge: episodeBadge(ref),
     label: <EpisodeLabel number={ref.episode.number} title={ref.episode.title} />,

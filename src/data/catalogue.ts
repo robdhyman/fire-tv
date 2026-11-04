@@ -1,7 +1,14 @@
 import data from './catalogue.json'
 
 export type Brand = 'syfy' | 'usa'
-export type Episode = { number: number; title: string; synopsis: string; duration: number }
+export type Episode = {
+  number: number
+  title: string
+  synopsis: string
+  duration: number
+  /** Generated still, a file in public/art/. Without one the tile walks a crop across the show's art. */
+  still?: string
+}
 export type Season = { number: number; episodes: Episode[] }
 export type Show = {
   id: string
@@ -106,8 +113,12 @@ export function timecode(seconds: number): string {
   return `${String(m).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
 }
 
-/** Episode stills: the show's art with a crop that walks across it per episode. */
+/** Episode still: the episode's generated still, else the show's tile art. */
+export const stillUrl = (ref: EpisodeRef) => artUrl(ref.episode.still ?? ref.show.tileArt)
+
+/** A generated still is centred; the fallback crop walks across the show's art per episode. */
 const CROPS = ['50% 20%', '30% 40%', '70% 30%', '50% 60%', '20% 50%', '80% 50%', '50% 80%', '40% 10%']
 export function stillFocus(ref: EpisodeRef): string {
+  if (ref.episode.still) return '50% 50%'
   return CROPS[(ref.season.number * 7 + ref.episode.number) % CROPS.length]
 }

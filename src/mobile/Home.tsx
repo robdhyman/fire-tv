@@ -12,6 +12,7 @@ import {
   episodeKey,
   recentlyAddedFor,
   stillFocus,
+  stillUrl,
   upNextFor,
   type Show,
 } from '../data/catalogue'
@@ -27,7 +28,7 @@ export function MobileHome() {
     () =>
       upNextFor(brand).map((ref) => ({
         id: episodeKey(ref),
-        art: artUrl(ref.show.tileArt),
+        art: stillUrl(ref),
         artFocus: stillFocus(ref),
         badge: episodeBadge(ref),
         label: <EpisodeLabel number={ref.episode.number} title={ref.episode.title} />,
