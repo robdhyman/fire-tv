@@ -28,20 +28,17 @@ import { noteArrow } from '../motion/useMotion'
 
 /**
  * What a key did: focus moved (or a handler moved along, like the hero strip
- * or the Player's scrub), an item was selected, Back ran, or a move found no
- * neighbour (an edge bump).
+ * or the Player's scrub), an item was selected, Back ran, or an arrow found
+ * no neighbour in its lane (an edge bump).
  */
 export type NavEvent = 'move' | 'select' | 'back' | 'bump'
-
-/** An `onKey` result: false passes the key on, true consumes it, `'wall'` consumes an arrow as an edge bump. */
-export type KeyResult = boolean | 'wall'
 
 type Entry = {
   id: string
   el: HTMLElement
   onSelect?: () => void
-  /** Handle a key before spatial navigation. Return true (or `'wall'`) to consume it. */
-  onKey?: (key: string) => KeyResult
+  /** Handle a key before spatial navigation. Return true to consume it. */
+  onKey?: (key: string) => boolean
 }
 
 type Ctx = {
@@ -122,11 +119,9 @@ export function FocusProvider({ children }: { children: ReactNode }) {
         arrowListeners.current.forEach((fn) => fn())
       }
 
-      const handled = current?.onKey?.(e.key)
-      if (handled) {
+      if (current?.onKey?.(e.key)) {
         e.preventDefault()
-        if (handled === 'wall') emit('bump')
-        else if (dir) emit('move')
+        if (dir) emit('move')
         else if (e.key === 'Enter') emit('select')
         return
       }
@@ -189,7 +184,7 @@ export function useFocusedId() {
 
 type FocusableOptions = {
   onSelect?: () => void
-  onKey?: (key: string) => KeyResult
+  onKey?: (key: string) => boolean
   disabled?: boolean
 }
 

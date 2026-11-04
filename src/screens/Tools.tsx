@@ -1,8 +1,9 @@
 import { useState, type ReactNode } from 'react'
 import { useNavigate } from 'react-router'
 import { Nav } from '../components/Nav'
-import { useFocusable, useFocusedId, useScreenFocus } from '../focus/FocusEngine'
+import { useFocusContext, useFocusable, useFocusedId, useScreenFocus } from '../focus/FocusEngine'
 import { CAPTION_SIZES, CAPTION_STYLES, useSettings } from '../state/settings'
+import { useSoundToggle } from '../sound/NavSounds'
 
 const MENU = ['language options', 'sign out', 'reload', 'about', 'terms', 'FAQs', 'contact'] as const
 const NOTES: Record<string, string> = {
@@ -25,9 +26,11 @@ function MenuItem({ label, onSelect }: { label: string; onSelect: () => void }) 
   )
 }
 
+type ChoiceProps = { id: string; selected: boolean; onSelect: () => void; onKey?: (key: string) => boolean; children: ReactNode; className?: string }
+
 /** One choice in a group: bold when selected, accent-underlined when focused. */
-function Choice({ id, selected, onSelect, children, className = '' }: { id: string; selected: boolean; onSelect: () => void; children: ReactNode; className?: string }) {
-  const { focused, props } = useFocusable(id, { onSelect })
+function Choice({ id, selected, onSelect, onKey, children, className = '' }: ChoiceProps) {
+  const { focused, props } = useFocusable(id, { onSelect, onKey })
   return (
     <div
       {...props}
@@ -66,6 +69,10 @@ export function Tools() {
   const { settings, update } = useSettings()
   const [note, setNote] = useState<string | null>(null)
   const { captions, audio, brand } = settings
+  const sounds = useSoundToggle()
+  const { setFocus } = useFocusContext()
+  // The columns' lanes interleave: Spanish shares one with the font sizes, so Down names its target.
+  const downToSounds = (key: string) => key === 'ArrowDown' && (setFocus('snd:on'), true)
   useScreenFocus('tools', captions.on ? 'cap:on' : 'cap:off')
 
   const onMenu = (label: string) => {
@@ -137,9 +144,16 @@ export function Tools() {
           <OnOff prefix="ad" on={audio.on} onChange={(on) => update({ audio: { ...audio, on } })} />
           <div className="mt-[56px] flex flex-col gap-[34px] text-[27px]">
             <Choice id="ad:en" selected={audio.lang === 'en'} onSelect={() => update({ audio: { ...audio, lang: 'en' } })}>English</Choice>
-            <Choice id="ad:es" selected={audio.lang === 'es'} onSelect={() => update({ audio: { ...audio, lang: 'es' } })}>Spanish</Choice>
+            <Choice id="ad:es" selected={audio.lang === 'es'} onSelect={() => update({ audio: { ...audio, lang: 'es' } })} onKey={downToSounds}>
+              Spanish
+            </Choice>
           </div>
         </Section>
+        <div className="mt-[90px]">
+          <Section title="nav sounds" prefix="snd:">
+            <OnOff prefix="snd" on={sounds.on} onChange={sounds.set} />
+          </Section>
+        </div>
       </div>
 
       <div className="absolute left-[1330px] top-[284px]">

@@ -9,8 +9,8 @@ const centre = (b: Box) => ({ x: (b.left + b.right) / 2, y: (b.top + b.bottom) /
  *
  * Vertical moves land on the nearest lane (the closest row of items in that
  * direction, with 40px of slack) and then the item in that lane nearest in x.
- * Horizontal moves prefer items that overlap the current one vertically and
- * fall back to the nearest item in that direction. Returns null to stay put.
+ * Horizontal moves stay in the lane: only items that overlap the current one
+ * vertically count. Returns null to stay put, which is an edge bump (ADR 004).
  */
 export function pickNeighbour(current: Box, boxes: Box[], dir: Direction): Box | null {
   const c = centre(current)
@@ -37,10 +37,8 @@ export function pickNeighbour(current: Box, boxes: Box[], dir: Direction): Box |
       const p = centre(b)
       return { b, dx: (p.x - c.x) * sign, dy: Math.abs(p.y - c.y) }
     })
-    .filter((e) => e.dx > 8)
+    .filter((e) => e.dx > 8 && e.b.top < current.bottom - 4 && e.b.bottom > current.top + 4)
   if (list.length === 0) return null
-  const overlapping = list.filter((e) => e.b.top < current.bottom - 4 && e.b.bottom > current.top + 4)
-  const pool = overlapping.length > 0 ? overlapping : list
-  pool.sort((a, b) => a.dx + a.dy * 3 - (b.dx + b.dy * 3))
-  return pool[0].b
+  list.sort((a, b) => a.dx + a.dy * 3 - (b.dx + b.dy * 3))
+  return list[0].b
 }
