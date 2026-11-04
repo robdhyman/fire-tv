@@ -1,5 +1,15 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 import type { Brand } from '../data/catalogue'
+import {
+  catalogue,
+  episodeKey,
+  episodeRef,
+  nextEpisode,
+  runtimeSeconds,
+  type EpisodeRef,
+  type WatchPositions,
+} from '../data/catalogue'
+import { CREDITS_LEAD } from '../data/playback'
 
 /* App settings and the viewer's watchlist, persisted in localStorage. */
 
@@ -82,5 +92,85 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
 export function useSettings() {
   const ctx = useContext(SettingsContext)
   if (!ctx) throw new Error('SettingsProvider missing')
+  return ctx
+}
+
+/*
+ * Watch position per episode, persisted under its own key beside the settings:
+ * `fire-tv.watch` holds { [episodeKey]: { elapsed, runtime } } in seconds, in
+ * Up Next order. The first run seeds it from the catalogue's Up Next. Both
+ * Players record into it; once the credits start the episode is finished and
+ * its entry hands over, in place, to the next episode at zero.
+ */
+
+const WATCH_KEY = 'fire-tv.watch'
+
+function seedWatch(): WatchPositions {
+  const watch: WatchPositions = {}
+  for (const u of catalogue.rows.upNext) {
+    const ref = episodeRef(u.show, u.season, u.episode, {})
+    if (!ref) continue
+    const runtime = runtimeSeconds(ref)
+    watch[episodeKey(ref)] = { elapsed: Math.floor(runtime * u.progress), runtime }
+  }
+  return watch
+}
+
+function loadWatch(): WatchPositions {
+  try {
+    const raw = localStorage.getItem(WATCH_KEY)
+    if (raw) return JSON.parse(raw)
+  } catch {
+    /* no storage */
+  }
+  return seedWatch()
+}
+
+/** The positions after the Player reports `elapsed` seconds into `ref`. */
+function recorded(watch: WatchPositions, ref: EpisodeRef, elapsed: number): WatchPositions {
+  const key = episodeKey(ref)
+  const runtime = runtimeSeconds(ref)
+  if (elapsed < runtime - CREDITS_LEAD) {
+    const at = Math.floor(elapsed)
+    return watch[key]?.elapsed === at ? watch : { ...watch, [key]: { elapsed: at, runtime } }
+  }
+  if (!(key in watch)) return watch
+  const next = nextEpisode(ref)
+  const nextKey = next && episodeKey(next)
+  const out: WatchPositions = {}
+  for (const [k, v] of Object.entries(watch)) {
+    if (k !== key) out[k] = v
+    else if (next && nextKey && !(nextKey in watch)) out[nextKey] = { elapsed: 0, runtime: runtimeSeconds(next) }
+  }
+  return out
+}
+
+type WatchCtx = {
+  watch: WatchPositions
+  record: (ref: EpisodeRef, elapsed: number) => void
+}
+
+const WatchContext = createContext<WatchCtx | null>(null)
+
+export function WatchProvider({ children }: { children: ReactNode }) {
+  const [watch, setWatch] = useState<WatchPositions>(loadWatch)
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(WATCH_KEY, JSON.stringify(watch))
+    } catch {
+      /* no storage */
+    }
+  }, [watch])
+
+  const record = useCallback((ref: EpisodeRef, elapsed: number) => setWatch((w) => recorded(w, ref, elapsed)), [])
+  const value = useMemo<WatchCtx>(() => ({ watch, record }), [watch, record])
+
+  return <WatchContext.Provider value={value}>{children}</WatchContext.Provider>
+}
+
+export function useWatch() {
+  const ctx = useContext(WatchContext)
+  if (!ctx) throw new Error('WatchProvider missing')
   return ctx
 }

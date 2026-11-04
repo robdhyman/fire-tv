@@ -1,31 +1,32 @@
 import { useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
-import { useSettings } from '../state/settings'
+import { useSettings, useWatch } from '../state/settings'
 import { EpisodeLabel, type RowItem } from '../components/Row'
 import { Logo } from '../components/Logo'
 import { MobileRow, Pill, Pressable } from './ui'
 import {
   artUrl,
   brandShows,
-  catalogue,
   episodeBadge,
   episodeKey,
   recentlyAddedFor,
   stillFocus,
   upNextFor,
   type Show,
+  type WatchPositions,
 } from '../data/catalogue'
 
 /** Home on a phone: a swipeable portrait hero, then the rows as rails. */
 export function MobileHome() {
   const navigate = useNavigate()
   const { settings } = useSettings()
+  const { watch } = useWatch()
   const brand = settings.brand
   const shows = useMemo(() => brandShows(brand), [brand])
 
   const upNext: RowItem[] = useMemo(
     () =>
-      upNextFor(brand).map((ref) => ({
+      upNextFor(brand, watch).map((ref) => ({
         id: episodeKey(ref),
         art: artUrl(ref.show.tileArt),
         artFocus: stillFocus(ref),
@@ -33,7 +34,7 @@ export function MobileHome() {
         label: <EpisodeLabel number={ref.episode.number} title={ref.episode.title} />,
         onSelect: () => navigate(`/play/${ref.show.id}/${ref.season.number}/${ref.episode.number}`),
       })),
-    [brand, navigate],
+    [brand, watch, navigate],
   )
 
   const recent: RowItem[] = useMemo(
@@ -60,12 +61,12 @@ export function MobileHome() {
   )
 }
 
-/** First episode to play for a show: where Up Next left off, else S1 E1. */
-export function playTarget(show: Show) {
-  const listed = catalogue.rows.upNext.find((u) => u.show === show.id)
-  const season = listed ? show.seasons.find((s) => s.number === listed.season) ?? show.seasons[0] : show.seasons[0]
-  const episode = listed ? season.episodes.find((e) => e.number === listed.episode) ?? season.episodes[0] : season.episodes[0]
-  return { season, episode, resume: !!listed && listed.progress > 0 }
+/** First episode to play for a show: its first tile in Up Next (where the viewer left off, else S1 E1). */
+export function playTarget(show: Show, watch: WatchPositions) {
+  const ref = upNextFor(show.brand, watch).find((r) => r.show.id === show.id)
+  const season = ref?.season ?? show.seasons[0]
+  const episode = ref?.episode ?? season.episodes[0]
+  return { season, episode, resume: !!ref && ref.progress > 0 }
 }
 
 /**
@@ -77,6 +78,7 @@ export function playTarget(show: Show) {
 function MobileHero({ shows }: { shows: Show[] }) {
   const navigate = useNavigate()
   const { settings, inWatchlist, toggleWatchlist } = useSettings()
+  const { watch } = useWatch()
   const [current, setCurrent] = useState(0)
   const track = useRef<HTMLDivElement>(null)
 
@@ -91,7 +93,7 @@ function MobileHero({ shows }: { shows: Show[] }) {
     <section className="relative">
       <div ref={track} onScroll={onScroll} className="rail flex snap-x snap-mandatory overflow-x-auto" data-hero-strip>
         {shows.map((show, i) => {
-          const target = playTarget(show)
+          const target = playTarget(show, watch)
           const added = inWatchlist(show.id)
           return (
             <div

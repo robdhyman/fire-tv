@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useNavigate } from 'react-router'
-import { useSettings } from '../state/settings'
+import { useSettings, useWatch } from '../state/settings'
 import { EpisodeLabel, type RowItem } from '../components/Row'
 import { MobileRow, ScreenHeader } from './ui'
 import { allEpisodes, artUrl, episodeBadge, episodeKey, showById, stillFocus, upNextFor, type EpisodeRef, type Show } from '../data/catalogue'
@@ -9,6 +9,7 @@ import { allEpisodes, artUrl, episodeBadge, episodeKey, showById, stillFocus, up
 export function MobileWatchlist() {
   const navigate = useNavigate()
   const { settings } = useSettings()
+  const { watch } = useWatch()
   const brand = settings.brand
 
   const toItem = (ref: EpisodeRef): RowItem => ({
@@ -20,7 +21,7 @@ export function MobileWatchlist() {
     onSelect: () => navigate(`/play/${ref.show.id}/${ref.season.number}/${ref.episode.number}`),
   })
 
-  const upNext = useMemo(() => upNextFor(brand).map(toItem), [brand]) // eslint-disable-line react-hooks/exhaustive-deps
+  const upNext = useMemo(() => upNextFor(brand, watch).map(toItem), [brand, watch]) // eslint-disable-line react-hooks/exhaustive-deps
   const shows = useMemo(
     () => settings.watchlist.map(showById).filter((s): s is Show => !!s && s.brand === brand),
     [settings.watchlist, brand],
@@ -32,7 +33,7 @@ export function MobileWatchlist() {
       <div className="flex flex-col gap-[28px] pt-[6px]">
         <MobileRow label="up next" items={upNext} />
         {shows.map((show) => (
-          <MobileRow key={show.id} label={show.title} items={allEpisodes(show).map(toItem)} />
+          <MobileRow key={show.id} label={show.title} items={allEpisodes(show, watch).map(toItem)} />
         ))}
         {shows.length === 0 && (
           <p className="px-gutter text-[15px] font-light text-white/60">your watchlist is empty. tap + on a show to add it.</p>

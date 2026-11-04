@@ -5,10 +5,10 @@ import { Nav } from '../components/Nav'
 import { EpisodeLabel, Row, type RowItem } from '../components/Row'
 import { RoundButton } from '../components/RoundButton'
 import { useFocusable, useFocusedId, useScreenFocus } from '../focus/FocusEngine'
-import { useSettings } from '../state/settings'
+import { useSettings, useWatch } from '../state/settings'
 import { FULL_CLIP, fromHeroPanel, morph, useFlight, useMotion } from '../motion/useMotion'
 import { distance, duration } from '../motion/tokens'
-import { artUrl, episodeBadge, showById, stillFocus, type Season, type Show } from '../data/catalogue'
+import { artUrl, episodeBadge, showById, stillFocus, toEpisodeRef, type Season, type Show } from '../data/catalogue'
 
 const TAB_PITCH = 132
 
@@ -53,6 +53,7 @@ function ShowPage({ show }: { show: Show }) {
     morph.showTitle = rest
   })
   const { inWatchlist, toggleWatchlist } = useSettings()
+  const { watch } = useWatch()
   const [seasonIndex, setSeasonIndex] = useState(show.seasons.length - 1)
   const season = show.seasons[seasonIndex]
   const added = inWatchlist(show.id)
@@ -74,7 +75,7 @@ function ShowPage({ show }: { show: Show }) {
   const items: RowItem[] = useMemo(
     () =>
       season.episodes.map((episode) => {
-        const ref = { show, season, episode, progress: 0 }
+        const ref = toEpisodeRef(show, season, episode, watch)
         return {
           id: String(episode.number),
           art: artUrl(show.tileArt),
@@ -84,7 +85,7 @@ function ShowPage({ show }: { show: Show }) {
           onSelect: () => navigate(`/play/${show.id}/${season.number}/${episode.number}`),
         }
       }),
-    [show, season, navigate],
+    [show, season, watch, navigate],
   )
 
   // Tabs sit in a fixed line from x=200 and never slide: selecting a season changes weight only.

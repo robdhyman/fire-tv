@@ -2,7 +2,8 @@
  * Simulated playback, shared by the TV and mobile Players: the clock runs
  * 20x so the credits are a few minutes away; scrubbing moves five minutes on
  * the D-pad and ten seconds on the touch skip buttons. Credits begin 2:08
- * from the end, when the next episode counts down 15 seconds.
+ * from the end, when the next episode counts down 15 seconds; the watch
+ * position counts the episode finished from there.
  */
 export const SPEED = 20
 export const TICK_MS = 100
@@ -12,6 +13,8 @@ export const SCRUB = 300
 export const SKIP = 10
 export const CREDITS_LEAD = 128
 export const COUNTDOWN = 15
+/** Seconds of playback between watch position saves (half a second of wall time at 20x). */
+export const WATCH_SAVE = 10
 
 export const CREW: [string, string][] = [
   ['Assistant Editor', 'John Klump'],

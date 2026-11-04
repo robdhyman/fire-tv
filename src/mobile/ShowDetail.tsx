@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router'
-import { useSettings } from '../state/settings'
+import { useSettings, useWatch } from '../state/settings'
 import { BackButton, MiniBadge, Pill, Pressable, TextTabs } from './ui'
 import { PlayGlyph, playTarget } from './Home'
-import { artUrl, episodeBadge, showById, stillFocus, type Show } from '../data/catalogue'
+import { artUrl, episodeBadge, showById, stillFocus, toEpisodeRef, type Show } from '../data/catalogue'
 
 export function MobileShowDetail() {
   const { id = '' } = useParams()
@@ -20,10 +20,11 @@ export function MobileShowDetail() {
 function ShowPage({ show }: { show: Show }) {
   const navigate = useNavigate()
   const { inWatchlist, toggleWatchlist } = useSettings()
+  const { watch } = useWatch()
   const [seasonIndex, setSeasonIndex] = useState(show.seasons.length - 1)
   const season = show.seasons[seasonIndex]
   const added = inWatchlist(show.id)
-  const target = playTarget(show)
+  const target = playTarget(show, watch)
   const play = (s: number, e: number) => navigate(`/play/${show.id}/${s}/${e}`)
 
   return (
@@ -59,7 +60,7 @@ function ShowPage({ show }: { show: Show }) {
 
       <ul className="flex flex-col md:grid md:grid-cols-2 md:gap-x-[16px]">
         {season.episodes.map((episode) => {
-          const ref = { show, season, episode, progress: 0 }
+          const ref = toEpisodeRef(show, season, episode, watch)
           const badge = episodeBadge(ref)
           return (
             <li key={episode.number}>

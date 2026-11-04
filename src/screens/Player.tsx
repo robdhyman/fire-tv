@@ -4,10 +4,9 @@ import { AnimatePresence, motion } from 'motion/react'
 import { useMotion } from '../motion/useMotion'
 import { EpisodeLabel, Row, rowTileId, type RowItem } from '../components/Row'
 import { useFocusable, useFocusContext, useFocusedId, useScreenFocus } from '../focus/FocusEngine'
-import { CAPTION_SIZES, CAPTION_STYLES, useSettings } from '../state/settings'
+import { CAPTION_SIZES, CAPTION_STYLES, useSettings, useWatch } from '../state/settings'
 import {
   artUrl,
-  catalogue,
   episodeBadge,
   episodeKey,
   episodeRef,
@@ -15,18 +14,17 @@ import {
   runtimeSeconds,
   stillFocus,
   timecode,
+  toEpisodeRef,
   upNextFor,
   type EpisodeRef,
 } from '../data/catalogue'
 
-import { COUNTDOWN, CREDITS_LEAD, CREW, SCRUB, SPEED, TICK_MS } from '../data/playback'
+import { COUNTDOWN, CREDITS_LEAD, CREW, SCRUB, SPEED, TICK_MS, WATCH_SAVE } from '../data/playback'
 
 export function Player() {
   const { showId = '', season = '', episode = '' } = useParams()
-  const listed = catalogue.rows.upNext.find(
-    (u) => u.show === showId && u.season === Number(season) && u.episode === Number(episode),
-  )
-  const ref = episodeRef(showId, Number(season), Number(episode), listed?.progress ?? 0)
+  const { watch } = useWatch()
+  const ref = episodeRef(showId, Number(season), Number(episode), watch)
   if (!ref) return <Navigate to="/" replace />
   return <Playback key={episodeKey(ref)} current={ref} />
 }
@@ -34,11 +32,12 @@ export function Player() {
 function Playback({ current }: { current: EpisodeRef }) {
   const navigate = useNavigate()
   const { settings } = useSettings()
+  const { watch, record } = useWatch()
   const { setFocus } = useFocusContext()
   const total = runtimeSeconds(current)
   const next = nextEpisode(current)
   const m = useMotion()
-  const [elapsed, setElapsed] = useState(Math.floor(total * current.progress))
+  const [elapsed, setElapsed] = useState(() => watch[episodeKey(current)]?.elapsed ?? 0)
   const [paused, setPaused] = useState(false)
   const [countdown, setCountdown] = useState(COUNTDOWN)
   const credits = elapsed >= total - CREDITS_LEAD
@@ -46,6 +45,13 @@ function Playback({ current }: { current: EpisodeRef }) {
   const enteredCredits = useRef(false)
 
   useScreenFocus(`play:${episodeKey(current)}`, 'player:timeline')
+
+  // Watch position: saved every WATCH_SAVE seconds of playback or scrub, and on leave.
+  const latest = useRef(elapsed)
+  latest.current = elapsed
+  const saved = Math.floor(elapsed / WATCH_SAVE)
+  useEffect(() => record(current, latest.current), [saved]) // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => () => record(current, latest.current), []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (paused) return
@@ -103,7 +109,7 @@ function Playback({ current }: { current: EpisodeRef }) {
   const episodes: RowItem[] = useMemo(
     () =>
       current.season.episodes.map((episode) => {
-        const ref = { ...current, episode, progress: 0 }
+        const ref = toEpisodeRef(current.show, current.season, episode, watch)
         const isNext = next?.episode === episode && next.season === current.season
         return {
           id: String(episode.number),
@@ -116,12 +122,13 @@ function Playback({ current }: { current: EpisodeRef }) {
         }
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [current, next, countdown],
+    [current, next, countdown, watch],
   )
 
+  // Up Next as it stood when this episode started, so the row holds still while the position saves.
   const upNext: RowItem[] = useMemo(
     () =>
-      upNextFor(settings.brand)
+      upNextFor(settings.brand, watch)
         .filter((r) => episodeKey(r) !== episodeKey(current))
         .map((r) => ({
           id: episodeKey(r),
@@ -132,7 +139,7 @@ function Playback({ current }: { current: EpisodeRef }) {
           onSelect: () => play(r),
         })),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [settings.brand, current],
+    [settings.brand],
   )
 
   const pct = total ? elapsed / total : 0
