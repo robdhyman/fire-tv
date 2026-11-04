@@ -29,8 +29,9 @@ export type Tone = {
 
 export type Voice = Tone[]
 
-/** Master level, dB. */
+/** Master level, dB, before the sound picker's volume steps (issue #43). */
 export const MASTER_DB = -6
+let masterDb = MASTER_DB
 
 let ctx: AudioContext | null = null
 let master: GainNode | null = null
@@ -42,7 +43,7 @@ function audio() {
   if (!ctx) {
     ctx = new AudioContext({ latencyHint: 'interactive' })
     master = ctx.createGain()
-    master.gain.value = dbToGain(MASTER_DB)
+    master.gain.value = dbToGain(masterDb)
     master.connect(ctx.destination)
   }
   return { ctx, master: master! }
@@ -60,8 +61,10 @@ export function wake() {
   })
 }
 
+/** Set the master level; the context is only made once a sound plays. */
 export function setMasterDb(db: number) {
-  audio().master.gain.value = dbToGain(db)
+  masterDb = db
+  if (master) master.gain.value = dbToGain(db)
 }
 
 function noiseBuffer(c: AudioContext) {

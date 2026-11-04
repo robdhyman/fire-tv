@@ -2,13 +2,13 @@ import { useCallback, useEffect, useRef } from 'react'
 import { useFocusContext } from '../focus/FocusEngine'
 import { useSettings } from '../state/settings'
 import { play, wake } from './synth'
-import { VOICES } from './voices'
+import { voiceOf } from './picks'
 
 /*
  * Nav sounds (issue #29, ADR 004): a voice for every nav event the focus
  * engine reports, so a key and the remote overlay's button for it sound the
  * same. On by default and remembered; S, the sound chip and Tools toggle
- * them. TV stage only: the touch layout has no focus engine and no sounds.
+ * them, and the sound picker (issue #43) chooses each event's voice. TV stage only: the touch layout has no focus engine and no sounds.
  */
 
 /** The sound toggle: whether nav sounds are on, and a setter that chimes when it turns them on. */
@@ -19,7 +19,7 @@ export function useSoundToggle() {
       update({ navSounds: on })
       if (on) {
         wake()
-        play(VOICES.select)
+        play(voiceOf('select'))
       }
     },
     [update],
@@ -33,7 +33,7 @@ export function NavSounds() {
   const onRef = useRef(on)
   onRef.current = on
 
-  useEffect(() => onNav((ev) => onRef.current && play(VOICES[ev])), [onNav])
+  useEffect(() => onNav((ev) => onRef.current && play(voiceOf(ev))), [onNav])
 
   useEffect(() => {
     // Capture, so the context is awake before the focus engine reports the key.

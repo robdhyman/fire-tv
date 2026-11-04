@@ -86,6 +86,10 @@ The short synthesised sounds the app makes as focus moves: a tick on each move, 
 
 The chip beside the remote overlay's chip that mutes and unmutes the nav sounds; key S, and a row in Tools. Remembered between visits.
 
+## Sound picker
+
+The panel that chooses each nav sound's voice from four candidates, A to D, with a volume step and a reset to Rob's 3 Nov picks. Shown and hidden by the chip at the bottom-left, mirroring the remote overlay's, or key N; it never takes focus, so the app can be navigated with it open. Picks are remembered between visits. Hidden on phone and tablet.
+
 ## Up Next
 
 The row of episodes the viewer is mid-way through or due to watch next, on Home and at the top of the Watchlist. Also the 15-second next-episode countdown card at the end of playback.
