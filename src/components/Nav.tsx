@@ -46,19 +46,11 @@ function NavItem({ item, active }: { item: (typeof WORDS)[number]; active: boole
   )
 }
 
-/*
- * The nav's ends are walls. With no item further along the lane, a sideways
- * press would fall back to the nearest item out of it (a row tile peeking at
- * the stage edge), so the logo keeps Left and the avatar keeps Right.
- */
-const keepLeft = (key: string) => key === 'ArrowLeft'
-const keepRight = (key: string) => key === 'ArrowRight'
-
-type IconItemProps = { id: string; label: string; active: boolean; onSelect: () => void; onKey?: (key: string) => boolean; children: ReactNode }
+type IconItemProps = { id: string; label: string; active: boolean; onSelect: () => void; children: ReactNode }
 
 /** A nav icon: a word's size and colour states, and an accent bar where a word's underline would sit. */
-function IconItem({ id, label, active, onSelect, onKey, children }: IconItemProps) {
-  const { focused, props } = useFocusable(id, { onSelect, onKey })
+function IconItem({ id, label, active, onSelect, children }: IconItemProps) {
+  const { focused, props } = useFocusable(id, { onSelect })
   return (
     <div
       {...props}
@@ -108,7 +100,7 @@ export function Nav({ active }: { active?: NavKey }) {
   const { settings } = useSettings()
   const { memory, setFocus } = useFocusContext()
   const m = useMotion()
-  const logo = useFocusable('nav:logo', { onSelect: () => navigate('/'), onKey: keepLeft })
+  const logo = useFocusable('nav:logo', { onSelect: () => navigate('/') })
   const openAccount = () => {
     // Seed Tools' focus memory so it opens on `sign out`; Back into Tools still restores where focus last was.
     memory.set(TOOLS_SCREEN, SIGN_OUT)
@@ -137,7 +129,7 @@ export function Nav({ active }: { active?: NavKey }) {
         <IconItem id="nav:tools" label="tools" active={active === 'tools'} onSelect={() => navigate('/tools')}>
           {GEAR}
         </IconItem>
-        <IconItem id="nav:account" label="account" active={false} onSelect={openAccount} onKey={keepRight}>
+        <IconItem id="nav:account" label="account" active={false} onSelect={openAccount}>
           {AVATAR}
         </IconItem>
       </div>

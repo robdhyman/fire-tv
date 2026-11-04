@@ -27,6 +27,8 @@ export type Settings = {
   brand: Brand
   captions: { on: boolean; size: number; style: number }
   audio: { on: boolean; lang: 'en' | 'es' }
+  /** Nav sounds (issue #29): the sound toggle's state, on by default. */
+  navSounds: boolean
   watchlist: string[]
   hintSeen: boolean
 }
@@ -35,6 +37,7 @@ const DEFAULTS: Settings = {
   brand: 'syfy',
   captions: { on: false, size: 0, style: 0 },
   audio: { on: false, lang: 'en' },
+  navSounds: true,
   watchlist: ['ember-hollow', 'ringfall', 'pale-street', 'the-long-dry'],
   hintSeen: false,
 }

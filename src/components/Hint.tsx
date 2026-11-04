@@ -6,10 +6,11 @@ import { useMotion } from '../motion/useMotion'
 
 /**
  * First-load hint: shown until the first arrow key, then remembered. Menu
- * (M) brings it back. The remote line shows only where the remote does (768px+).
+ * (M) brings it back. The remote and sound lines show only where their
+ * chips do (768px+).
  */
 export function Hint({ shown, setShown }: { shown: boolean; setShown: (v: boolean) => void }) {
-  const { update } = useSettings()
+  const { settings, update } = useSettings()
   const { onFirstArrow } = useFocusContext()
   const m = useMotion()
 
@@ -35,7 +36,8 @@ export function Hint({ shown, setShown }: { shown: boolean; setShown: (v: boolea
           use the <b className="font-semibold text-accent">arrow keys</b> to move, <b className="font-semibold">enter</b> to
           select, <b className="font-semibold">esc</b> to go back
           <span className="hidden md:inline">
-            , <b className="font-semibold text-accent">R</b> for an on-screen remote
+            , <b className="font-semibold text-accent">R</b> for an on-screen remote, <b className="font-semibold text-accent">S</b>{' '}
+            {settings.navSounds ? 'to mute sounds' : 'for sounds'}
           </span>
         </motion.div>
       )}

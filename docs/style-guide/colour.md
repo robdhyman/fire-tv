@@ -53,7 +53,7 @@ The accent is used for:
 - the **focus underline** on text: nav, Shows tabs, season tabs (3 px, offset 8 or 10 px);
 - the **selected option** on Tools, in accent text with the same underline;
 - the **focused search field** border;
-- keys named in the first-load hint (`arrow keys`, `R`);
+- keys named in the first-load hint (`arrow keys`, `R`, `S`);
 - the **caption colour** options on Tools.
 
 It is not used for tile focus (that is always white) and never fills a surface other than the USA logo block.
