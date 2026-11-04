@@ -29,6 +29,5 @@ Review sheets: [Slow Burn](review/slow-burn.jpg), [Ringfall](review/ringfall.jpg
 
 ## Follow-ups
 
-- [The Drowned Court's hero goes back to its placeholder](https://github.com/robdhyman/fire-tv/issues/50) is its own ticket and is not in this PR.
 - Key art isn't wired anywhere yet, as with The Drowned Court.
-- Thirteen Unsplash photos are still referenced, as hero and tile art. `art-04` becomes the fourteenth once #50 lands.
+- All 14 Unsplash photos are still referenced as hero and tile art. That includes `art-04`, since [The Drowned Court's hero goes back to its placeholder](https://github.com/robdhyman/fire-tv/issues/50) merged into this branch.
