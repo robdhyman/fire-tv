@@ -39,6 +39,18 @@ const rect = (sel) =>
     return r && { x: Math.round(r.left), y: Math.round(r.top), w: Math.round(r.width), h: Math.round(r.height) }
   }, sel)
 const focused = () => page.evaluate(() => document.querySelector('[data-focused]')?.getAttribute('data-focus-id'))
+// Each nav's effective opacity on the stage, the arriving screen's first.
+const navs = () =>
+  page.evaluate(() =>
+    [...document.querySelectorAll('header')]
+      .sort((a, b) => Number(!!a.closest('[data-exiting]')) - Number(!!b.closest('[data-exiting]')))
+      .map((h) => {
+        let o = 1
+        for (let el = h; el && el !== document.body; el = el.parentElement) o *= Number(getComputedStyle(el).opacity)
+        return Math.round(o * 100) / 100
+      }),
+  )
+const isAdd = (id) => /^show:[\w-]+:add$/.test(id ?? '')
 
 // Fresh Home: where the hero title sits at rest.
 await page.goto(base + '/')
@@ -82,6 +94,23 @@ await strip('1-hero-slide', 'ArrowRight', [0, 100, 200, 350, 600])
 await page.waitForTimeout(400)
 await strip('2-hero-to-show', 'Enter', [0, 100, 200, 350, 600, 900])
 check('hero → show page', page.url().includes('/show/'), page.url())
+
+// Show page: arrives on the + with the nav shown; the nav hides below the + and returns on the way up.
+await page.waitForTimeout(400)
+check('show page arrives on the + with the nav shown', isAdd(await focused()) && (await navs())[0] === 1, `${await focused()}, nav ${await navs()}`)
+await strip('2b-show-nav-hides', 'ArrowDown', [0, 80, 160, 300])
+check('nav hides below the +', (await focused())?.startsWith('season:') && (await navs())[0] === 0, `${await focused()}, nav ${await navs()}`)
+await page.keyboard.press('ArrowUp')
+await page.waitForTimeout(300)
+check('nav returns with focus on the +', isAdd(await focused()) && (await navs())[0] === 1, `${await focused()}, nav ${await navs()}`)
+await page.keyboard.press('ArrowUp')
+await page.waitForTimeout(300)
+check('Up from the + reaches the nav', (await focused())?.startsWith('nav:'), await focused())
+// Down from a nav word can stop on the logo first (its box sits lower), so step down to the +.
+for (let i = 0; i < 3 && !isAdd(await focused()); i++) {
+  await page.keyboard.press('ArrowDown')
+  await page.waitForTimeout(300)
+}
 await page.waitForTimeout(400)
 await strip('3-back-to-hero', 'Escape', [0, 100, 200, 350, 600, 900])
 await page.waitForTimeout(500)
@@ -108,6 +137,9 @@ await page.waitForFunction((sel) => document.querySelector(sel) && location.path
 const startBox = await rect(showTitle)
 const near = Math.abs(startBox.x - fromBox.x) <= 2 && Math.abs(startBox.y - fromBox.y) <= 2
 check('morph starts from the hero title', reduced ? !near : near, `${JSON.stringify(fromBox)} → ${JSON.stringify(startBox)}`)
+// The show page's nav paints over Home's at full opacity, so the nav never dips.
+const seen = (await navs()).reduce((clear, o) => clear * (1 - o), 1)
+check('nav holds through the morph', 1 - seen >= 0.99, `navs ${await navs()}`)
 await page.waitForTimeout(1000)
 await page.keyboard.press('Escape')
 await page.waitForTimeout(1000)

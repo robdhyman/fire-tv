@@ -24,8 +24,8 @@ The direction: the 2017 prototype used fixed ease-out tweens. The rebuild keeps 
 | Token | Value | Used for |
 |---|---|---|
 | `backdropFade` | 0.6 | Home's blurred backdrop crossfading to the current hero show |
-| `screenFade` | 0.25 | screen to screen crossfade; the nav fading out of the morph |
-| `quick` | 0.15 | colour and underline changes on text focus (CSS transition, `--motion-quick`) |
+| `screenFade` | 0.25 | screen to screen crossfade |
+| `quick` | 0.15 | colour and underline changes on text focus (CSS transition, `--motion-quick`); the show page's nav fading out when focus goes below the `+` and back in when it returns |
 | `riseDelay` | 0.12 | the season row waits this long into the morph before rising |
 | `copyAfterFlight` | 0.45 | the logline and `+` wait for the title to land |
 | `reduced` | 0.15 | the only animation left under reduced motion: a short opacity fade |
@@ -49,7 +49,7 @@ The direction: the 2017 prototype used fixed ease-out tweens. The rebuild keeps 
 | Moment | 2017 recording | Now |
 |---|---|---|
 | Hero change | whole strip slides about 500 ms, neighbours peek | the strip slides one panel on `heroSlide`; a press mid-slide retargets; centre panel full size with the white ring, neighbours 0.92 and 40% |
-| Hero to show page | hero zooms to fill, nav fades, season row rises | stage-pixel shared-element **morph** on `morph`: the photo's clip opens to full bleed with no crop jump, the title flies to its place, the nav fades (`screenFade`), the season row rises `rowRise` on `rise` after `riseDelay` |
+| Hero to show page | hero zooms to fill, nav fades, season row rises | stage-pixel shared-element **morph** on `morph`: the photo's clip opens to full bleed with no crop jump, the title flies to its place, the nav holds (the show page arrives on the `+` with it shown), the season row rises `rowRise` on `rise` after `riseDelay` |
 | Back | cut | the morph in reverse; the ring waits for it to land |
 | Tile focus | instant border | `focusIn` to scale 1.1 and lift 8 px with the white ring; unfocus trails on `focusOut` |
 | Up and down | about 250 ms | the slower `scroll` spring, about 600 ms |
