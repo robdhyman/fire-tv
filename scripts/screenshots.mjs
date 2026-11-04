@@ -21,6 +21,8 @@ const shots = [
   { name: 'player-credits', path: '/play/ringfall/3/2', keys: Array(10).fill('ArrowRight') },
   { name: 'watchlist', path: '/watchlist', keys: [] },
   { name: 'tools', path: '/tools', keys: [] },
+  // N opens the sound picker over Home; one Down so a row's name is lit.
+  { name: 'sound-picker', path: '/', keys: ['n', 'ArrowDown'] },
   { name: 'search', path: '/search', keys: [], type: 'the' },
   { name: 'home-usa', path: '/', keys: [], brand: 'usa' },
 ]
