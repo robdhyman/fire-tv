@@ -1,6 +1,6 @@
 # The Drowned Court: generated art prompts
 
-Style lock for issue #33. The hero is the locked reference: every still and the key art pass it as `images[0]`.
+Style lock for issue #33. The lock hero (seed 90517, centred) is the reference image every still and the key art pass as `images[0]`; the shipped hero is a right-of-centre re-take (seed 90518), described below.
 
 Still template v2 replaced the research doc's v1 opening ("Same series, same world, same lens and grade as the reference image"), which made the model paste the hero's sunken spires into the bottom of 10 of 12 stills. v2 limits the reference to grade, grain, lens and light, uses a seed per still (905SE), and bans signage and writing. The 1x1 scene asks for "knife-cut marks" rather than names, because "names cut into the bark" rendered as legible text.
 
@@ -8,11 +8,11 @@ Model: fal-ai/nano-banana-2 (Nano Banana 2.1, via Figma Weave). House-style suff
 
 ## hero.jpg
 
-Seed 90517, 16:9 at 2K, thinking High. Picked from four candidates (seeds 48213, 90517, 17742, 63390).
+Seed 90518, 16:9 at 2K, thinking High, no reference image. Right-of-centre hero (Rob, 3 Nov): the left 40% stays clear for the TV logline; artFocus 72% keeps both sisters in the phone crops. It replaces the centred lock hero (seed 90517, the original template, picked from seeds 48213, 90517, 17742, 63390), which stays the reference image for the key art and stills. A run with that hero as reference ignored the move and stayed centred.
 
 ```
 The Drowned Court, a fantasy series. Beneath the lake lies a kingdom that drowned a thousand years ago and never stopped ruling. Two sisters from the shore town are summoned to serve at its court, and only one of them is meant to come back up.
-Establishing image of the series' world with its central figure or object held in the middle third of the frame: two young women in wet wool coats standing waist-deep at the lake edge at night, the spires of a sunken court faintly lit green beneath the surface in front of them, a rowan branch floating between them; mid-shot, horizon in the lower third, headroom above, fog and black water in the outer thirds, nothing essential near the left or right edge, no cropped faces, no action at the frame edge.
+Establishing image of the series' world with its central figures held right of centre, between 45% and 75% of the frame width: two young women in wet wool coats standing waist-deep at the lake edge at night, the spires of a sunken court faintly lit green beneath the surface in front of them, a rowan branch floating between them; mid-shot, horizon in the lower third, headroom above, the left 40% of the frame only fog and black water with no figures and no detail, nothing essential near the right edge, no cropped faces, no action at the frame edge.
 Dark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of lake-black, bottle green, tarnished brass and bone white with a single accent of cold rowan-berry red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera.
 ```
 

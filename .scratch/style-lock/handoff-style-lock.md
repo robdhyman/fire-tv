@@ -31,3 +31,5 @@ Done when Rob approves the style and this PR merges. #34 (batch) and #35 (Coming
 ## Rob's answers (3 Nov 2026)
 
 He approved HS-1 with still template v2, title-clear posters, separate hero and key art, and the four-plus-one palette rule. TV heroes move the subject into the right two-thirds. Next: re-generate The Drowned Court hero to that rule (about 10 credits), swap it in, and merge #41.
+
+Hero swapped (3 Nov, Rob picked B): seed 90518, no reference image, sisters at 62–84% of the width, artFocus `72% 50%` for the phone crops. A re-take using the old hero as reference ignored the move and stayed centred, so in #34 TV heroes are generated fresh from text, not edited. Spend for the re-take: 20 credits (278 total).

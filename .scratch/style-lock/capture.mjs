@@ -18,5 +18,6 @@ const shoot = async (ctxOpts, name, path, keys) => {
 const tv = { viewport: { width: 1920, height: 1080 } }
 await shoot(tv, 'tv-show', '/show/the-drowned-court', [])
 await shoot(tv, 'tv-show-episodes', '/show/the-drowned-court', ['ArrowDown', 'ArrowDown', 'ArrowDown'])
+await shoot(devices["iPhone 13"], "phone-home", "/", [])
 await shoot(devices['iPhone 13'], 'phone-show', '/show/the-drowned-court', [])
 await browser.close()
