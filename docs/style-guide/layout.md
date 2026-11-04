@@ -43,14 +43,16 @@ The dashed rectangle is the benchmark's safe inset. The app puts its **left cont
 | Plain tile | 318 x 179, 2 px gap | `Row.tsx` |
 | Big tile (row focused) | 376 x 211, 19 px gap, labels beneath | `Row.tsx` |
 | Current tile (row focused) | 590 x 332, label inside | `Row.tsx` |
+| Poster tile (Coming Soon) | 160 x 240 at rest, plain or open; current 221 x 332; no label, the poster carries its title | `Row.tsx` (`POSTER`) |
 | Row gap | 80 on Home, 85 on Watchlist | `Home.tsx`, `Watchlist.tsx` |
-| Shows grid | 4 columns of 320 x 180; column pitch 400 (80 gap), row pitch 249 (69 gap); grid at (200, 250) | `GridTile.tsx`, `Shows.tsx` |
+| Shows grid | 4 columns of 320 x 180; column pitch 400 (80 gap), row pitch 249 (69 gap); grid at (200, 250). A movie keeps the cell: its 120 x 180 poster flush left, the title set beside it on `rows` grey | `GridTile.tsx`, `Shows.tsx` |
 | Shows tabs | at (200, 160), 48 apart | `Shows.tsx` |
 | Show page | title at (200, 268), max 620 wide; `+` at y 536; episode row at y 645, its label the season tabs in a fixed line from x 200, 132 apart, never sliding | `ShowDetail.tsx` |
+| Movie page | the show page's left column (title at (200, 268), `+` at y 536) with a `coming soon` line at y 645 where the episodes would be; poster 560 x 840 at (1160, 160), its right edge on x 1720; the poster blurred full bleed behind | `MovieDetail.tsx` |
 | Round button | 60 px circle, 3 px border | `RoundButton.tsx` |
 | Player | timeline full width, 3 px, five segments with 12 px gaps | `Player.tsx` |
 
-**Aspect ratios.** Tiles, the grid and the current tile are all **16:9** (318x179, 376x211, 590x332, 320x180); art is 1920 px wide, 16:9, cropped with `object-fit: cover` and a per-show focus point (`artFocus`). The **hero is 1686x672, about 2.5:1 (5:2)**; it is cut from the same full-bleed 16:9 art, which is why the hero morphs to the show page without a change of crop.
+**Aspect ratios.** Tiles, the grid and the current tile are all **16:9** (318x179, 376x211, 590x332, 320x180); art is 1920 px wide, 16:9, cropped with `object-fit: cover` and a per-show focus point (`artFocus`). The **hero is 1686x672, about 2.5:1 (5:2)**; it is cut from the same full-bleed 16:9 art, which is why the hero morphs to the show page without a change of crop. **Movie posters are 2:3** and are never cropped or set over: a poster carries its title in the image, so tiles show it whole and the app sets text beside it.
 
 ## The hero strip and the larger centre panel
 

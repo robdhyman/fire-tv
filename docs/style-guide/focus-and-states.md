@@ -67,10 +67,11 @@ The 60 px circle (`+`, `i`, play): a 3 px white border at 90%, white glyph. Focu
 
 ## Badges
 
-`new` and `expiring` tag a tile's top-right corner: 19 px Figtree light, lowercase, white on black at 55%, padding 6 x 12 px, flush to the corner with no radius. Both kinds look the same; the word carries the meaning. See the [colour page](/docs/style-guide/colour) for the specimen.
+`new`, `expiring` and `coming soon` tag a tile's top-right corner: 19 px Figtree light, lowercase, white on black at 55%, padding 6 x 12 px, flush to the corner with no radius. Every kind looks the same; the word carries the meaning. See the [colour page](/docs/style-guide/colour) for the specimen.
 
 - **`new`**: an episode in the last two of the newest season of a new show, or a show flagged new (`episodeBadge`, `show.new`).
 - **`expiring`**: the first two episodes of the first season of an expiring show.
+- **`coming soon`**: every movie's tile, on Home's Coming Soon row, the Shows grid, Search and the Watchlist.
 
 ## Dimmed states
 

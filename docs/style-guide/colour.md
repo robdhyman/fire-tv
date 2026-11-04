@@ -72,7 +72,7 @@ White, `#ffffff`, 3 px, with an 18 px / 36 px drop shadow at 55% black under a l
 
 ## Badge colours
 
-Badges have no colour. `new` and `expiring` are the same style: white `light` text at 19 px on 55% black, pinned to the tile's top-right corner. Kind is told by the word, not by a colour, so it survives any art behind it.
+Badges have no colour. `new`, `expiring` and `coming soon` are the same style: white `light` text at 19 px on 55% black, pinned to the tile's top-right corner. Kind is told by the word, not by a colour, so it survives any art behind it.
 
 <div class="sg-spec sg-spec-rows"><div style="display:flex;gap:16px;padding:8px"><span class="sg-tile" style="position:relative;width:190px;height:107px;background-image:linear-gradient(135deg,#4a5a3b,#232b1b)"><span style="position:absolute;right:0;top:0;background:rgb(0 0 0/.55);padding:6px 12px;font-size:19px;font-weight:300;line-height:1">new</span></span><span class="sg-tile" style="position:relative;width:190px;height:107px;background-image:linear-gradient(135deg,#5a4a3b,#2b231b)"><span style="position:absolute;right:0;top:0;background:rgb(0 0 0/.55);padding:6px 12px;font-size:19px;font-weight:300;line-height:1">expiring</span></span></div></div>
 

@@ -16,11 +16,11 @@ A series in the catalogue: title, logline, hero art, tile art, one or more seaso
 
 ## Movie
 
-A catalogue entry with key art and a logline and no seasons. Every movie in the catalogue is coming soon: it has a detail page but nothing to play.
+A catalogue entry with a poster and a logline and no seasons. Every movie in the catalogue is coming soon: it has a detail page (`/movie/:id`, the movie page) but nothing to play. Its **poster** is 2:3 key art with the title set in the image, so the app shows it whole and never sets a title over it.
 
 ## Coming Soon
 
-The Home row of movies, and the badge on their tiles.
+The Home row of movies (after `recently added`), and the badge on their tiles.
 
 ## Episode
 
@@ -40,7 +40,7 @@ A horizontal strip of tiles with a label (`up next`, `recently added`, a show's 
 
 ## Tile
 
-One item in a row: episode still or show key art with a label and optional badge.
+One item in a row: an episode still or show key art with a label, or a movie's poster with none, and an optional badge.
 
 ## Badge
 
@@ -92,7 +92,7 @@ The row of episodes the viewer is mid-way through or due to watch next, on Home 
 
 ## Watchlist
 
-The screen listing shows the viewer has added (the `+` on a hero or show page), one row per show plus Up Next.
+The screen listing shows and movies the viewer has added (the `+` on a hero, show page or movie page): Up Next, one row per show, then a `coming soon` row with one poster tile per movie. A movie is never in Up Next.
 
 ## Nav
 

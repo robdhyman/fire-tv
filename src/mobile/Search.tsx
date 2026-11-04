@@ -1,15 +1,15 @@
 import { useMemo, useState } from 'react'
 import { useSettings } from '../state/settings'
 import { ScreenHeader, ShowGrid } from './ui'
-import { brandShows } from '../data/catalogue'
+import { brandShows, comingSoonFor } from '../data/catalogue'
 
-/** Search stub on a phone: a typed filter over the brand's titles. */
+/** Search stub on a phone: a typed filter over the brand's titles, shows first, then movies. */
 export function MobileSearch() {
   const { settings } = useSettings()
   const [query, setQuery] = useState('')
   const results = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return brandShows(settings.brand).filter((s) => !q || s.title.toLowerCase().includes(q))
+    return [...brandShows(settings.brand), ...comingSoonFor(settings.brand)].filter((s) => !q || s.title.toLowerCase().includes(q))
   }, [query, settings.brand])
   return (
     <main>

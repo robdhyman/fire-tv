@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, motion, useIsPresent } from 'motion/react'
 import { useMotion } from '../motion/useMotion'
 import { EpisodeLabel, Row, rowTileId, type RowItem } from '../components/Row'
 import { useFocusable, useFocusContext, useFocusedId, useScreenFocus } from '../focus/FocusEngine'
@@ -47,20 +47,28 @@ function Playback({ current }: { current: EpisodeRef }) {
 
   useScreenFocus(`play:${episodeKey(current)}`, 'player:timeline')
 
-  // Watch position: saved every WATCH_SAVE seconds of playback or scrub, and on leave.
+  // The screen stays mounted while it fades out (ADR 002); from the moment Back is pressed the clock,
+  // the countdown and the media keys stop, so the position saved is the one on screen at the press.
+  const present = useIsPresent()
+
+  // Watch position: saved every WATCH_SAVE seconds of playback or scrub, when the screen starts leaving, and on unmount.
   const latest = useRef(elapsed)
   latest.current = elapsed
   const saved = Math.floor(elapsed / WATCH_SAVE)
   useEffect(() => record(current, latest.current), [saved]) // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (!present) record(current, latest.current)
+  }, [present]) // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => () => record(current, latest.current), []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (paused) return
+    if (paused || !present) return
     const t = setInterval(() => setElapsed((e) => Math.min(total, e + (SPEED * TICK_MS) / 1000)), TICK_MS)
     return () => clearInterval(t)
-  }, [total, paused])
+  }, [total, paused, present])
 
   useEffect(() => {
+    if (!present) return
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'MediaPlayPause' || e.key === ' ') setPaused((p) => !p)
       else if (e.key === 'MediaRewind') setElapsed((v) => Math.max(0, v - SCRUB))
@@ -70,7 +78,7 @@ function Playback({ current }: { current: EpisodeRef }) {
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [total])
+  }, [total, present])
 
   useEffect(() => {
     if (!credits || enteredCredits.current) return
@@ -82,17 +90,17 @@ function Playback({ current }: { current: EpisodeRef }) {
     navigate(`/play/${ref.show.id}/${ref.season.number}/${ref.episode.number}`, { replace: true })
 
   useEffect(() => {
-    if (!credits) return
+    if (!credits || !present) return
     const t = setInterval(() => setCountdown((c) => c - 1), 1000)
     return () => clearInterval(t)
-  }, [credits])
+  }, [credits, present])
   useEffect(() => {
-    if (credits && countdown <= 0) {
+    if (credits && countdown <= 0 && present) {
       if (next) play(next)
       else navigate(`/show/${current.show.id}`, { replace: true })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [countdown, credits])
+  }, [countdown, credits, present])
 
   const timeline = useFocusable('player:timeline', {
     onKey: (key) => {

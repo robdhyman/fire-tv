@@ -12,11 +12,13 @@ import {
   artUrl,
   episodeBadge,
   episodeKey,
+  movieById,
   showById,
   stillFocus,
   stillArt,
   upNextFor,
   type EpisodeRef,
+  type Movie,
   type Show,
 } from '../data/catalogue'
 
@@ -52,12 +54,28 @@ export function Watchlist() {
     () => listed.map(showById).filter((s): s is Show => !!s && s.brand === brand),
     [listed, brand],
   )
+  // Added movies: one poster tile each in a closing `coming soon` row, with nothing in Up Next.
+  const movies: RowItem[] = useMemo(
+    () =>
+      settings.watchlist
+        .map(movieById)
+        .filter((m): m is Movie => !!m && m.brand === brand)
+        .map((movie) => ({
+          id: movie.id,
+          art: artUrl(movie.posterArt),
+          badge: 'coming soon',
+          onSelect: () => navigate(`/movie/${movie.id}`),
+        })),
+    [settings.watchlist, brand, navigate],
+  )
 
   useScreenFocus(`watchlist:${brand}`, 'nav:watchlist')
 
   const rowIndex = focusedId?.startsWith('row:show:')
     ? shows.findIndex((s) => focusedId.startsWith(`row:show:${s.id}:`)) + 1
-    : 0
+    : focusedId?.startsWith('row:coming:')
+      ? shows.length + 1
+      : 0
   const scroll = Math.max(0, rowIndex - 1) * ROW_PITCH
 
   return (
@@ -88,7 +106,17 @@ export function Watchlist() {
             enterDelay={stagger.row * (i + 1)}
           />
         ))}
-        {shows.length === 0 && (
+        {movies.length > 0 && (
+          <Row
+            id="row:coming"
+            label="coming soon"
+            items={movies}
+            poster
+            className="mt-[85px]"
+            enterDelay={stagger.row * (shows.length + 1)}
+          />
+        )}
+        {shows.length === 0 && movies.length === 0 && (
           <p className="mt-[85px] text-[25px] font-light text-white/60">
             your watchlist is empty. press + on a show to add it.
           </p>
