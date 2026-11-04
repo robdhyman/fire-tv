@@ -1191,5 +1191,25 @@
       "ember-hollow",
       "last-town-standing"
     ]
-  }
+  },
+  "movies": [
+    {
+      "id": "low-orbit",
+      "brand": "syfy",
+      "title": "Low Orbit",
+      "genre": "sci-fi",
+      "logline": "A four-person repair crew docks with a failing station in low orbit and finds a second crew already aboard, wearing their faces.",
+      "posterArt": "coming-soon/low-orbit.jpg",
+      "artFocus": "50% 70%"
+    },
+    {
+      "id": "the-night-desk",
+      "brand": "usa",
+      "title": "The Night Desk",
+      "genre": "crime thriller",
+      "logline": "A night-shift editor at a dying city newspaper takes a call reporting a murder that hasn't happened yet, and has six hours to stop the story coming true.",
+      "posterArt": "coming-soon/the-night-desk.jpg",
+      "artFocus": "50% 70%"
+    }
+  ]
 }

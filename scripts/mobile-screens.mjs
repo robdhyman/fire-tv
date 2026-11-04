@@ -19,6 +19,7 @@ const SCREENS = [
   { name: 'shows', path: '/shows' },
   { name: 'show-detail', path: '/show/ringfall' },
   { name: 'show-detail-episodes', path: '/show/ringfall', scroll: 'episodes' },
+  { name: 'movie-detail', path: '/movie/low-orbit' },
   { name: 'player', path: '/play/ringfall/3/2', chrome: true },
   { name: 'player-credits', path: '/play/ringfall/3/2', credits: true },
   { name: 'watchlist', path: '/watchlist' },

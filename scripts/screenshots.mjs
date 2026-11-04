@@ -11,8 +11,10 @@ mkdirSync(out, { recursive: true })
 const shots = [
   { name: 'home', path: '/', keys: [] },
   { name: 'home-rows', path: '/', keys: ['ArrowDown'] },
+  { name: 'home-coming-soon', path: '/', keys: ['ArrowDown', 'ArrowDown', 'ArrowDown'] },
   { name: 'shows', path: '/shows', keys: ['ArrowDown'] },
   { name: 'show-detail', path: '/show/ringfall', keys: [] },
+  { name: 'movie-detail', path: '/movie/low-orbit', keys: [] },
   { name: 'player', path: '/play/ringfall/3/2', keys: [] },
   { name: 'player-credits', path: '/play/ringfall/3/2', keys: Array(10).fill('ArrowRight') },
   { name: 'watchlist', path: '/watchlist', keys: [] },

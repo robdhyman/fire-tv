@@ -4,6 +4,7 @@ import { Shell } from './app/Shell'
 import { Home } from './screens/Home'
 import { Shows } from './screens/Shows'
 import { ShowDetail } from './screens/ShowDetail'
+import { MovieDetail } from './screens/MovieDetail'
 import { Player } from './screens/Player'
 import { Watchlist } from './screens/Watchlist'
 import { Tools } from './screens/Tools'
@@ -12,6 +13,7 @@ import { Adaptive } from './app/device'
 import { MobileHome } from './mobile/Home'
 import { MobileShows } from './mobile/Shows'
 import { MobileShowDetail } from './mobile/ShowDetail'
+import { MobileMovieDetail } from './mobile/MovieDetail'
 import { MobilePlayer } from './mobile/Player'
 import { MobileWatchlist } from './mobile/Watchlist'
 import { MobileTools } from './mobile/Tools'
@@ -31,6 +33,7 @@ export const router = createBrowserRouter(
         { path: '/', element: <Adaptive tv={<Home />} mobile={<MobileHome />} /> },
         { path: '/shows', element: <Adaptive tv={<Shows />} mobile={<MobileShows />} /> },
         { path: '/show/:id', element: <Adaptive tv={<ShowDetail />} mobile={<MobileShowDetail />} /> },
+        { path: '/movie/:id', element: <Adaptive tv={<MovieDetail />} mobile={<MobileMovieDetail />} /> },
         { path: '/play/:showId/:season/:episode', element: <Adaptive tv={<Player />} mobile={<MobilePlayer />} /> },
         { path: '/watchlist', element: <Adaptive tv={<Watchlist />} mobile={<MobileWatchlist />} /> },
         { path: '/tools', element: <Adaptive tv={<Tools />} mobile={<MobileTools />} /> },

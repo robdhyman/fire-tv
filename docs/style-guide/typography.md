@@ -54,7 +54,7 @@ The `.display` class applies the display face, the brand's weight and tracking, 
 | **Tools heading** | 38 px | Figtree 300 | lower, white | `captions`, `audio description` |
 | **Tools option** | 25 to 30 px | Figtree 300 | lower, white; accent when focused | `on / off`, `reload` |
 | **Note and hint** | 23 to 25 px | Figtree 300 | white at 60 to 90% | Watchlist and Tools hints |
-| **Badge** | 19 px | Figtree 300 | lower, white on black 55% | `new`, `expiring` |
+| **Badge** | 19 px | Figtree 300 | lower, white on black 55% | `new`, `expiring`, `coming soon` |
 | **Caption sample** | 27 / 34 / 41 px (the three font-size options) | Figtree 400 | white or accent, on black 70% or none | Tools sample, Player captions |
 | **Player show line** | 30 px, tracking 0.04 em | Figtree 300 | upper, white | above the Player title |
 | **Player `S1 E1`, timecodes** | 27 px | Figtree 300 | white | Player |

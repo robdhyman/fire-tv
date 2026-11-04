@@ -3,9 +3,9 @@ import { Nav } from '../components/Nav'
 import { Grid } from './Shows'
 import { useFocusable, useFocusContext, useScreenFocus } from '../focus/FocusEngine'
 import { useSettings } from '../state/settings'
-import { brandShows } from '../data/catalogue'
+import { brandShows, comingSoonFor } from '../data/catalogue'
 
-/** Search stub: a typed filter over the brand's titles. */
+/** Search stub: a typed filter over the brand's titles, shows first, then movies. */
 export function Search() {
   const { settings } = useSettings()
   const { setFocus } = useFocusContext()
@@ -14,7 +14,7 @@ export function Search() {
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return brandShows(settings.brand).filter((s) => !q || s.title.toLowerCase().includes(q))
+    return [...brandShows(settings.brand), ...comingSoonFor(settings.brand)].filter((s) => !q || s.title.toLowerCase().includes(q))
   }, [query, settings.brand])
 
   const { focused, props } = useFocusable<HTMLDivElement>('search:input', {
@@ -57,7 +57,7 @@ export function Search() {
           nothing matches “{query}”
         </p>
       ) : (
-        <Grid shows={results} idPrefix="grid:search" top={290} />
+        <Grid entries={results} idPrefix="grid:search" top={290} />
       )}
     </main>
   )
