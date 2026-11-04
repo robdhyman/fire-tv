@@ -1,9 +1,10 @@
-import { useMemo, useState } from 'react'
-import { Navigate, useNavigate, useParams } from 'react-router'
-import { motion } from 'motion/react'
+import { useEffect, useMemo, useState } from 'react'
+import { Navigate, useNavigate, useNavigationType, useParams } from 'react-router'
+import { motion, useIsPresent } from 'motion/react'
+import { Nav } from '../components/Nav'
 import { EpisodeLabel, Row, type RowItem } from '../components/Row'
 import { RoundButton } from '../components/RoundButton'
-import { useFocusable, useScreenFocus } from '../focus/FocusEngine'
+import { useFocusable, useFocusedId, useScreenFocus } from '../focus/FocusEngine'
 import { useSettings } from '../state/settings'
 import { FULL_CLIP, fromHeroPanel, morph, useFlight, useMotion } from '../motion/useMotion'
 import { distance, duration } from '../motion/tokens'
@@ -56,7 +57,19 @@ function ShowPage({ show }: { show: Show }) {
   const season = show.seasons[seasonIndex]
   const added = inWatchlist(show.id)
 
-  useScreenFocus(`show:${show.id}`, `episodes:${show.id}:${season.number}:${season.episodes[0].number}`)
+  // Arriving (Home's hero, the Shows grid, Search, a tile's info) lands on the +; coming back from the Player restores the last focus.
+  const returning = useNavigationType() !== 'PUSH'
+  useScreenFocus(`show:${show.id}`, `show:${show.id}:add`, returning)
+
+  // The nav is shown while focus is on the + (or in the nav) and hidden while it is below, on the season tabs or episodes.
+  // Once the page starts leaving, the nav stays as it was.
+  const focusedId = useFocusedId()
+  const present = useIsPresent()
+  const below = !!focusedId && (focusedId.startsWith(`season:${show.id}:`) || focusedId.startsWith(`episodes:${show.id}:`))
+  const [navShown, setNavShown] = useState(true)
+  useEffect(() => {
+    if (present) setNavShown(!below)
+  }, [present, below])
 
   const items: RowItem[] = useMemo(
     () =>
@@ -110,6 +123,15 @@ function ShowPage({ show }: { show: Show }) {
       </motion.div>
       <motion.div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/10 to-transparent" variants={m.part} />
       <motion.div className="absolute inset-x-0 bottom-0 h-[420px] bg-gradient-to-t from-black/60 to-transparent" variants={m.part} />
+      {/* Labels of its own, so the nav ignores the screen's hidden/shown: it holds through the morph and Back and fades only with focus. */}
+      <motion.div
+        variants={{ navHidden: { opacity: 0 }, navShown: { opacity: 1 } }}
+        initial={viaHero ? false : 'navHidden'}
+        animate={navShown ? 'navShown' : 'navHidden'}
+        transition={m.quick}
+      >
+        <Nav />
+      </motion.div>
 
       <div className="absolute left-[200px] top-[268px] max-w-[620px]">
         <motion.h1

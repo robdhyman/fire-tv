@@ -12,7 +12,7 @@ const shots = [
   { name: 'home', path: '/', keys: [] },
   { name: 'home-rows', path: '/', keys: ['ArrowDown'] },
   { name: 'shows', path: '/shows', keys: ['ArrowDown'] },
-  { name: 'show-detail', path: '/show/ringfall', keys: ['ArrowRight'] },
+  { name: 'show-detail', path: '/show/ringfall', keys: [] },
   { name: 'player', path: '/play/ringfall/3/2', keys: [] },
   { name: 'player-credits', path: '/play/ringfall/3/2', keys: Array(10).fill('ArrowRight') },
   { name: 'watchlist', path: '/watchlist', keys: [] },

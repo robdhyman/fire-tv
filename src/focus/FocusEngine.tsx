@@ -208,9 +208,10 @@ export function useBack(handler: () => void) {
 
 /**
  * Give a screen its focus path: restore the id remembered for `key`, or
- * fall back to `defaultId`; then keep remembering as focus moves.
+ * fall back to `defaultId`; then keep remembering as focus moves. With
+ * `restore` false the screen starts on `defaultId` and still remembers.
  */
-export function useScreenFocus(key: string, defaultId: string) {
+export function useScreenFocus(key: string, defaultId: string, restore = true) {
   const { focusedId, setFocus, has, memory } = useFocusContext()
   const ready = useRef(false)
   // Once the screen starts leaving, the next screen's focus is not ours to remember.
@@ -219,7 +220,7 @@ export function useScreenFocus(key: string, defaultId: string) {
   useLayoutEffect(() => {
     ready.current = false
     const frame = requestAnimationFrame(() => {
-      const saved = memory.get(key)
+      const saved = restore ? memory.get(key) : undefined
       setFocus(saved && has(saved) ? saved : defaultId)
       ready.current = true
     })

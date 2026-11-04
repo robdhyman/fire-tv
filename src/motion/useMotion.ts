@@ -48,6 +48,7 @@ export function useMotion() {
     morph: t(spring.morph),
     rise: t(spring.rise),
     fade: fade(reduced ? duration.reduced : duration.screenFade),
+    quick: fade(reduced ? duration.reduced : duration.quick),
     backdropFade: fade(reduced ? duration.reduced : duration.backdropFade),
     /** Opacity-only part of a screen: fades with the screen's enter/exit. */
     part: {
