@@ -25,6 +25,7 @@ export type Show = {
   expiring: boolean
   seasons: Season[]
 }
+/** The catalogue's Up Next: the first-run seed for the persisted watch positions. */
 export type UpNextEntry = { show: string; season: number; episode: number; progress: number }
 export type Rows = { upNext: UpNextEntry[]; recentlyAdded: string[]; editorsChoice: string[] }
 export type Catalogue = {
@@ -42,33 +43,53 @@ export const showById = (id: string) => catalogue.shows.find((s) => s.id === id)
 
 export const brandShows = (brand: Brand) => catalogue.shows.filter((s) => s.brand === brand)
 
-/** One episode in context: the row item everything else is built from. */
+/** One episode in context: the row item everything else is built from. `progress` is its watch position as a fraction of the runtime. */
 export type EpisodeRef = { show: Show; season: Season; episode: Episode; progress: number }
 
-export const episodeKey = (ref: EpisodeRef) => `${ref.show.id}-${ref.season.number}-${ref.episode.number}`
+export const episodeKey = (ref: Pick<EpisodeRef, 'show' | 'season' | 'episode'>) =>
+  `${ref.show.id}-${ref.season.number}-${ref.episode.number}`
 
-export function episodeRef(showId: string, season: number, episode: number, progress = 0): EpisodeRef | null {
+/**
+ * Watch positions, keyed by episodeKey: elapsed and total seconds for every
+ * episode the viewer has started and not finished. The Player writes them;
+ * src/state/settings.tsx persists them, seeded from the catalogue's Up Next.
+ * Insertion order is Up Next order.
+ */
+export type WatchPosition = { elapsed: number; runtime: number }
+export type WatchPositions = Record<string, WatchPosition>
+
+/** An episode with its watch position read from `watch`. */
+export function toEpisodeRef(show: Show, season: Season, episode: Episode, watch: WatchPositions): EpisodeRef {
+  const p = watch[episodeKey({ show, season, episode })]
+  return { show, season, episode, progress: p && p.runtime > 0 ? Math.min(1, p.elapsed / p.runtime) : 0 }
+}
+
+export function episodeRef(showId: string, season: number, episode: number, watch: WatchPositions): EpisodeRef | null {
   const show = showById(showId)
   const s = show?.seasons.find((x) => x.number === season)
   const e = s?.episodes.find((x) => x.number === episode)
-  return show && s && e ? { show, season: s, episode: e, progress } : null
+  return show && s && e ? toEpisodeRef(show, s, e, watch) : null
 }
 
-export function allEpisodes(show: Show): EpisodeRef[] {
-  return show.seasons.flatMap((season) =>
-    season.episodes.map((episode) => ({ show, season, episode, progress: 0 })),
-  )
+/** The episode an episodeKey names; show ids hold dashes, so the numbers are read from the end. */
+function refFromKey(key: string, watch: WatchPositions): EpisodeRef | null {
+  const m = /^(.+)-(\d+)-(\d+)$/.exec(key)
+  return m ? episodeRef(m[1], Number(m[2]), Number(m[3]), watch) : null
 }
 
-/** Up Next for a brand: the catalogue's entries, then S1 E1 of its other shows. */
-export function upNextFor(brand: Brand): EpisodeRef[] {
-  const listed = catalogue.rows.upNext
-    .map((u) => episodeRef(u.show, u.season, u.episode, u.progress))
+export function allEpisodes(show: Show, watch: WatchPositions): EpisodeRef[] {
+  return show.seasons.flatMap((season) => season.episodes.map((episode) => toEpisodeRef(show, season, episode, watch)))
+}
+
+/** Up Next for a brand: the episodes with a watch position in saved order (the catalogue's seeds first), then S1 E1 of its other shows. */
+export function upNextFor(brand: Brand, watch: WatchPositions): EpisodeRef[] {
+  const listed = Object.keys(watch)
+    .map((key) => refFromKey(key, watch))
     .filter((r): r is EpisodeRef => !!r && r.show.brand === brand)
   const seen = new Set(listed.map((r) => r.show.id))
   const rest = brandShows(brand)
     .filter((s) => !seen.has(s.id))
-    .map((s) => ({ show: s, season: s.seasons[0], episode: s.seasons[0].episodes[0], progress: 0 }))
+    .map((s) => toEpisodeRef(s, s.seasons[0], s.seasons[0].episodes[0], watch))
   return [...listed, ...rest]
 }
 
@@ -101,7 +122,7 @@ export function nextEpisode(ref: EpisodeRef): EpisodeRef | null {
 }
 
 /** Total length in seconds: the minutes from the catalogue plus a stable spread of seconds. */
-export function runtimeSeconds(ref: EpisodeRef): number {
+export function runtimeSeconds(ref: Pick<EpisodeRef, 'show' | 'season' | 'episode'>): number {
   let h = 0
   for (const ch of episodeKey(ref)) h = (h * 31 + ch.charCodeAt(0)) >>> 0
   return ref.episode.duration * 60 + (h % 60)

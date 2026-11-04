@@ -56,7 +56,7 @@ What a dwell reveals on an episode tile: `info`, `play` and `add` buttons and th
 
 ## Watch position
 
-How far into an episode the viewer has got, remembered per episode across visits. Zero for an episode never started.
+How far into an episode the viewer has got, remembered per episode across visits. The Player saves it; zero for an episode never started or finished (reaching the credits finishes it, and Up Next moves on to the next episode).
 
 ## Progress stroke
 

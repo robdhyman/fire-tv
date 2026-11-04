@@ -4,7 +4,7 @@ import { MotionConfig } from 'motion/react'
 import { Stage } from './Stage'
 import { Screens } from './Screens'
 import { FocusProvider, useBack } from '../focus/FocusEngine'
-import { SettingsProvider, useSettings } from '../state/settings'
+import { SettingsProvider, useSettings, WatchProvider } from '../state/settings'
 import { Hint } from '../components/Hint'
 import { RemoteOverlay } from '../remote/Remote'
 import { useGlobalKeys } from '../remote/keys'
@@ -70,11 +70,13 @@ function Layout() {
 export function Shell() {
   return (
     <SettingsProvider>
-      <DeviceProvider>
-        <MotionRoot>
-          <Layout />
-        </MotionRoot>
-      </DeviceProvider>
+      <WatchProvider>
+        <DeviceProvider>
+          <MotionRoot>
+            <Layout />
+          </MotionRoot>
+        </DeviceProvider>
+      </WatchProvider>
     </SettingsProvider>
   )
 }

@@ -3,10 +3,10 @@ import { Navigate, useNavigate, useParams } from 'react-router'
 import { AnimatePresence, motion } from 'motion/react'
 import { useMotion } from '../motion/useMotion'
 import { distance, duration } from '../motion/tokens'
-import { CAPTION_SIZES, CAPTION_STYLES, useSettings } from '../state/settings'
-import { COUNTDOWN, CREDITS_LEAD, CREW, SKIP, SPEED, TICK_MS } from '../data/playback'
+import { CAPTION_SIZES, CAPTION_STYLES, useSettings, useWatch } from '../state/settings'
+import { COUNTDOWN, CREDITS_LEAD, CREW, SKIP, SPEED, TICK_MS, WATCH_SAVE } from '../data/playback'
 import { BackButton, Pill, Pressable } from './ui'
-import { artUrl, catalogue, episodeKey, episodeRef, nextEpisode, runtimeSeconds, stillArt, stillFocus, timecode, type EpisodeRef } from '../data/catalogue'
+import { artUrl, episodeKey, episodeRef, nextEpisode, runtimeSeconds, stillArt, stillFocus, timecode, type EpisodeRef } from '../data/catalogue'
 
 /*
  * The Player on a phone: native-style touch controls. A tap on the picture
@@ -19,8 +19,8 @@ import { artUrl, catalogue, episodeKey, episodeRef, nextEpisode, runtimeSeconds,
 
 export function MobilePlayer() {
   const { showId = '', season = '', episode = '' } = useParams()
-  const listed = catalogue.rows.upNext.find((u) => u.show === showId && u.season === Number(season) && u.episode === Number(episode))
-  const ref = episodeRef(showId, Number(season), Number(episode), listed?.progress ?? 0)
+  const { watch } = useWatch()
+  const ref = episodeRef(showId, Number(season), Number(episode), watch)
   if (!ref) return <Navigate to="/" replace />
   return <Playback key={episodeKey(ref)} current={ref} />
 }
@@ -28,16 +28,24 @@ export function MobilePlayer() {
 function Playback({ current }: { current: EpisodeRef }) {
   const navigate = useNavigate()
   const { settings } = useSettings()
+  const { watch, record } = useWatch()
   const m = useMotion()
   const total = runtimeSeconds(current)
   const next = nextEpisode(current)
-  const [elapsed, setElapsed] = useState(Math.floor(total * current.progress))
+  const [elapsed, setElapsed] = useState(() => watch[episodeKey(current)]?.elapsed ?? 0)
   const [paused, setPaused] = useState(false)
   const [countdown, setCountdown] = useState(COUNTDOWN)
   const [chrome, setChrome] = useState(true)
   const [dragging, setDragging] = useState(false)
   const [touched, setTouched] = useState(0)
   const credits = elapsed >= total - CREDITS_LEAD
+
+  // Watch position: saved every WATCH_SAVE seconds of playback or scrub, and on leave.
+  const latest = useRef(elapsed)
+  latest.current = elapsed
+  const saved = Math.floor(elapsed / WATCH_SAVE)
+  useEffect(() => record(current, latest.current), [saved]) // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => () => record(current, latest.current), []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (paused || dragging) return

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router'
 import { Nav } from '../components/Nav'
 import { EpisodeLabel, Row, ROW_H_PLAIN, type RowItem } from '../components/Row'
 import { useFocusedId, useScreenFocus } from '../focus/FocusEngine'
-import { useSettings } from '../state/settings'
+import { useSettings, useWatch } from '../state/settings'
 import { useMotion } from '../motion/useMotion'
 import { stagger } from '../motion/tokens'
 import {
@@ -26,6 +26,7 @@ const ROW_PITCH = ROW_H_PLAIN + 6 + ROW_GAP
 export function Watchlist() {
   const navigate = useNavigate()
   const { settings } = useSettings()
+  const { watch } = useWatch()
   const brand = settings.brand
   const focusedId = useFocusedId()
   const m = useMotion()
@@ -39,7 +40,7 @@ export function Watchlist() {
     onSelect: () => navigate(`/play/${ref.show.id}/${ref.season.number}/${ref.episode.number}`),
   })
 
-  const upNext = useMemo(() => upNextFor(brand).map(toItem), [brand]) // eslint-disable-line react-hooks/exhaustive-deps
+  const upNext = useMemo(() => upNextFor(brand, watch).map(toItem), [brand, watch]) // eslint-disable-line react-hooks/exhaustive-deps
   const shows = useMemo(
     () => settings.watchlist.map(showById).filter((s): s is Show => !!s && s.brand === brand),
     [settings.watchlist, brand],
@@ -75,7 +76,7 @@ export function Watchlist() {
             key={show.id}
             id={`row:show:${show.id}`}
             label={show.title}
-            items={allEpisodes(show).map(toItem)}
+            items={allEpisodes(show, watch).map(toItem)}
             className="mt-[85px]"
             enterDelay={stagger.row * (i + 1)}
           />

@@ -5,7 +5,7 @@ import { Nav } from '../components/Nav'
 import { Hero, HERO_ID } from '../components/Hero'
 import { EpisodeLabel, Row, ROW_H_PLAIN, type RowItem } from '../components/Row'
 import { useFocusedId, useScreenFocus } from '../focus/FocusEngine'
-import { useSettings } from '../state/settings'
+import { useSettings, useWatch } from '../state/settings'
 import { useMotion } from '../motion/useMotion'
 import { stagger } from '../motion/tokens'
 import {
@@ -27,6 +27,7 @@ const SCROLL_TO_ROWS = 552
 export function Home() {
   const navigate = useNavigate()
   const { settings } = useSettings()
+  const { watch } = useWatch()
   const brand = settings.brand
   const m = useMotion()
   const shows = useMemo(() => brandShows(brand), [brand])
@@ -38,7 +39,7 @@ export function Home() {
 
   const upNext: RowItem[] = useMemo(
     () =>
-      upNextFor(brand).map((ref) => ({
+      upNextFor(brand, watch).map((ref) => ({
         id: episodeKey(ref),
         art: artUrl(stillArt(ref)),
         artFocus: stillFocus(ref),
@@ -46,7 +47,7 @@ export function Home() {
         label: <EpisodeLabel number={ref.episode.number} title={ref.episode.title} />,
         onSelect: () => navigate(`/play/${ref.show.id}/${ref.season.number}/${ref.episode.number}`),
       })),
-    [brand, navigate],
+    [brand, watch, navigate],
   )
 
   const recent: RowItem[] = useMemo(
