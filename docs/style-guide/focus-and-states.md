@@ -38,11 +38,12 @@ Text items (nav, tabs, Tools options) do not move or resize. Focus is **colour a
 |---|---|---|
 | Nav item | white 60% | white, 3 px accent underline, offset 10 px |
 | Nav, current screen | white, 50 px | same, plus underline |
+| Nav gear or avatar | white 60% (gear white, 50 px on Tools) | white, 3 px accent bar 10 px below the baseline |
 | Shows or season tab | white 70% | white, 3 px accent underline, offset 8 px |
 | Tools option | white | accent text, 3 px underline, offset 8 px |
 | Search field | white 30% border | accent border |
 
-<div class="sg-spec" style="background:#000"><div style="display:flex;gap:40px;align-items:baseline;font-weight:300;font-size:38px"><span style="color:rgb(255 255 255/.6)">tools</span><span style="text-decoration:underline;text-decoration-color:var(--color-accent);text-decoration-thickness:3px;text-underline-offset:10px">search</span></div></div>
+<div class="sg-spec" style="background:#000"><div style="display:flex;gap:40px;align-items:baseline;font-weight:300;font-size:38px"><span style="color:rgb(255 255 255/.6)">watchlist</span><span style="text-decoration:underline;text-decoration-color:var(--color-accent);text-decoration-thickness:3px;text-underline-offset:10px">search</span></div></div>
 
 ## Round buttons
 

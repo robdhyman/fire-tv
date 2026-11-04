@@ -50,7 +50,7 @@ Faces: Barlow Condensed (SYFY titles), Montserrat (USA titles), Figtree (all UI)
 |---|---|
 | Stage | 1920 x 1080, scaled and letterboxed |
 | Left content edge | x = 200 |
-| Nav | (200, 48), 64 high |
+| Nav | (200, 48), 64 high; gear and avatar end at x = 1720 |
 | Hero | 1686 x 672 at (117, 130); gap 25; neighbours 0.92 and 40% |
 | Plain tile | 318 x 179 (16:9), 2 px gap |
 | Open row | 376 x 211, 19 px gap; current 590 x 332 |
