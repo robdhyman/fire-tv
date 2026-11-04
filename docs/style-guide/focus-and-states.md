@@ -24,7 +24,7 @@ Ring and shadow tween together: the unfocused ring is the same shape at zero opa
 
 ## Rows: the expanding tile
 
-Rows keep the 2017 behaviour: focusing a tile in a row **opens the row**. Tiles grow from 318 x 179 to 376 x 211 with labels beneath, and the current tile opens to 590 x 332 with its label inside. The focused tile also takes the white ring and the 8 px lift. The row label brightens from 30 px at 80% white to 36 px at 100%. Neighbouring tiles stay at full brightness.
+Rows keep the 2017 behaviour: focusing a tile in a row **opens the row**. Tiles grow from 318 x 179 to 376 x 211 with labels beneath, and the current tile opens to 590 x 332 with its label inside. The focused tile also takes the white ring and the 8 px lift; an open row keeps 11 px more between its label and its tiles, so the lifted ring lands 6 px under the label and never crosses it. The row label brightens from 30 px at 80% white to 36 px at 100%. Neighbouring tiles stay at full brightness.
 
 ## Hero: ring without lift
 

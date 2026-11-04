@@ -30,7 +30,7 @@ export const spring = {
   focusInFast: { type: 'spring', stiffness: 700, damping: 40, mass: 0.8 },
   /** Focus leaving: softer than focusIn, so the old tile trails the new one. */
   focusOut: { type: 'spring', stiffness: 200, damping: 26, mass: 1 },
-  /** Sideways moves: row strips, season tabs, expanded-tile width. About 250 ms, no overshoot. */
+  /** Sideways moves: row strips, expanded-tile width. About 250 ms, no overshoot. */
   strip: { type: 'spring', stiffness: 260, damping: 32, mass: 1 },
   /** Home's hero strip sliding one panel (1711 px): about 450 ms, critically damped, like the 2017 slide. */
   heroSlide: { type: 'spring', stiffness: 170, damping: 26, mass: 1 },

@@ -39,14 +39,14 @@ The dashed rectangle is the benchmark's safe inset. The app puts its **left cont
 | Nav | at (200, 48), 64 high; gaps of 60 between logo and words; gear and avatar flush right, 32 apart | `Nav.tsx` |
 | Hero panel | 1686 x 672 at (117, 130); gap 25 between panels | `Hero.tsx` |
 | Hero to first row | 58 | `Home.tsx` |
-| Row label | 33 high, then 6 to the tiles | `Row.tsx` |
+| Row label | 33 high, then 6 to the tiles; 17 once the row is open, so the lifted tile and its ring clear the label (`LIFT_ROOM`) | `Row.tsx` |
 | Plain tile | 318 x 179, 2 px gap | `Row.tsx` |
 | Big tile (row focused) | 376 x 211, 19 px gap, labels beneath | `Row.tsx` |
 | Current tile (row focused) | 590 x 332, label inside | `Row.tsx` |
 | Row gap | 80 on Home, 85 on Watchlist | `Home.tsx`, `Watchlist.tsx` |
 | Shows grid | 4 columns of 320 x 180; column pitch 400 (80 gap), row pitch 249 (69 gap); grid at (200, 250) | `GridTile.tsx`, `Shows.tsx` |
 | Shows tabs | at (200, 160), 48 apart | `Shows.tsx` |
-| Show page | title at (200, 268), max 620 wide; season tabs at y 536, 132 apart; episode row at y 645 | `ShowDetail.tsx` |
+| Show page | title at (200, 268), max 620 wide; `+` at y 536; episode row at y 645, its label the season tabs in a fixed line from x 200, 132 apart, never sliding | `ShowDetail.tsx` |
 | Round button | 60 px circle, 3 px border | `RoundButton.tsx` |
 | Player | timeline full width, 3 px, five segments with 12 px gaps | `Player.tsx` |
 
