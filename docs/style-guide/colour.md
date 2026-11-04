@@ -33,7 +33,7 @@ White only, stepped by opacity. There is no coloured text outside the accent.
 | 90% | the Watchlist's "press ⊜ to manage" hint, the first-load hint |
 | 80% | row label at rest (`up next`), Tools sub-headings (`Font size`) |
 | 70% | inactive Shows tab, inactive season tab, Tools body note |
-| 60% | inactive nav items, empty-state and Tools notes |
+| 60% | inactive nav items, empty-state and Tools notes, the Player's captions button at rest |
 | 50% / 45% | a whole Tools section while it is out of focus (50%) or captions are off (45%) |
 | 40% | search placeholder |
 | `#4a4a4a` | the Player's credits ticker (role and name), deliberately recessive |

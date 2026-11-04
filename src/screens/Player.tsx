@@ -110,9 +110,14 @@ function Playback({ current }: { current: EpisodeRef }) {
       return true
     },
   })
+  // The up next row peeks at the bottom; focusing it lifts the overlay so the opened row fits on screen.
+  const focusedId = useFocusedId()
+  const browsing = focusedId?.startsWith('row:upnext:') ?? false
   const captionsOn = settings.captions.on
+  // The opened row covers the captions button, so it leaves the focus graph until the row closes.
   const captionsBtn = useFocusable('player:captions', {
     onSelect: () => navigate('/tools'),
+    disabled: browsing,
   })
 
   const episodes: RowItem[] = useMemo(
@@ -155,9 +160,6 @@ function Playback({ current }: { current: EpisodeRef }) {
 
   const pct = total ? elapsed / total : 0
   const style = CAPTION_STYLES[settings.captions.style]
-  // The up next row peeks at the bottom; focusing it lifts the overlay so the opened row fits on screen.
-  const focusedId = useFocusedId()
-  const browsing = focusedId?.startsWith('row:upnext:') ?? false
   const top = credits
     ? browsing
       ? { title: 100, episode: 236, timeline: 236, credits: 316, upNext: 690, episodeOpacity: 0 }
@@ -280,7 +282,8 @@ function CountdownRing({ value }: { value: number }) {
 }
 
 function CaptionsIcon({ on, focused }: { on: boolean; focused: boolean }) {
-  const stroke = focused ? '#fff' : on ? 'var(--color-accent)' : '#fff'
+  // White when focused, 60% white at rest; the filled bubble shows captions are on.
+  const stroke = focused ? '#fff' : 'rgba(255,255,255,0.6)'
   return (
     <svg width="52" height="44" viewBox="0 0 52 44" fill="none" stroke={stroke} strokeWidth="2.5" strokeLinecap="round">
       <path d="M4 4h44v28H30l-8 9v-9H4z" strokeLinejoin="round" fill={on ? 'rgba(255,255,255,0.15)' : 'none'} />
