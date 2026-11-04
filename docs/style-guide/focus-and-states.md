@@ -26,6 +26,20 @@ Ring and shadow tween together: the unfocused ring is the same shape at zero opa
 
 Rows keep the 2017 behaviour: focusing a tile in a row **opens the row**. Tiles grow from 318 x 179 to 376 x 211 with labels beneath, and the current tile opens to 590 x 332 with its label inside. The focused tile also takes the white ring and the 8 px lift; an open row keeps 11 px more between its label and its tiles, so the lifted ring lands 6 px under the label and never crosses it. The row label brightens from 30 px at 80% white to 36 px at 100%. Neighbouring tiles stay at full brightness.
 
+## Tile overlay: a dwell on an episode tile
+
+When focus rests on an episode tile for `duration.dwell` (1.2 s), the **tile overlay** fades in over it on `overlayFade` (0.2 s). It is only ever drawn on the open 590 x 332 tile, since focus always opens a tile to that size, and it leaves at once when focus moves.
+
+| Part | Value |
+|---|---|
+| Scrim | black 55% over the whole still |
+| Stack | on a 24 px inset: show name (23 px light, upper, 0.04 em, white 85%), 8 px, `S<n> E<n>` label (25 px), 22 px, the three round buttons 20 px apart, 20 px, the synopsis (23 px / 1.3 light, 540 px wide, three lines at most) |
+| Buttons | `info` (italic `i`), `play` (the filled green button), `add` (`+`, a tick when the show is in the watchlist); the selected one is drawn focused |
+| Keys | the tile keeps focus: Left and Right move the selection, starting on `play`; past `info` or `add` the arrow leaves the tile; Up and Down leave as usual; Enter runs the selection |
+| Sounds | a move between buttons ticks like any other move; past the row's ends it bumps |
+
+The **progress stroke** sits on every episode tile, overlay or not: 2 px white along the bottom edge, as wide as the watch position is a fraction of the runtime, drawn above the scrim.
+
 ## Hero: ring without lift
 
 The centre panel takes the same white 3 px ring when the hero has focus, with no lift or scale (it is already the size of the screen). Neighbour panels are the strip's dimmed state: 0.92 scale, 40% opacity, copy faded.

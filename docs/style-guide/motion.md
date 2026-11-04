@@ -29,6 +29,8 @@ The direction: the 2017 prototype used fixed ease-out tweens. The rebuild keeps 
 | `riseDelay` | 0.12 | the season row waits this long into the morph before rising |
 | `copyAfterFlight` | 0.45 | the logline and `+` wait for the title to land |
 | `reduced` | 0.15 | the only animation left under reduced motion: a short opacity fade |
+| `dwell` | 1.2 | focus resting on an episode tile this long reveals the tile overlay (not motion: unchanged under reduced motion) |
+| `overlayFade` | 0.2 | the tile overlay fading in after a dwell; it leaves at once when focus moves |
 
 ## Stagger and distance
 

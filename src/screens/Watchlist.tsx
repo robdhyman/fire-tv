@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'motion/react'
 import { useNavigate } from 'react-router'
 import { Nav } from '../components/Nav'
@@ -38,12 +38,19 @@ export function Watchlist() {
     badge: episodeBadge(ref),
     label: <EpisodeLabel number={ref.episode.number} title={ref.episode.title} />,
     onSelect: () => navigate(`/play/${ref.show.id}/${ref.season.number}/${ref.episode.number}`),
+    episode: ref,
   })
 
   const upNext = useMemo(() => upNextFor(brand, watch).map(toItem), [brand, watch]) // eslint-disable-line react-hooks/exhaustive-deps
+  // A show removed with a tile overlay's `add` keeps its row (its + back to a +) until the screen is left,
+  // so focus never sits on a row that vanished and a second press puts it back.
+  const [listed, setListed] = useState(settings.watchlist)
+  useEffect(() => {
+    setListed((prev) => [...prev, ...settings.watchlist.filter((id) => !prev.includes(id))])
+  }, [settings.watchlist])
   const shows = useMemo(
-    () => settings.watchlist.map(showById).filter((s): s is Show => !!s && s.brand === brand),
-    [settings.watchlist, brand],
+    () => listed.map(showById).filter((s): s is Show => !!s && s.brand === brand),
+    [listed, brand],
   )
 
   useScreenFocus(`watchlist:${brand}`, 'nav:watchlist')

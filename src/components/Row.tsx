@@ -1,9 +1,13 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useNavigate } from 'react-router'
 import { motion } from 'motion/react'
 import { useFocusable, useFocusedId } from '../focus/FocusEngine'
 import { useMotion } from '../motion/useMotion'
 import { distance } from '../motion/tokens'
+import { useSettings } from '../state/settings'
+import type { EpisodeRef } from '../data/catalogue'
 import { Badge } from './Badge'
+import { OVERLAY_BUTTONS, OVERLAY_START, ProgressStroke, TileOverlay, useDwell, type OverlayButton } from './TileOverlay'
 
 /*
  * A row of tiles with a label. Two modes, both from the screenshots:
@@ -15,7 +19,9 @@ import { Badge } from './Badge'
  * The row is a carousel anchored at x=200: the current tile sits at the safe
  * inset and the previous one peeks in from the left edge. Strip, widths and
  * height move on the `strip` spring; the focused tile lifts on `focus`;
- * tiles settle in with a stagger when the screen enters.
+ * tiles settle in with a stagger when the screen enters. Episode tiles
+ * (`episode` set) draw the progress stroke, and a dwell on one reveals the
+ * tile overlay (issue #30, `TileOverlay.tsx`).
  */
 
 export const PLAIN = { w: 318, h: 179, gap: 2 }
@@ -36,8 +42,12 @@ export type RowItem = {
   label?: ReactNode
   badge?: 'new' | 'expiring'
   onSelect: () => void
-  /** Extra content drawn over the tile (the Player's countdown ring). */
+  /** Extra content drawn over the tile (the Player's countdown ring). A tile with one gets no tile overlay. */
   overlay?: ReactNode
+  /** An episode tile: draws the progress stroke, and a dwell reveals the tile overlay. */
+  episode?: EpisodeRef
+  /** The overlay's `info`; opens the show page when absent. */
+  onInfo?: () => void
 }
 
 type Props = {
@@ -106,7 +116,42 @@ export function Row({ id, label, items, mode = 'auto', initialIndex = 0, aside, 
 
 function Tile({ rowId, item, big, current }: { rowId: string; item: RowItem; big: boolean; current: boolean }) {
   const m = useMotion()
-  const { focused, props } = useFocusable(rowTileId(rowId, item.id), { onSelect: item.onSelect })
+  const navigate = useNavigate()
+  const { inWatchlist, toggleWatchlist } = useSettings()
+  const id = rowTileId(rowId, item.id)
+  const focusedId = useFocusedId()
+  const ep = item.episode
+  // A dwell on an episode tile reveals the tile overlay; a tile already carrying an overlay (the countdown ring) keeps it.
+  const dwelling = useDwell(focusedId === id && !!ep && !item.overlay)
+  // The overlay's selected button: a ref as well, so presses faster than a render still step one at a time.
+  const [selected, setSelectedState] = useState(OVERLAY_START)
+  const selectedRef = useRef(OVERLAY_START)
+  const setSelected = (i: number) => {
+    selectedRef.current = i
+    setSelectedState(i)
+  }
+  useEffect(() => {
+    if (!dwelling) setSelected(OVERLAY_START)
+  }, [dwelling])
+
+  const run = (button: OverlayButton) => {
+    if (!ep) return
+    if (button === 'play') item.onSelect()
+    else if (button === 'info') (item.onInfo ?? (() => navigate(`/show/${ep.show.id}`)))()
+    else toggleWatchlist(ep.show.id)
+  }
+  const { focused, props } = useFocusable(id, {
+    onSelect: dwelling ? () => run(OVERLAY_BUTTONS[selectedRef.current]) : item.onSelect,
+    // Left/Right step through info, play, add; past either end the arrow leaves the tile as usual.
+    onKey: (key) => {
+      if (!dwelling) return false
+      const step = key === 'ArrowLeft' ? -1 : key === 'ArrowRight' ? 1 : 0
+      const to = selectedRef.current + step
+      if (!step || to < 0 || to >= OVERLAY_BUTTONS.length) return false
+      setSelected(to)
+      return true
+    },
+  })
   const w = current ? BIG.focusW : big ? BIG.w : PLAIN.w
   const h = current ? BIG.focusH : big ? BIG.h : PLAIN.h
   return (
@@ -131,9 +176,18 @@ function Tile({ rowId, item, big, current }: { rowId: string; item: RowItem; big
             className="h-full w-full object-cover"
             style={{ objectPosition: item.artFocus }}
           />
+          {dwelling && ep && (
+            <TileOverlay
+              episode={ep}
+              label={<EpisodeLabel season={ep.season.number} number={ep.episode.number} title={ep.episode.title} />}
+              selected={selected}
+              added={inWatchlist(ep.show.id)}
+            />
+          )}
+          {ep && <ProgressStroke progress={ep.progress} />}
           {item.badge && <Badge kind={item.badge} />}
           {item.overlay}
-          {current && item.label && (
+          {current && item.label && !dwelling && (
             <div className="absolute bottom-[14px] left-[20px] right-[20px] truncate text-[25px] leading-none text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]">
               {item.label}
             </div>

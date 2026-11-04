@@ -13,6 +13,8 @@ const shots = [
   { name: 'home-rows', path: '/', keys: ['ArrowDown'] },
   { name: 'shows', path: '/shows', keys: ['ArrowDown'] },
   { name: 'show-detail', path: '/show/ringfall', keys: [] },
+  // A dwell on S2 E5 (watch position seeded at 27%): the tile overlay and the progress stroke.
+  { name: 'tile-overlay', path: '/show/the-drowned-court', keys: ['ArrowDown', 'ArrowDown', ...Array(4).fill('ArrowRight')], wait: 1900 },
   { name: 'player', path: '/play/ringfall/3/2', keys: [] },
   { name: 'player-credits', path: '/play/ringfall/3/2', keys: Array(10).fill('ArrowRight') },
   { name: 'watchlist', path: '/watchlist', keys: [] },
@@ -40,7 +42,7 @@ for (const shot of shots) {
     await page.keyboard.press(key)
     await page.waitForTimeout(80)
   }
-  await page.waitForTimeout(700)
+  await page.waitForTimeout(shot.wait ?? 700)
   await page.screenshot({ path: `${out}/${shot.name}.png` })
   console.log(shot.name)
 }

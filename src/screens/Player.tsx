@@ -119,6 +119,7 @@ function Playback({ current }: { current: EpisodeRef }) {
           badge: episodeBadge(ref),
           label: <EpisodeLabel season={current.season.number} number={episode.number} title={episode.title} />,
           onSelect: () => play(ref),
+          episode: ref,
           overlay: isNext ? <CountdownRing value={countdown} /> : undefined,
         }
       }),
@@ -138,6 +139,7 @@ function Playback({ current }: { current: EpisodeRef }) {
           badge: episodeBadge(r),
           label: <EpisodeLabel season={r.season.number} number={r.episode.number} title={r.episode.title} />,
           onSelect: () => play(r),
+          episode: r,
         })),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [settings.brand],

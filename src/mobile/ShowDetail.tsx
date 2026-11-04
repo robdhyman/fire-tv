@@ -3,6 +3,7 @@ import { Navigate, useNavigate, useParams } from 'react-router'
 import { useSettings, useWatch } from '../state/settings'
 import { BackButton, MiniBadge, Pill, Pressable, TextTabs } from './ui'
 import { PlayGlyph, playTarget } from './Home'
+import { ProgressStroke } from '../components/TileOverlay'
 import { artUrl, episodeBadge, showById, stillArt, stillFocus, toEpisodeRef, type Show } from '../data/catalogue'
 
 export function MobileShowDetail() {
@@ -68,6 +69,7 @@ function ShowPage({ show }: { show: Show }) {
                 <div className="relative aspect-video w-[42%] shrink-0 overflow-hidden rounded-[4px] bg-black/40 md:w-[200px]">
                   <img src={artUrl(stillArt(ref))} alt="" draggable={false} className="h-full w-full object-cover" style={{ objectPosition: stillFocus(ref) }} />
                   {badge && <MiniBadge kind={badge} />}
+                  <ProgressStroke progress={ref.progress} />
                   <span className="absolute left-1/2 top-1/2 flex h-[30px] w-[30px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white">
                     <PlayGlyph />
                   </span>
