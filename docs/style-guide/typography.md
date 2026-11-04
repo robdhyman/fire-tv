@@ -44,7 +44,7 @@ The `.display` class applies the display face, the brand's weight and tracking, 
 | **Show title** | 76 px / 0.95 (USA 68) | display | upper, white | show page, and the Player's episode title (`text-title`) |
 | **Hero logline** | 25 px / 1.3 | Figtree 300 | sentence, white | hero (max 640 wide), show page (max 620 wide) |
 | **Nav, current screen** | 50 px | Figtree 300 | lower, white | `watchlist` when on Watchlist |
-| **Nav item** | 38 px | Figtree 300 | lower, white at 60% | `shows`, `watchlist`, `tools`, `search` |
+| **Nav item** | 38 px | Figtree 300 | lower, white at 60% | `shows`, `watchlist`, `search`; the gear and avatar are 1 em glyphs in the same line (50 px for the gear on Tools) |
 | **Row label** | 30 px (36 px when the row has focus) | Figtree 300 | lower, white at 80% (white in focus) | `up next`, `recently added`, a show's name |
 | **Episode label** | 25 px | Figtree: `E<n>` 600, name 400, 10 px apart | as typed, white | under a tile, and inside the expanded tile |
 | **Tile label (expanded)** | 25 px | Figtree 400 | as typed, white, shadow | the current tile of a row |

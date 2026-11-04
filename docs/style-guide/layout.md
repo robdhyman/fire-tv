@@ -14,6 +14,9 @@ Everything is laid out on the **stage**: a fixed 1920x1080 canvas, scaled to fit
 <text x="210" y="1070" fill="#f2e600" font-size="26" font-family="sans-serif">x = 200: left content edge</text>
 <rect x="200" y="48" width="560" height="64" fill="#0d0d0d" stroke="#fff" stroke-opacity=".5"/>
 <text x="216" y="92" fill="#fff" font-size="30" font-family="sans-serif">nav  (200, 48)  64 high</text>
+<line x1="1720" y1="0" x2="1720" y2="1080" stroke="#f2e600" stroke-width="2"/>
+<rect x="1612" y="48" width="108" height="64" fill="#0d0d0d" stroke="#fff" stroke-opacity=".5"/>
+<text x="1600" y="92" fill="#fff" font-size="30" font-family="sans-serif" text-anchor="end">gear, avatar</text>
 <rect x="30" y="160" width="62" height="580" fill="#fff" fill-opacity=".12"/>
 <rect x="1828" y="160" width="62" height="580" fill="#fff" fill-opacity=".12"/>
 <rect x="117" y="130" width="1686" height="672" fill="#555" stroke="#fff" stroke-width="3"/>
@@ -32,7 +35,8 @@ The dashed rectangle is the benchmark's safe inset. The app puts its **left cont
 |---|---|---|
 | Stage | 1920 x 1080, 16:9 | `Stage.tsx` |
 | Left content edge | x = 200 | nav, rows, tabs, show-page copy |
-| Nav | at (200, 48), 64 high; gaps of 60 between logo and items | `Nav.tsx` |
+| Right content edge | x = 1720 | the avatar's right edge |
+| Nav | at (200, 48), 64 high; gaps of 60 between logo and words; gear and avatar flush right, 32 apart | `Nav.tsx` |
 | Hero panel | 1686 x 672 at (117, 130); gap 25 between panels | `Hero.tsx` |
 | Hero to first row | 58 | `Home.tsx` |
 | Row label | 33 high, then 6 to the tiles | `Row.tsx` |
