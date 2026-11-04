@@ -261,9 +261,9 @@
       "title": "The Drowned Court",
       "genre": "fantasy",
       "logline": "Beneath the lake lies a kingdom that drowned a thousand years ago and never stopped ruling. Two sisters from the shore town are summoned to serve at its court, and only one of them is meant to come back up.",
-      "heroArt": "art-04.jpg",
-      "tileArt": "art-04.jpg",
-      "artFocus": "50% 35%",
+      "heroArt": "the-drowned-court/hero.jpg",
+      "tileArt": "the-drowned-court/hero.jpg",
+      "artFocus": "50% 50%",
       "new": false,
       "expiring": true,
       "seasons": [
@@ -274,37 +274,43 @@
               "number": 1,
               "title": "The Summons",
               "synopsis": "On the night of the spring tide, a rowan branch washes up at the Marlowe sisters' door with their names cut into the bark.",
-              "duration": 50
+              "duration": 50,
+              "still": "the-drowned-court/still-1x1.jpg"
             },
             {
               "number": 2,
               "title": "Below",
               "synopsis": "Wren and Ada descend and find a court that speaks their language as it was spoken a thousand years ago.",
-              "duration": 47
+              "duration": 47,
+              "still": "the-drowned-court/still-1x2.jpg"
             },
             {
               "number": 3,
               "title": "The Berry Tithe",
               "synopsis": "Every servant of the court must eat from the rowan. Wren refuses and the lake begins to rise over the town.",
-              "duration": 46
+              "duration": 46,
+              "still": "the-drowned-court/still-1x3.jpg"
             },
             {
               "number": 4,
               "title": "The Queen's Mirror",
               "synopsis": "Ada is chosen as the drowned queen's reflection and starts forgetting the shape of the sun.",
-              "duration": 48
+              "duration": 48,
+              "still": "the-drowned-court/still-1x4.jpg"
             },
             {
               "number": 5,
               "title": "Low Water",
               "synopsis": "A drought on the surface exposes the court's spires, and the shore town comes down with boats and hooks.",
-              "duration": 49
+              "duration": 49,
+              "still": "the-drowned-court/still-1x5.jpg"
             },
             {
               "number": 6,
               "title": "One Comes Up",
               "synopsis": "The sisters learn which of them the court intends to keep, and make their own choice instead.",
-              "duration": 56
+              "duration": 56,
+              "still": "the-drowned-court/still-1x6.jpg"
             }
           ]
         },
@@ -315,37 +321,43 @@
               "number": 1,
               "title": "Shore Leave",
               "synopsis": "Wren returns to a town that has aged thirty years in the week she was gone.",
-              "duration": 49
+              "duration": 49,
+              "still": "the-drowned-court/still-2x1.jpg"
             },
             {
               "number": 2,
               "title": "The Drowned Prince",
               "synopsis": "A boy from the court walks the shore road in daylight, and the water follows him.",
-              "duration": 47
+              "duration": 47,
+              "still": "the-drowned-court/still-2x2.jpg"
             },
             {
               "number": 3,
               "title": "Salt",
               "synopsis": "The lake turns to brine overnight and the court's old enemy, the sea, sends an envoy.",
-              "duration": 46
+              "duration": 46,
+              "still": "the-drowned-court/still-2x3.jpg"
             },
             {
               "number": 4,
               "title": "Ada",
               "synopsis": "Ada rules the court as queen, and her first decree is a war on the surface.",
-              "duration": 50
+              "duration": 50,
+              "still": "the-drowned-court/still-2x4.jpg"
             },
             {
               "number": 5,
               "title": "The Rowan Pact",
               "synopsis": "Wren bargains with the sea to break the court's hold, and the price is every memory she has of her sister.",
-              "duration": 48
+              "duration": 48,
+              "still": "the-drowned-court/still-2x5.jpg"
             },
             {
               "number": 6,
               "title": "Still Water",
               "synopsis": "The lake goes flat and silent for the first time in a thousand years. Something beneath it is listening.",
-              "duration": 57
+              "duration": 57,
+              "still": "the-drowned-court/still-2x6.jpg"
             }
           ]
         }

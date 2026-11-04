@@ -1,0 +1,195 @@
+{
+  "the-drowned-court": {
+    "hero.jpg": {
+      "model": "fal-ai/nano-banana-2 (Nano Banana 2.1, via Figma Weave)",
+      "suffix": "HS-1",
+      "date": "2026-11-03",
+      "seed": 90517,
+      "aspect": "16:9",
+      "resolution": "2K",
+      "thinking": "High",
+      "reference": null,
+      "prompt": "The Drowned Court, a fantasy series. Beneath the lake lies a kingdom that drowned a thousand years ago and never stopped ruling. Two sisters from the shore town are summoned to serve at its court, and only one of them is meant to come back up.\nEstablishing image of the series' world with its central figure or object held in the middle third of the frame: two young women in wet wool coats standing waist-deep at the lake edge at night, the spires of a sunken court faintly lit green beneath the surface in front of them, a rowan branch floating between them; mid-shot, horizon in the lower third, headroom above, fog and black water in the outer thirds, nothing essential near the left or right edge, no cropped faces, no action at the frame edge.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of lake-black, bottle green, tarnished brass and bone white with a single accent of cold rowan-berry red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera.",
+      "note": "Picked from four candidates (seeds 48213, 90517, 17742, 63390)."
+    },
+    "key-art.jpg": {
+      "model": "fal-ai/nano-banana-2 (Nano Banana 2.1, via Figma Weave)",
+      "suffix": "HS-1",
+      "date": "2026-11-03",
+      "seed": 90517,
+      "aspect": "2:3",
+      "resolution": "2K",
+      "thinking": "High",
+      "reference": "hero.jpg",
+      "prompt": "The Drowned Court, a fantasy series. Beneath the lake lies a kingdom that drowned a thousand years ago and never stopped ruling. Two sisters from the shore town are summoned to serve at its court, and only one of them is meant to come back up.\nKey art, vertical: a young woman in a drowned queen's brass crown seen from the chest up, eyes closed, black water at her collarbone and a second face reflected beneath the surface, lit from one side by green light from below; the lower two-thirds carry the image and the top third is a dark quiet gradient of lake-black with no detail.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of lake-black, bottle green, tarnished brass and bone white with a single accent of cold rowan-berry red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+    },
+    "still-1x1.jpg": {
+      "model": "fal-ai/nano-banana-2 (Nano Banana 2.1, via Figma Weave)",
+      "suffix": "HS-1",
+      "date": "2026-11-03",
+      "template": "still v2",
+      "seed": 90511,
+      "aspect": "16:9",
+      "resolution": "1K",
+      "thinking": "Minimal",
+      "reference": "hero.jpg",
+      "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures, spires or layout. New scene from the same series, episode 1x1 \"The Summons\": On the night of the spring tide, a rowan branch washes up at the Marlowe sisters' door with their names cut into the bark.\nSingle moment: a rowan branch with deep knife-cut marks in its bark lying on the wet stone threshold of a cottage door at night, a young woman's hand reaching down to it, the black lake behind; mid shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of lake-black, bottle green, tarnished brass and bone white with a single accent of cold rowan-berry red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+    },
+    "still-1x2.jpg": {
+      "model": "fal-ai/nano-banana-2 (Nano Banana 2.1, via Figma Weave)",
+      "suffix": "HS-1",
+      "date": "2026-11-03",
+      "template": "still v2",
+      "seed": 90512,
+      "aspect": "16:9",
+      "resolution": "1K",
+      "thinking": "Minimal",
+      "reference": "hero.jpg",
+      "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures, spires or layout. New scene from the same series, episode 1x2 \"Below\": Wren and Ada descend and find a court that speaks their language as it was spoken a thousand years ago.\nSingle moment: two sisters in wet wool coats walking down a flooded stone stair into a vast green-lit hall beneath the lake, courtiers in drowned finery waiting at the foot of the stair; wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of lake-black, bottle green, tarnished brass and bone white with a single accent of cold rowan-berry red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+    },
+    "still-1x3.jpg": {
+      "model": "fal-ai/nano-banana-2 (Nano Banana 2.1, via Figma Weave)",
+      "suffix": "HS-1",
+      "date": "2026-11-03",
+      "template": "still v2",
+      "seed": 90513,
+      "aspect": "16:9",
+      "resolution": "1K",
+      "thinking": "Minimal",
+      "reference": "hero.jpg",
+      "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures, spires or layout. New scene from the same series, episode 1x3 \"The Berry Tithe\": Every servant of the court must eat from the rowan. Wren refuses and the lake begins to rise over the town.\nSingle moment: a long stone table in a drowned hall lit green from above, a bowl of red rowan berries pushed away by a young woman's hand, courtiers in sodden finery turned toward her; wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of lake-black, bottle green, tarnished brass and bone white with a single accent of cold rowan-berry red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+    },
+    "still-1x4.jpg": {
+      "model": "fal-ai/nano-banana-2 (Nano Banana 2.1, via Figma Weave)",
+      "suffix": "HS-1",
+      "date": "2026-11-03",
+      "template": "still v2",
+      "seed": 90514,
+      "aspect": "16:9",
+      "resolution": "1K",
+      "thinking": "Minimal",
+      "reference": "hero.jpg",
+      "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures, spires or layout. New scene from the same series, episode 1x4 \"The Queen's Mirror\": Ada is chosen as the drowned queen's reflection and starts forgetting the shape of the sun.\nSingle moment: a young woman standing before a tall tarnished brass mirror in a drowned chamber, her reflection wearing a queen's crown while her own face is pale and still; mid shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of lake-black, bottle green, tarnished brass and bone white with a single accent of cold rowan-berry red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+    },
+    "still-1x5.jpg": {
+      "model": "fal-ai/nano-banana-2 (Nano Banana 2.1, via Figma Weave)",
+      "suffix": "HS-1",
+      "date": "2026-11-03",
+      "template": "still v2",
+      "seed": 90515,
+      "aspect": "16:9",
+      "resolution": "1K",
+      "thinking": "Minimal",
+      "reference": "hero.jpg",
+      "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures, spires or layout. New scene from the same series, episode 1x5 \"Low Water\": A drought on the surface exposes the court's spires, and the shore town comes down with boats and hooks.\nSingle moment: the tips of the court's spires breaking through a shrunken lake at dusk, townsfolk in small rowing boats with hooks and lanterns circling them; wide shot, last daylight, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of lake-black, bottle green, tarnished brass and bone white with a single accent of cold rowan-berry red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+    },
+    "still-1x6.jpg": {
+      "model": "fal-ai/nano-banana-2 (Nano Banana 2.1, via Figma Weave)",
+      "suffix": "HS-1",
+      "date": "2026-11-03",
+      "template": "still v2",
+      "seed": 90516,
+      "aspect": "16:9",
+      "resolution": "1K",
+      "thinking": "Minimal",
+      "reference": "hero.jpg",
+      "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures, spires or layout. New scene from the same series, episode 1x6 \"One Comes Up\": The sisters learn which of them the court intends to keep, and make their own choice instead.\nSingle moment: two sisters in a shaft of pale light falling through dark water, one reaching upward, the other holding her hand and looking down toward the court; mid shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of lake-black, bottle green, tarnished brass and bone white with a single accent of cold rowan-berry red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+    },
+    "still-2x1.jpg": {
+      "model": "fal-ai/nano-banana-2 (Nano Banana 2.1, via Figma Weave)",
+      "suffix": "HS-1",
+      "date": "2026-11-03",
+      "template": "still v2",
+      "seed": 90521,
+      "aspect": "16:9",
+      "resolution": "1K",
+      "thinking": "Minimal",
+      "reference": "hero.jpg",
+      "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures, spires or layout. New scene from the same series, episode 2x1 \"Shore Leave\": Wren returns to a town that has aged thirty years in the week she was gone.\nSingle moment: a young woman in a still-damp wool coat standing in the grey street of a shore town with weathered, aged shopfronts, an old woman in a doorway staring at her; wide shot, overcast morning, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of lake-black, bottle green, tarnished brass and bone white with a single accent of cold rowan-berry red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+    },
+    "still-2x2.jpg": {
+      "model": "fal-ai/nano-banana-2 (Nano Banana 2.1, via Figma Weave)",
+      "suffix": "HS-1",
+      "date": "2026-11-03",
+      "template": "still v2",
+      "seed": 90522,
+      "aspect": "16:9",
+      "resolution": "1K",
+      "thinking": "Minimal",
+      "reference": "hero.jpg",
+      "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures, spires or layout. New scene from the same series, episode 2x2 \"The Drowned Prince\": A boy from the court walks the shore road in daylight, and the water follows him.\nSingle moment: a pale boy in sodden courtly clothes walking the shore road in flat daylight, a thin line of lake water running along the road behind his bare feet; wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of lake-black, bottle green, tarnished brass and bone white with a single accent of cold rowan-berry red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+    },
+    "still-2x3.jpg": {
+      "model": "fal-ai/nano-banana-2 (Nano Banana 2.1, via Figma Weave)",
+      "suffix": "HS-1",
+      "date": "2026-11-03",
+      "template": "still v2",
+      "seed": 90523,
+      "aspect": "16:9",
+      "resolution": "1K",
+      "thinking": "Minimal",
+      "reference": "hero.jpg",
+      "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures, spires or layout. New scene from the same series, episode 2x3 \"Salt\": The lake turns to brine overnight and the court's old enemy, the sea, sends an envoy.\nSingle moment: the lake shore crusted white with salt at dawn among dead reeds, a tall robed envoy wrapped in kelp standing at the water's edge; wide shot, cold dawn light, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of lake-black, bottle green, tarnished brass and bone white with a single accent of cold rowan-berry red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+    },
+    "still-2x4.jpg": {
+      "model": "fal-ai/nano-banana-2 (Nano Banana 2.1, via Figma Weave)",
+      "suffix": "HS-1",
+      "date": "2026-11-03",
+      "template": "still v2",
+      "seed": 90524,
+      "aspect": "16:9",
+      "resolution": "1K",
+      "thinking": "Minimal",
+      "reference": "hero.jpg",
+      "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures, spires or layout. New scene from the same series, episode 2x4 \"Ada\": Ada rules the court as queen, and her first decree is a war on the surface.\nSingle moment: a young woman crowned in tarnished brass seated on a throne of drowned stone in the green-lit court, courtiers kneeling below her; mid-wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of lake-black, bottle green, tarnished brass and bone white with a single accent of cold rowan-berry red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+    },
+    "still-2x5.jpg": {
+      "model": "fal-ai/nano-banana-2 (Nano Banana 2.1, via Figma Weave)",
+      "suffix": "HS-1",
+      "date": "2026-11-03",
+      "template": "still v2",
+      "seed": 90525,
+      "aspect": "16:9",
+      "resolution": "1K",
+      "thinking": "Minimal",
+      "reference": "hero.jpg",
+      "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures, spires or layout. New scene from the same series, episode 2x5 \"The Rowan Pact\": Wren bargains with the sea to break the court's hold, and the price is every memory she has of her sister.\nSingle moment: a young woman kneeling in the surf at night holding out a rowan branch to a dark wave rising in front of her; mid shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of lake-black, bottle green, tarnished brass and bone white with a single accent of cold rowan-berry red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+    },
+    "still-2x6.jpg": {
+      "model": "fal-ai/nano-banana-2 (Nano Banana 2.1, via Figma Weave)",
+      "suffix": "HS-1",
+      "date": "2026-11-03",
+      "template": "still v2",
+      "seed": 90526,
+      "aspect": "16:9",
+      "resolution": "1K",
+      "thinking": "Minimal",
+      "reference": "hero.jpg",
+      "prompt": "Use the reference image only for colour grade, film grain, lens and lighting; reproduce none of its objects, figures, spires or layout. New scene from the same series, episode 2x6 \"Still Water\": The lake goes flat and silent for the first time in a thousand years. Something beneath it is listening.\nSingle moment: the lake perfectly flat and mirror-still under a grey sky, an empty rowing boat in the middle, a faint green glow deep beneath it; wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of lake-black, bottle green, tarnished brass and bone white with a single accent of cold rowan-berry red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+    }
+  },
+  "coming-soon": {
+    "low-orbit.jpg": {
+      "model": "fal-ai/nano-banana-2 (Nano Banana 2.1, via Figma Weave)",
+      "suffix": "HS-1",
+      "date": "2026-11-03",
+      "seed": 31416,
+      "aspect": "2:3",
+      "resolution": "2K",
+      "thinking": "High",
+      "reference": null,
+      "prompt": "Low Orbit, a science fiction film. A four-person repair crew docks with a failing station in low orbit and finds a second crew already aboard, wearing their faces.\nKey art, vertical: an astronaut in a scuffed white pressure suit floating in a narrow station corridor, visor raised, facing a second identical astronaut further down the corridor, lit from one side by a single orange warning lamp; the lower two-thirds carry the image and the scene itself continues upward and falls away into darkness in the top third, with no hard edge, no band and no detail.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of graphite, ice blue, steel grey and chalk white with a single accent of sodium-lamp orange, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+    },
+    "the-night-desk.jpg": {
+      "model": "fal-ai/nano-banana-2 (Nano Banana 2.1, via Figma Weave)",
+      "suffix": "HS-1",
+      "date": "2026-11-03",
+      "seed": 27182,
+      "aspect": "2:3",
+      "resolution": "2K",
+      "thinking": "High",
+      "reference": null,
+      "prompt": "The Night Desk, a crime thriller film. A night-shift editor at a dying city newspaper takes a call reporting a murder that hasn't happened yet, and has six hours to stop the story coming true.\nKey art, vertical: a woman in shirtsleeves at a cluttered newsroom desk at three in the morning, a desk phone receiver at her ear, rain on the tall window behind her and the tail-lights of the city far below, three-quarter length, lit from one side by a brass desk lamp; the lower two-thirds carry the image and the top third is a dark quiet gradient of ink black with no detail.\nDark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of ink black, nicotine yellow, newsprint grey and cold fluorescent white with a single accent of brake-light red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera."
+    }
+  }
+}
