@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { useNavigate } from 'react-router'
 import { motion } from 'motion/react'
 import { useMotion } from '../motion/useMotion'
-import { useFocusContext, useFocusable } from '../focus/FocusEngine'
+import { useFocusContext, useFocusable, type KeyResult } from '../focus/FocusEngine'
 import { useSettings } from '../state/settings'
 import { Logo } from './Logo'
 
@@ -47,14 +47,13 @@ function NavItem({ item, active }: { item: (typeof WORDS)[number]; active: boole
 }
 
 /*
- * The nav's ends are walls. With no item further along the lane, a sideways
- * press would fall back to the nearest item out of it (a row tile peeking at
- * the stage edge), so the logo keeps Left and the avatar keeps Right.
+ * The nav's ends are walls: the logo keeps Left and the avatar keeps Right,
+ * and each press is an edge bump.
  */
-const keepLeft = (key: string) => key === 'ArrowLeft'
-const keepRight = (key: string) => key === 'ArrowRight'
+const keepLeft = (key: string): KeyResult => key === 'ArrowLeft' && 'wall'
+const keepRight = (key: string): KeyResult => key === 'ArrowRight' && 'wall'
 
-type IconItemProps = { id: string; label: string; active: boolean; onSelect: () => void; onKey?: (key: string) => boolean; children: ReactNode }
+type IconItemProps = { id: string; label: string; active: boolean; onSelect: () => void; onKey?: (key: string) => KeyResult; children: ReactNode }
 
 /** A nav icon: a word's size and colour states, and an accent bar where a word's underline would sit. */
 function IconItem({ id, label, active, onSelect, onKey, children }: IconItemProps) {
