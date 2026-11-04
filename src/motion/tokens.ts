@@ -57,6 +57,10 @@ export const duration = {
   reduced: 0.15,
   /** Mobile Player: the chrome hides this long after the last tap while playing. */
   chromeHide: 3,
+  /** Focus resting on an episode tile this long is a dwell: the tile overlay fades in (issue #30). */
+  dwell: 1.2,
+  /** The tile overlay fading in after a dwell. It leaves at once when focus moves. */
+  overlayFade: 0.2,
 } as const
 
 export const stagger = {

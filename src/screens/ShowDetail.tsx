@@ -4,7 +4,7 @@ import { motion, useIsPresent } from 'motion/react'
 import { Nav } from '../components/Nav'
 import { EpisodeLabel, Row, type RowItem } from '../components/Row'
 import { RoundButton } from '../components/RoundButton'
-import { useFocusable, useFocusedId, useScreenFocus } from '../focus/FocusEngine'
+import { useFocusable, useFocusContext, useFocusedId, useScreenFocus } from '../focus/FocusEngine'
 import { useSettings, useWatch } from '../state/settings'
 import { FULL_CLIP, fromHeroPanel, morph, useFlight, useMotion } from '../motion/useMotion'
 import { distance, duration } from '../motion/tokens'
@@ -65,6 +65,7 @@ function ShowPage({ show }: { show: Show }) {
   // The nav is shown while focus is on the + (or in the nav) and hidden while it is below, on the season tabs or episodes.
   // Once the page starts leaving, the nav stays as it was.
   const focusedId = useFocusedId()
+  const { setFocus } = useFocusContext()
   const present = useIsPresent()
   const below = !!focusedId && (focusedId.startsWith(`season:${show.id}:`) || focusedId.startsWith(`episodes:${show.id}:`))
   const [navShown, setNavShown] = useState(true)
@@ -83,9 +84,12 @@ function ShowPage({ show }: { show: Show }) {
           badge: episodeBadge(ref),
           label: <EpisodeLabel number={episode.number} title={episode.title} />,
           onSelect: () => navigate(`/play/${show.id}/${season.number}/${episode.number}`),
+          episode: ref,
+          // Already on the show page: info goes up to the +, where every arrival lands.
+          onInfo: () => setFocus(`show:${show.id}:add`),
         }
       }),
-    [show, season, watch, navigate],
+    [show, season, watch, navigate, setFocus],
   )
 
   // Tabs sit in a fixed line from x=200 and never slide: selecting a season changes weight only.

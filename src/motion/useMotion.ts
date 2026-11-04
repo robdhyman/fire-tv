@@ -50,6 +50,8 @@ export function useMotion() {
     fade: fade(reduced ? duration.reduced : duration.screenFade),
     quick: fade(reduced ? duration.reduced : duration.quick),
     backdropFade: fade(reduced ? duration.reduced : duration.backdropFade),
+    /** The tile overlay fading in after a dwell. */
+    overlay: fade(reduced ? duration.reduced : duration.overlayFade),
     /** Opacity-only part of a screen: fades with the screen's enter/exit. */
     part: {
       hidden: { opacity: 0, transition: fade(reduced ? duration.reduced : duration.screenFade) },
