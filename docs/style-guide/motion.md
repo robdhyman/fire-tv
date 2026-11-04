@@ -13,7 +13,7 @@ The direction: the 2017 prototype used fixed ease-out tweens. The rebuild keeps 
 | `focusIn` | 400 / 30 / 0.8 | settles in about 200 ms | focus arriving on a tile, round button or logo (ring, scale, lift) |
 | `focusInFast` | 700 / 40 / 0.8 | about 150 ms | the same, while arrows are pressed rapidly (under 160 ms apart) |
 | `focusOut` | 200 / 26 / 1 | softer, so the old tile trails the new one | focus leaving |
-| `strip` | 260 / 32 / 1 | about 250 ms, no overshoot | sideways moves: row strips, season tabs, an expanding tile's width |
+| `strip` | 260 / 32 / 1 | about 250 ms, no overshoot | sideways moves: row strips, an expanding tile's width (season tabs never move; selecting one changes weight only) |
 | `heroSlide` | 170 / 26 / 1 | about 450 ms, critically damped | Home's hero strip sliding one panel (1711 px) |
 | `scroll` | 90 / 20 / 1 | about 600 ms | up and down: the page scrolling, a row opening to its big height, the Player's overlay shifting |
 | `morph` | 80 / 18 / 1 | about 700 ms, critically damped | the hero to show-page shared-element flight and its reverse |
