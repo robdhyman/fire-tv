@@ -32,6 +32,7 @@ export function MobileWatchlist() {
     badge: episodeBadge(ref),
     label: <EpisodeLabel number={ref.episode.number} title={ref.episode.title} />,
     onSelect: () => navigate(`/play/${ref.show.id}/${ref.season.number}/${ref.episode.number}`),
+    episode: ref,
   })
 
   const upNext = useMemo(() => upNextFor(brand, watch).map(toItem), [brand, watch]) // eslint-disable-line react-hooks/exhaustive-deps

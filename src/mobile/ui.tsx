@@ -7,6 +7,7 @@ import { Logo } from '../components/Logo'
 import type { RowItem } from '../components/Row'
 import type { BadgeKind } from '../components/Badge'
 import { artUrl, isMovie, type Movie, type Show } from '../data/catalogue'
+import { ProgressStroke } from '../components/TileOverlay'
 
 /* Touch primitives shared by the mobile screens. Sizes are CSS px. */
 
@@ -106,6 +107,7 @@ export function MobileRow({ label, items, poster = false, className = '' }: { la
                 <img src={item.art} alt="" draggable={false} className="h-full w-full object-cover" style={{ objectPosition: item.artFocus }} />
                 {item.badge && <MiniBadge kind={item.badge} />}
                 {item.overlay}
+                {item.episode && <ProgressStroke progress={item.episode.progress} />}
               </div>
               {item.label && <div className="mt-[6px] truncate text-[13px] leading-none text-white/90">{item.label}</div>}
             </Pressable>

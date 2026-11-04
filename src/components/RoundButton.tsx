@@ -17,21 +17,30 @@ export function RoundButton({
   filled?: boolean
   label?: string
 }) {
-  const m = useMotion()
   const { focused, props } = useFocusable(id, { onSelect })
   return (
     <div {...props} className="flex items-center gap-[16px]" title={label}>
-      <motion.span
-        className={`flex h-[60px] w-[60px] items-center justify-center rounded-full border-[3px] text-[34px] font-light leading-none transition-colors duration-(--motion-quick) ${
-          filled ? 'border-white bg-[#3aa551]' : 'border-white/90'
-        } ${focused ? 'bg-white text-black' : 'text-white'}`}
-        initial={false}
-        animate={{ scale: focused ? m.focusScale : 1 }}
-        transition={m.focus(focused)}
-      >
+      <RoundFace focused={focused} filled={filled}>
         {children}
-      </motion.span>
+      </RoundFace>
       {label && focused && <span className="text-[25px] font-light text-white">{label}</span>}
     </div>
+  )
+}
+
+/** The round button's face alone, for controls that are not focusables of their own (the tile overlay's buttons). */
+export function RoundFace({ focused, filled, children }: { focused: boolean; filled?: boolean; children: ReactNode }) {
+  const m = useMotion()
+  return (
+    <motion.span
+      className={`flex h-[60px] w-[60px] items-center justify-center rounded-full border-[3px] text-[34px] font-light leading-none transition-colors duration-(--motion-quick) ${
+        focused ? 'border-white bg-white text-black' : filled ? 'border-white bg-[#3aa551] text-white' : 'border-white/90 text-white'
+      }`}
+      initial={false}
+      animate={{ scale: focused ? m.focusScale : 1 }}
+      transition={m.focus(focused)}
+    >
+      {children}
+    </motion.span>
   )
 }

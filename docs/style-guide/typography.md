@@ -48,6 +48,8 @@ The `.display` class applies the display face, the brand's weight and tracking, 
 | **Row label** | 30 px (36 px when the row has focus) | Figtree 300 | lower, white at 80% (white in focus) | `up next`, `recently added`, a show's name |
 | **Episode label** | 25 px | Figtree: `E<n>` 600, name 400, 10 px apart | as typed, white | under a tile, and inside the expanded tile |
 | **Tile label (expanded)** | 25 px | Figtree 400 | as typed, white, shadow | the current tile of a row |
+| **Overlay show name** | 23 px, tracking 0.04 em | Figtree 300 | upper, white 85% | top of the tile overlay |
+| **Overlay synopsis** | 23 px / 1.3 | Figtree 300 | sentence, white, three lines at most | the tile overlay, 540 px wide |
 | **Season tab** | 25 px | Figtree 400, current 600 | lower, white at 70% (current white) | show page |
 | **Shows tab** | 25 px, current 36 px | Figtree | lower, white at 70% (current white) | `shows` / `movies` / `editor's choice` |
 | **Grid tile title** | 34 px / 0.95 | display | upper, white, shadow | Shows grid |

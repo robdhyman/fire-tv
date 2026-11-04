@@ -16,4 +16,5 @@ Netflix and Apple TV+ benchmarks (#5, #7) both treat lost focus as a frozen app 
 
 - Rows are carousels anchored at x=200 with the previous tile peeking from the left edge; each row remembers its own current index.
 - The Player simulates playback at 20x with a 2:08 credits lead and a 15s Up Next countdown; Left/Right scrub five minutes.
+- The tile overlay's `info` / `play` / `add` (#30, 4 Nov) are not focusables: the episode tile keeps focus and its `onKey` steps a selection, so lanes, screen memory and the row's open tile are unchanged; an arrow past either end falls through to spatial navigation.
 - `scripts/screenshots.mjs` drives the preview by keyboard with Playwright and Chrome to capture `docs/screens/`.

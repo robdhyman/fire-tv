@@ -17,5 +17,6 @@ Sounds should describe what focus did, not which key was pressed, so the engine 
 ## Consequences
 
 - Left from `season 1` on the show page no longer jumps to the `+`; Up does. In Tools, Right from the caption colours lands on `nav sounds`, and Down from `Spanish` names `snd:on` as its target because Spanish shares a lane with the font sizes.
+- The tile overlay (#30) steps its button selection with a consumed arrow, so moving between `info`, `play` and `add` ticks like any focus move; an arrow past the last button moves to the next tile (a tick) or, at the row's end, bumps.
 - The sound lab (four candidates per event, `?prototype=sounds`) is kept on the `prototype/nav-sounds` branch, not on `main`.
 - Open (map #25 fog): whether reduced motion or a system preference should also silence the sounds.

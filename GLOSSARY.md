@@ -48,11 +48,11 @@ The small corner tag on a tile: `new`, `expiring` or `coming soon`.
 
 ## Dwell
 
-Focus resting on a tile without moving for about a second. A dwell on an episode tile reveals the tile overlay.
+Focus resting on a tile without moving for 1.2 s (`duration.dwell`). A dwell on an episode tile reveals the tile overlay. TV stage only: phone and tablet have no D-pad, so no dwell.
 
 ## Tile overlay
 
-What a dwell reveals on an episode tile: `info`, `play` and `add` buttons and the episode's synopsis. `info` opens the show page, `play` the Player, `add` toggles the show in the watchlist.
+What a dwell reveals on an episode tile: over the still darkened to black 55%, the show's name and the `S<n> E<n>` label, the `info`, `play` and `add` round buttons, and the episode's synopsis (three lines at most). The tile keeps focus; Left and Right move between the buttons, starting on `play`, and past either end leave the tile. `info` opens the show page (on the show page itself it goes up to the `+`), `play` the Player, `add` toggles the show in the watchlist (the `+` becomes a tick). Moving focus hides it at once.
 
 ## Watch position
 
@@ -60,7 +60,7 @@ How far into an episode the viewer has got, remembered per episode across visits
 
 ## Progress stroke
 
-The 2px white line along the bottom edge of an episode tile whose width, as a fraction of the tile, is the watch position as a fraction of the runtime. Absent when the watch position is zero.
+The 2px white line along the bottom edge of an episode tile whose width, as a fraction of the tile, is the watch position as a fraction of the runtime. Absent when the watch position is zero. Drawn on every episode tile on every device class, above the tile overlay when it is up; never on show or movie tiles.
 
 ## Focus
 

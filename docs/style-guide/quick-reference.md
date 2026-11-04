@@ -69,7 +69,7 @@ Tile focus: white 3 px ring, scale 1.1, lift 8 px, shadow `0 18px 36px` at 55% b
 | `focusIn` / `focusInFast` / `focusOut` | 400/30/0.8 · 700/40/0.8 · 200/26/1 |
 | `strip` / `heroSlide` | 260/32/1 · 170/26/1 |
 | `scroll` / `morph` / `rise` | 90/20/1 · 80/18/1 · 110/20/1 |
-| durations | backdropFade 0.6 · screenFade 0.25 · quick 0.15 · riseDelay 0.12 · copyAfterFlight 0.45 · reduced 0.15 |
+| durations | backdropFade 0.6 · screenFade 0.25 · quick 0.15 · riseDelay 0.12 · copyAfterFlight 0.45 · reduced 0.15 · dwell 1.2 · overlayFade 0.2 |
 | stagger | tile 0.035 · row 0.08 |
 | distance | focusScale 1.1 · focusLift -8 · tileEnter 16 · rowRise 200 · heroNeighbourScale 0.92 · heroNeighbourOpacity 0.4 |
 | Reduced motion | instant moves, 0.15 s fades, no scale or lift; `?motion=reduced` |

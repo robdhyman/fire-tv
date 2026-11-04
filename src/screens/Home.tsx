@@ -49,6 +49,7 @@ export function Home() {
         badge: episodeBadge(ref),
         label: <EpisodeLabel number={ref.episode.number} title={ref.episode.title} />,
         onSelect: () => navigate(`/play/${ref.show.id}/${ref.season.number}/${ref.episode.number}`),
+        episode: ref,
       })),
     [brand, watch, navigate],
   )
