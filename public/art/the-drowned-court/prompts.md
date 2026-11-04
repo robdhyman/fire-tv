@@ -145,3 +145,15 @@ Use the reference image only for colour grade, film grain, lens and lighting; re
 Single moment: the lake perfectly flat and mirror-still under a grey sky, an empty rowing boat in the middle, a faint green glow deep beneath it; wide shot, subject in the central third, no action at the frame edge, no signage and no writing anywhere in the frame.
 Dark, cinematic, photographic realism, shot on anamorphic 35 mm, shallow depth of field, one motivated light source, deep shadows with lifted blacks, fine film grain, muted palette of lake-black, bottle green, tarnished brass and bone white with a single accent of cold rowan-berry red, colour held consistent across the series. No on-screen text, no lettering, no logos, no watermark, no captions, no subtitles, no UI. No one looks at the camera.
 ```
+
+## broll.mp4
+
+B-roll prototype for #36. Runway Gen-4 Turbo (`rw_4_video`, via Figma Weave), image to video, 5 s, ratio 1280:720, seed 36003, 30 Weave credits, rendered in about 31 s. Generated 2026-11-04 (UTC).
+
+First frame: the show's placeholder hero `../art-04.jpg`, not the generated `hero.jpg`. Rob, 4 Nov: hero art stays the placeholders, and every clip starts from the placeholder that is the hero shot. The frame is cropped full width to 16:9 at the pre-#41 artFocus (50% 35%), 1371x771 from y = 402. Weave's 1280x720 output was 4.2 MB, so it was re-encoded to 960x540 H.264 with `avconvert` Preset960x540 (2.75 MB) to fit the 3 MB limit. The original is on the `prototype/broll` branch.
+
+```
+Very slow push-in over five seconds, no camera shake, no cut, no zoom burst. Small bubbles rise slowly through the green water, the two women's hair drifts in a gentle current, the rowan berries sway on their stem, fine particles float past. Faces and hands hold still; nothing enters or leaves the frame; lighting and colour unchanged from the first frame; no text.
+```
+
+Flaws: the grade swings from warm sepia to teal by 3 s; the lower sister opens her eyes, turns to the camera and smiles; a raised arm appears behind the upper sister at 1–2 s. An earlier run from the generated `hero.jpg` (seed 90518) flared the spires to neon green and drifted both faces. It is kept on `prototype/broll` as evidence only.
