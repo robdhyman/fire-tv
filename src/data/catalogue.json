@@ -261,9 +261,9 @@
       "title": "The Drowned Court",
       "genre": "fantasy",
       "logline": "Beneath the lake lies a kingdom that drowned a thousand years ago and never stopped ruling. Two sisters from the shore town are summoned to serve at its court, and only one of them is meant to come back up.",
-      "heroArt": "the-drowned-court/hero.jpg",
-      "tileArt": "the-drowned-court/hero.jpg",
-      "artFocus": "72% 50%",
+      "heroArt": "art-04.jpg",
+      "tileArt": "art-04.jpg",
+      "artFocus": "50% 35%",
       "new": false,
       "expiring": true,
       "seasons": [
