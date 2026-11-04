@@ -7,7 +7,7 @@
  * fixed ease-out tweens. These replace it (issue #9):
  *   tile focus     spring scale 1.1 + 8px lift, brighter border; unfocus trails
  *   hero change    the strip of hero panels slides; neighbours peek smaller and dimmed
- *   hero → show    shared-element morph; nav fades, season row rises
+ *   hero → show    shared-element morph; the nav holds, season row rises
  *   Back           the same morph reversed
  *   screen entry   rows and grids settle with a light stagger
  * With reduced motion every spring becomes an instant move and every fade
@@ -45,9 +45,9 @@ export const spring = {
 export const duration = {
   /** Home's blurred backdrop crossfading to the current hero show. */
   backdropFade: 0.6,
-  /** Screen-to-screen crossfade and the nav fading out of the morph. */
+  /** Screen-to-screen crossfade. */
   screenFade: 0.25,
-  /** Colour and underline changes on text focus (CSS transitions). */
+  /** Colour and underline changes on text focus (CSS transitions); the show page's nav hiding below the + and returning. */
   quick: 0.15,
   /** The season row waits this long into the morph before rising. */
   riseDelay: 0.12,

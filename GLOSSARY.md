@@ -148,4 +148,4 @@ A short generated video clip of a show, meant one day to play on the hero after 
 
 ## Morph
 
-The shared-element transition from Home's hero to a show page: the hero art opens out to full bleed and the title flies to its place on the show page while the nav fades and the season row rises. Back plays it in reverse. Its timings are the `morph` tokens in `src/motion/tokens.ts`.
+The shared-element transition from Home's hero to a show page: the hero art opens out to full bleed and the title flies to its place on the show page while the nav holds and the season row rises. Back plays it in reverse. Its timings are the `morph` tokens in `src/motion/tokens.ts`.
